@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Survey</title>
+</head>
+<body>
+	<form action="Exercise.php" method="POST" id="submit_info">
+		<table border="1" align="center">
+			<tr>
+				<td>Your name</td>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>Class</td>
+				<td><input type="text" name="class"></td>
+			</tr>
+			<tr>
+				<td>University</td>
+				<td><input type="text" name="university"></td>
+			</tr>
+			<tr>
+				<td>Hobby</td>
+				<td>	
+					<table align="center" border="1">
+						<tr>
+							<td></td>
+							<td>Yes</td>
+							<td>No</td>
+						</tr>
+						<tr>
+							<td>Anime</td>
+							<td><input type="radio" name="anime" value="Yes"></td>
+							<td><input type="radio" name="anime" value="No"></td>
+						</tr>
+						<tr>
+							<td>Manga</td>
+							<td><input type="radio" name="manga" value="Yes"></td>
+							<td><input type="radio" name="manga" value="No"></td>
+						</tr>
+						<tr>
+							<td>Game</td>
+							<td><input type="radio" name="game" value="Yes"></td>
+							<td><input type="radio" name="game" value="No"></td>
+						</tr>
+						<tr>
+							<td>Sleep</td>
+							<td><input type="radio" name="sleep" value="Yes"></td>
+							<td><input type="radio" name="sleep" value="No"></td>
+						</tr>
+						<tr>
+							<td>Football</td>
+							<td><input type="radio" name="football" value="Yes"></td>
+							<td><input type="radio" name="football" value="No"></td>
+						</tr>
+						<tr>
+							<td>Facebook</td>
+							<td><input type="radio" name="facebook" value="Yes"></td>
+							<td><input type="radio" name="facebook" value="No"></td>
+						</tr>
+						<tr>
+							<td>Youtube</td>
+							<td><input type="radio" name="youtube" value="Yes"></td>
+							<td><input type="radio" name="youtube" value="No"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Click to Submit" form="submit_info"></td>
+			</tr>
+			<tr>
+				<td><input type="reset" value="Erase and Restart" form="submit_info"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
