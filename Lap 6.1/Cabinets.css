@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+    color: aliceblue;
+}
+p {
+    margin: 0.25in;
+    border: 0.25in solid black;
+    padding: 0.25in;
+    background: url("./image_directory/bond-paper.jpg");
+}
+body {
+    background:  url("./image_directory/brick-wallpaper-4.jpg");
+}
+.banner {
+    background: url("./image_directory/board.jpg") repeat-x;
+    font-size: 50pt;
+    font-family: Arial Rounded MT Bold;
+}
+li {
+    color: aliceblue;
+}
