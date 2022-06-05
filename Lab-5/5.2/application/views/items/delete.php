@@ -1,0 +1,1 @@
+<a class="big" href="../../items/viewall">Xoá thành công. Bấm vào đây để quay lại.</a>
