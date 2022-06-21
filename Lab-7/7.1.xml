@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+	<student>
+		<name>
+			<firstname>Nguyen</firstname>
+			<lastname>Hung</lastname>
+		</name>
+		<birth>
+			<day>25</day>
+			<month>9</month>
+			<year>2001</year>
+		</birth>
+		<class>IT1-02</class>
+		<address>
+			<city>Hanoi</city>
+		</address>
+		<contact>
+			<phone>0123 456 789</phone>
+		</contact>
+	</student>
+	<student>
+		<name>
+			<firstname>Nguyen</firstname>
+			<lastname>Van A</lastname>
+		</name>
+		<birth>
+			<day>1</day>
+			<month>1</month>
+			<year>2001</year>
+		</birth>
+		<class>IT1</class>
+		<address>
+			<city>Hanoi</city>
+		</address>
+		<contact>
+			<phone>0987 654 321</phone>
+		</contact>
+	</student>
+</students>
