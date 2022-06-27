@@ -1,7 +1,3 @@
-const input = document.getElementById("search-input");
-input.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        alert(`Searching: ${input.value}`);
-    }
-});
+if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+}

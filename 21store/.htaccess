@@ -6,5 +6,5 @@
     RewriteCond %{REQUEST_URI} /$
     RewriteRule (.*) public/$1 [L]
 
-    ErrorDocument 404 404.php
+    ErrorDocument 404 /21store/404.php
 </IfModule>

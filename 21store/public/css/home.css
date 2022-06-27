@@ -5,10 +5,99 @@
 }
 
 .home-container {
-    height: 600px;
-    background: yellow;
+    padding: 16px 0;
 }
 
 .home-content {
     max-width: 1120px;
+}
+
+.slideshow-container {
+    position: relative;
+    margin: auto;
+}
+
+.mySlides > img {
+    height: 400px;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.mySlides {
+    display: none;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: black;
+    font-weight: 900;
+    font-size: 26px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    color: #ea2624;
+    background-color: #f4f4ec;
+}
+
+.dot-container {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #f4f4ec;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #ea2624;
+}
+
+/* Fading animation */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.new-arrival-container {
+    height: 600px;
+}
+
+.brand-container {
+    height: 300px;
 }

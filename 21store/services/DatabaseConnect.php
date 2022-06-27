@@ -14,31 +14,25 @@ class DatabaseConnect {
     public function connect($address, $account, $password, $name) {
         $this->db = @mysqli_connect($address, $account, $password);
         if ($this->db) {
-            if (mysqli_select_db($this->db, $name)) {
-                echo "Connect database successfully.";
-            } else {
-                echo "Connect database failed.";
+            // An error occurred.
+            if (!mysqli_select_db($this->db, $name)) {
                 exit();
             }
         } else {
-            echo "Connect database failed.";
+            // An error occurred.
             exit();
         }
     }
 
     function disconnect() {
-        if (@mysqli_close($this->db) != 0) {
-            echo "An error occurred when disconnecting database.";
-        } else {
-            echo "Database disconnect successfully.";
-        }
+        mysqli_close($this->db);
     }
 
     public function setQuery($query){
         $this->query = $query;
     }
 
-    public function executeQuery(){
+    public function executeQuery($singleResult = 0){
         $this->result = mysqli_query($this->db, $this->query);
 
         if(!$this->result){
@@ -46,18 +40,7 @@ class DatabaseConnect {
             exit();
         }
 
-        return $result;
-    }
-
-    public function updateQuery(){
-        $this->result = mysqli_query($this->db, $this->query);
-
-        if(!$this->result){
-            echo "An error occurred when executing query!";
-            exit();
-        }
-
-        if (preg_match("/select/i", $query)) {
+        if (preg_match("/select/i", $this->query)) {
             $res = array();
             $table = array();
             $field = array();
@@ -84,6 +67,16 @@ class DatabaseConnect {
             mysqli_free_result($this->result);
             return ($res);
         }
+    }
+
+    public function select($id) {
+        $this->query = 'SELECT * FROM `' . $this->table . '` WHERE `id` = \'' . mysqli_real_escape_string($this->db, $id) . '\'';
+        return $this->executeQuery(1);
+    }
+
+    public function selectAll() {
+        $this->query = 'SELECT * FROM `' . $this->table . '`';
+        return $this->executeQuery();
     }
 
     public function getNumRows() {
