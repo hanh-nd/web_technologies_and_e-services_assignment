@@ -22,7 +22,11 @@ section {
     width: 100%;
     text-align: left;
     font: bold 16px sans-serif;
-    padding: 55px 50px;
+    padding: 40px 16px;
+}
+
+.footer-content {
+    max-width: 1120px;
 }
 
 .footer-distributed .footer-left,

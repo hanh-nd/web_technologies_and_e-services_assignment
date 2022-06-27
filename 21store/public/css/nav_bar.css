@@ -1,5 +1,5 @@
 * {
-    margin: 0;
+    margin: auto;
     padding: 0;
     text-decoration: none;
 }
@@ -8,10 +8,13 @@
     background: #f4f4ec;
 }
 
+.nav-content {
+    max-width: 1120px;
+}
+
 .nav-bar {
     display: flex;
     align-items: center;
-    padding: 16px;
     height: 80px;
 }
 

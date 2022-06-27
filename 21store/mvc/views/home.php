@@ -16,5 +16,7 @@
 <body>
 	<?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
     <div class="home-container">
-        Hello world!
+		<div class="home-content">
+        	Hello world!
+		</div>
     </div>

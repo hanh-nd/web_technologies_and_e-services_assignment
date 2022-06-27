@@ -8,3 +8,7 @@
     height: 600px;
     background: yellow;
 }
+
+.home-content {
+    max-width: 1120px;
+}

@@ -1,0 +1,13 @@
+* {
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.about-container {
+    padding: 16px;
+}
+
+.about-content {
+    max-width: 1120px;
+}
