@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    width: 100%;
+}
+
+.home-container {
+    height: 300px;
+    background: yellow;
+}
