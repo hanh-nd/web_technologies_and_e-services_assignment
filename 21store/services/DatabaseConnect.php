@@ -47,26 +47,34 @@ class DatabaseConnect {
             $tempResults = array();
             $numOfFields = 0;
             while ($fieldinfo = mysqli_fetch_field($this->result)) {
-                array_push($table, $fieldinfo->table);
                 array_push($field, $fieldinfo->name);
                 $numOfFields++;
             }
 
             while ($row = mysqli_fetch_row($this->result)) {
                 for ($i = 0; $i < $numOfFields; ++$i) {
-                    $table[$i] = trim(ucfirst($table[$i]), "s");
-                    $tempResults[$table[$i]][$field[$i]] = $row[$i];
+                    $field[$i] = $this->snakeToCamel($field[$i]);
+                    $tempResults[$field[$i]] = $row[$i];
                 }
                 if ($singleResult == 1) {
                     mysqli_free_result($this->result);
-                    return $tempResults;
+                    return json_decode(json_encode($tempResults));
                 }
                 array_push($res, $tempResults);
             }
 
             mysqli_free_result($this->result);
-            return ($res);
+            $objRes = array();
+
+            foreach ($res as $item) {
+                array_push($objRes, json_decode(json_encode($item)));
+            }
+            return $objRes;
         }
+    }
+
+    function snakeToCamel($input) {
+        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
     }
 
     public function select($id) {

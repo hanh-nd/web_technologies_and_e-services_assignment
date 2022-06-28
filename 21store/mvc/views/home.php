@@ -1,5 +1,6 @@
 <?php
 	require_once ROOT . DS . 'services' . DS . 'ProductService.php';
+	require_once ROOT . DS . 'services' . DS . 'BrandService.php';
 ?>
 
 <!DOCTYPE html>
@@ -36,10 +37,42 @@
 				</div>
 			</div>
 			<div class="new-arrival-container">
-				TOP MOI NHAT
+				<div class="new-arrival title">
+					Top mới nhất
+				</div>
+				<div class="new-arrival product-list">
+					<?php
+						$service = new ProductService();
+						$products = $service->getNewArrivalProducts();
+						foreach($products as $product) {
+					?>
+							<div class="product-item-row">
+								<img src=<?php echo $product->getImageUrl() ?> width="250">
+								<p><?php echo $product->getProductName() ?></p>
+								<p><?php echo $product->getFormattedPrice() ?></p>
+							</div>
+					<?php
+						}
+					?>	
+				</div>
 			</div>
 			<div class="brand-container">
-				DANH SACH THUONG HIEU
+				<div class="brand title">
+					Danh sách thương hiệu
+				</div>
+				<div class="brand brand-list">
+					<?php
+						$service = new BrandService();
+						$brands = $service->getAllBrands();
+						foreach($brands as $brand) {
+					?>
+							<div class="brand-item-row">
+								<img src=<?php echo $brand->getImageUrl() ?> width="150">
+							</div>
+					<?php
+						}
+					?>	
+				</div>
 			</div>
 		</div>
 	</div>

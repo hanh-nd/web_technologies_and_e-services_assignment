@@ -94,8 +94,24 @@
     }
 }
 
-.new-arrival-container {
-    height: 600px;
+.title {
+    margin: 16px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.product-list,
+.brand-list {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-content: space-between;
+    gap: 32px 8px;
+}
+
+.product-item-row,
+.brand-item-row {
+    cursor: pointer;
 }
 
 .brand-container {
