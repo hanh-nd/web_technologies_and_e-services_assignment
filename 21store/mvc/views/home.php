@@ -48,11 +48,12 @@
 						foreach($products as $product) {
 					?>
 							<div class="product-item-row">
-								<a href="<?php echo  "/" . $path_project . "/" . "detail"?>">
+								<a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $product->getId() ?>">
 									<img src=<?php echo $product->getImageUrl() ?> width="250">							
 								</a>
 								<p><?php echo $product->getProductName() ?></p>
 								<p><?php echo $product->getFormattedPrice() ?></p>
+
 							</div>
 					<?php
 						}

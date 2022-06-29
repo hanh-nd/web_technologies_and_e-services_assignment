@@ -1,5 +1,21 @@
-<?php ?>
+<?php
+	require_once ROOT . DS . 'services' . DS . 'ProductService.php';
+	require_once ROOT . DS . 'services' . DS . 'BrandService.php';
 
+    $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "/";
+    $url_components = parse_url($url);
+    if (isset($url_components['query'])) {
+        parse_str($url_components['query'], $params);
+        if (isset($params['id'])) {
+            $id = $params['id'];
+        } else {
+            $id = 1;
+        }
+    } else {
+        $id = 1;
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -10,31 +26,36 @@
     <link rel="stylesheet" href="public/css/footer.css" type="text/css">
     <link rel="stylesheet" href="public/css/nav_bar.css" type="text/css">
 	<link rel="stylesheet" href="public/css/detail.css" type="text/css">
-    <title>About</title>
+    <title>Detail</title>
 </head>
 
 <body>
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
     <div class="detail-container">
+            <?php 
+                $service = new ProductService();
+                $product = $service->getProduct($id);
+                $description = $product->getProductDescription();
+            ?>
         <div>
-            <img src="https://cdn.gumac.vn/image2/bo-suu-tap-web/2022/t0422/2-xanh-dc04052210320221538114047.jpg?width=350" >
+            <img src="<?php echo $product->getImageUrl() ?>" >
         </div>
         <div class="infor-product">
             <h1>THÔNG TIN SẢN PHẨM</h1>
-            <p>Đầm suông cổ kiểu</p>
-            <p>-Mã Sản Phẩm: DC05011</p>
-            <p>-Tên Sản Phẩm: Đầm suông cổ kiểu</p>
-            <p>-Giá Bán: 480,000vnđ</p>
-            <p>-Màu Sắc: ĐEN, HỒNG</p>
-            <p>-Số Đo Vai: 34CM</p>
-            <p>-Số Đo Eo: 66CM</p>
-            <p>-Số Đo Dài Tay: 26CM</p>
-            <p>*ĐẦM FORM A HƠI SUÔNG NHẸ, CỔ VUÔNG, CÓ NẸP CÁCH ĐIỆU Ở CỔ, TAY NGẮN, ĐẦM RÃ EO, DÂY KÉO PHÍA SAU,*</p>
+            <p><?php echo $product->getProductName() ?></p>
+            <p>-Loại sản phẩm: <?php echo $product->getProductType() ?></p>
+            <p>-Thương hiệu: <?php echo $product->getBrand() ?></p>
+            <p>-Tên Sản Phẩm: <?php echo $product->getProductName() ?></p>
+            <p>-Giá Bán: <?php echo $product->getFormattedPrice() ?></p> 
+            <p>-Màu Sắc: <?php echo $product->getColor() ?></p>
+            <p>-Chất liệu vải: <?php echo $product->getMaterial() ?></p>
+            <p>-Kích cỡ: <?php echo $product->getSize() ?></p>
+            <p>*<?php echo $product->getProductDescription() ?>*</p>
         </div>
         <div class="buy-product">
-            <h2>ĐẦM SUÔNG CỔ KIỂU</h2>
-            <p>DC05011</p>
-            <p class="price">379,000 VNĐ</p>
+            <h2><?php echo strtoupper($product->getProductName()) ?></h2>
+            <p> <?php echo $product->getProductType() ?></p>
+            <p class="price"> <?php echo $product->getFormattedPrice() ?></p>
             <h4>Số lượng</h4>
             <input type="number" value="1" min="1" ></input><br/>
             <button class="buy-now">

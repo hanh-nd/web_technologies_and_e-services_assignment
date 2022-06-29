@@ -24,6 +24,7 @@ class Product {
         $this->brand = $product->brand;
         $this->productType = $product->productType;
         $this->createdAt = $product->createdAt;
+        $this->id = $product->id ;
     }
 
     public function getId() {
