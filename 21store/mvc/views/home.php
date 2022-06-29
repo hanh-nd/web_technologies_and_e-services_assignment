@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="public/css/home.css" type="text/css">
 		<link rel="stylesheet" href="public/css/footer.css" type="text/css">
 		<link rel="stylesheet" href="public/css/nav_bar.css" type="text/css">
+		<link rel="stylesheet" href="public/css/detail.css" type="text/css">
 		<title>Home</title>
 	</head>
 <body>
@@ -47,7 +48,9 @@
 						foreach($products as $product) {
 					?>
 							<div class="product-item-row">
-								<img src=<?php echo $product->getImageUrl() ?> width="250">
+								<a href="<?php echo  "/" . $path_project . "/" . "detail"?>">
+									<img src=<?php echo $product->getImageUrl() ?> width="250">							
+								</a>
 								<p><?php echo $product->getProductName() ?></p>
 								<p><?php echo $product->getFormattedPrice() ?></p>
 							</div>

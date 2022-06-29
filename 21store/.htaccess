@@ -1,6 +1,7 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_URI} /about$ [OR]
+    RewriteCond %{REQUEST_URI} /detail$ [OR]
     RewriteCond %{REQUEST_URI} /home$ [OR]
     RewriteCond %{REQUEST_URI} /products$ [OR]
     RewriteCond %{REQUEST_URI} .jpg|.png|.svg [OR]
