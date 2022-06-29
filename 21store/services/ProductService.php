@@ -43,5 +43,26 @@ class ProductService extends DatabaseConnect implements IMapper {
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);
     }
+
+    public function getPaginatedProducts($page, $pageSize, $searchQuery = '') {
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        if ($pageSize < 0) {
+            $pageSize = 0;
+        }
+
+        $offset = ($page - 1)  * $pageSize;
+        $limit = $pageSize;
+        $query = "SELECT * FROM products WHERE product_name LIKE '%{$searchQuery}%' ORDER BY created_at DESC LIMIT " . $limit . " OFFSET " . $offset;
+        parent::setQuery($query);
+        $objArr = parent::executeQuery();
+        return $this->fromObjectArray($objArr);
+    }
+
+    public function getTotalProducts($searchQuery) {
+        return parent::getTotalRowsWithKeyword('product_name', $searchQuery);
+    }
 }
 ?>
