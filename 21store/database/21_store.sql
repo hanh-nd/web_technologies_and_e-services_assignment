@@ -54,3 +54,12 @@ INSERT INTO brands(brand_name, image_url) VALUES ("ARMANI", "https://static.cdnl
 INSERT INTO users(username, password, phone_number, address) VALUES ("hoanganh", "123123", "0912975138", "Nga Son Thanh Hoa");
 
 INSERT INTO comments(product_id, user_id, rate, content) VALUES ("1", "1", "1" ,"sp nhu biu");
+
+
+create table admin(
+	admin_username varchar(50) not null,
+    admin_password varchar(50)
+);
+insert admin(admin_username, admin_password)
+value('admin', 'admin');
+

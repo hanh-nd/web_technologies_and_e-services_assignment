@@ -72,6 +72,15 @@ class DatabaseConnect {
             return $objRes;
         }
     }
+    public function updateQuery(){
+        $result = mysqli_query($this->db, $this->query);
+
+        if(!$result){
+            echo "FAIL when update!";
+            exit();
+        }
+
+    }
 
     function snakeToCamel($input) {
         return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
