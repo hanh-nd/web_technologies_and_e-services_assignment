@@ -51,6 +51,9 @@ INSERT INTO products(product_name, product_description, price, image_url, size, 
 
 INSERT INTO brands(brand_name, image_url) VALUES ("ARMANI", "https://static.cdnlogo.com/logos/e/41/emporio-armani.svg"), ("FENDI", "https://i.pinimg.com/originals/97/f8/f8/97f8f8332d2e31fe20877f1b8ee3a8e9.png"), ("VERSACE", "https://global-uploads.webflow.com/5e157548d6f7910beea4e2d6/5ed97c67c917b86429019e61_Versace%20(1).png"), ("BURBERRY", "https://logos-world.net/wp-content/uploads/2020/08/Burberry-Logo-2018-present.jpg"), ("CHANEL", "https://cdn.elly.vn/uploads/2021/01/06205934/y-nghia-logo-thuong-hieu-chanel.png"), ("PRADA", "https://www.elleman.vn/wp-content/uploads/2019/07/27/logo-thu%CC%9Bo%CC%9Bng-hie%CC%A3%CC%82u-prada-nguye%CC%82n-ba%CC%89n.jpg"), ("HERMES", "https://bazaarvietnam.vn/wp-content/uploads/2022/03/BZ-logo-hermes-stories-history-meaning-01.jpg"), ("GUCCI", "https://i.pinimg.com/originals/0e/9e/df/0e9edf68a71c691ba32b5e88847588f8.png"), ("LOUIS VUITTON", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Louis_Vuitton_logo_and_wordmark.svg/1679px-Louis_Vuitton_logo_and_wordmark.svg.png");
 
-INSERT INTO users(username, password, phone_number, address) VALUES ("hoanganh", "123123", "0912975138", "Nga Son Thanh Hoa");
+INSERT INTO users(username, password, phone_number, address) VALUES ("hoanganh", "123123", "0912972138", "Nga Son Thanh Hoa");
+INSERT INTO users(username, password, phone_number, address) VALUES ("Bac Vo Tien", "123123", "0912976138", "Ha Tinh");
+INSERT INTO users(username, password, phone_number, address) VALUES ("Nguyen Van Hung", "123123", "0911975138", "Hoang Hoa Thanh Hoa");
+INSERT INTO users(username, password, phone_number, address) VALUES ("Ngo Dang Hanh", "123123", "0912975738", "Ha Noi");
 
 INSERT INTO comments(product_id, user_id, rate, content) VALUES ("1", "1", "1" ,"sp nhu biu");
