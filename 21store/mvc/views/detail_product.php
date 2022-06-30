@@ -16,8 +16,17 @@ if (isset($url_components['query'])) {
 } else {
     $id = 1;
 }
-
 ?>
+
+<?php 
+    if(isset($_POST['content'])){
+        $content = $_POST['content'];
+        $rate =  $_POST['rate'];
+        $commentService = new CommentService();
+        $commentService->insert($id, 2 ,$rate, $content);
+    }//van dang hard code user
+?>
+
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -106,11 +115,15 @@ if (isset($url_components['query'])) {
         </div>
     </div>
     <div class="rate-product">
-        <p>Đánh giá trung bình: 4 sao</p>
+        <p>Đánh giá trung bình: <?php echo $product->getAverageRate() ?> sao</p>
         <h2>Đánh giá của bạn</h2>
-        <b>Điểm đánh giá <input type="number" value="5" max="5" min="0"></b><br />
-        <b>Bình luận:</b><br>
-        <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3"></textarea>
+        <form method="post">
+            <b>Điểm đánh giá <input name="rate" type="number" value="5" max="5" min="0"></b><br />
+            <b>Bình luận:</b><br>
+            <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3"
+                name="content"></textarea>
+            <input type="submit" value="Bình luận">            
+        </form>
         <h2>Phản hồi của khách hàng</h2>
         <?php
         $commentService = new CommentService();
@@ -118,7 +131,7 @@ if (isset($url_components['query'])) {
         foreach ($comments as $comment) {
         ?>
             <div class="comment">
-                <span><b> HoangAnh</b>&emsp;<b>
+                <span><b><?php echo $comment->getNameUser() ?></b>&emsp;<b>
                     Điểm đánh giá:</b> <?php echo $comment->getRate() ?>/5</span>
                 <br>
                 <span><?php echo $comment->getContent() ?></span>

@@ -105,6 +105,17 @@
 .rate-product h2 {
     margin: 10px 0px;
 }
+.rate-product input[type="submit"] {
+    padding: 5px 15px;
+    background-color: rgb(83, 83, 250);
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.rate-product input[type="submit"]:hover {
+    background-color:blue;
+}
+
 .rate-product input[type="number"] {
     margin-left: 20px;
     text-align: center;
@@ -119,6 +130,6 @@
 .comment {
     width: 90%;
     border: 1px solid brown;
-    margin: 0px;
+    margin: 10px 0px;
     padding: 5px 20px;
 }

@@ -1,4 +1,6 @@
 <?php
+	require_once ROOT . DS . 'services' . DS . 'CommentService.php';
+
 
 class Product {
     private $id;                    // int
@@ -73,6 +75,19 @@ class Product {
 
     public function getCreatedAt() {
         return $this->createdAt;
+    }
+    public function getAverageRate() {
+        $commentService = new CommentService();
+        $totalComment = $commentService->getAllCommentFormProduct($this->id);
+        $count = 0;
+        $sum = 0;
+        foreach ($totalComment as $comment){
+            $count++;
+            $sum += $comment->getRate();
+        }
+        if($count == 0)
+            return 0;
+        return round($sum / $count, 1);
     }
 }
 ?>
