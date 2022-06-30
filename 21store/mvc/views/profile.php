@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="public/css/about.css" type="text/css">
 		<link rel="stylesheet" href="public/css/footer.css" type="text/css">
 		<link rel="stylesheet" href="public/css/nav_bar.css" type="text/css">
-		<title>About</title>
+		<title>Profile</title>
 	</head>
 	<body>
 		<?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
