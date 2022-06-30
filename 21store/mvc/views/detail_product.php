@@ -1,19 +1,21 @@
 <?php
-	require_once ROOT . DS . 'services' . DS . 'ProductService.php';
-	require_once ROOT . DS . 'services' . DS . 'BrandService.php';
+require_once ROOT . DS . 'services' . DS . 'ProductService.php';
+require_once ROOT . DS . 'services' . DS . 'BrandService.php';
+require_once ROOT . DS . 'services' . DS . 'CommentService.php';
 
-    $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "/";
-    $url_components = parse_url($url);
-    if (isset($url_components['query'])) {
-        parse_str($url_components['query'], $params);
-        if (isset($params['id'])) {
-            $id = $params['id'];
-        } else {
-            $id = 1;
-        }
+
+$url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "/";
+$url_components = parse_url($url);
+if (isset($url_components['query'])) {
+    parse_str($url_components['query'], $params);
+    if (isset($params['id'])) {
+        $id = $params['id'];
     } else {
         $id = 1;
     }
+} else {
+    $id = 1;
+}
 
 ?>
 <!DOCTYPE html>
@@ -25,20 +27,20 @@
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="public/css/footer.css" type="text/css">
     <link rel="stylesheet" href="public/css/nav_bar.css" type="text/css">
-	<link rel="stylesheet" href="public/css/detail.css" type="text/css">
+    <link rel="stylesheet" href="public/css/detail.css" type="text/css">
     <title>Detail</title>
 </head>
 
 <body>
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
     <div class="detail-container">
-            <?php 
-                $service = new ProductService();
-                $product = $service->getProduct($id);
-                $description = $product->getProductDescription();
-            ?>
+        <?php
+        $service = new ProductService();
+        $product = $service->getProduct($id);
+        $description = $product->getProductDescription();
+        ?>
         <div>
-            <img src="<?php echo $product->getImageUrl() ?>" >
+            <img src="<?php echo $product->getImageUrl() ?>">
         </div>
         <div class="infor-product">
             <h1>THÔNG TIN SẢN PHẨM</h1>
@@ -46,7 +48,7 @@
             <p>-Loại sản phẩm: <?php echo $product->getProductType() ?></p>
             <p>-Thương hiệu: <?php echo $product->getBrand() ?></p>
             <p>-Tên Sản Phẩm: <?php echo $product->getProductName() ?></p>
-            <p>-Giá Bán: <?php echo $product->getFormattedPrice() ?></p> 
+            <p>-Giá Bán: <?php echo $product->getFormattedPrice() ?></p>
             <p>-Màu Sắc: <?php echo $product->getColor() ?></p>
             <p>-Chất liệu vải: <?php echo $product->getMaterial() ?></p>
             <p>-Kích cỡ: <?php echo $product->getSize() ?></p>
@@ -57,25 +59,22 @@
             <p> <?php echo $product->getProductType() ?></p>
             <p class="price"> <?php echo $product->getFormattedPrice() ?></p>
             <h4>Số lượng</h4>
-            <input type="number" value="1" min="1" ></input><br/>
+            <input type="number" value="1" min="1"></input><br />
             <button class="buy-now">
                 <span>MUA NGAY</span>
                 <p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p>
             </button>
             <button class="add-to-cart">
-                <img src="https://gumac.vn/Content/Image/WebImage/addcart.png" 
-                    style="width:30px; height:30px"/>
+                <img src="https://gumac.vn/Content/Image/WebImage/addcart.png" style="width:30px; height:30px" />
                 <span>THÊM VÀO GIỎ HÀNG</span>
             </button>
             <h3>TỔNG ĐÀI HỖ TRỢ</h3>
             <div class="row-container hotline">
-                <img src="https://gumac.vn/Content/Image/WebImage/iconphone.png" 
-                    style="width:25px; height:25px"/>
+                <img src="https://gumac.vn/Content/Image/WebImage/iconphone.png" style="width:25px; height:25px" />
                 <span>Hotline Mua Hàng: <b style="font-size: 1.2rem;">18006013 </b>(Miễn phí)</span>
             </div>
             <div class="row-container hotline">
-                <img src="https://gumac.vn/Content/Image/WebImage/iconphone.png" 
-                    style="width:25px; height:25px"/>
+                <img src="https://gumac.vn/Content/Image/WebImage/iconphone.png" style="width:25px; height:25px" />
                 <span>Hotline Hỗ trợ, khiếu nại: <b style="font-size: 1.2rem;"> 0972 333 444</b></span>
             </div>
         </div>
@@ -109,16 +108,25 @@
     <div class="rate-product">
         <p>Đánh giá trung bình: 4 sao</p>
         <h2>Đánh giá của bạn</h2>
-        <b>Điểm đánh giá <input type="number" value="5" max="5" min="0"></b><br/>
+        <b>Điểm đánh giá <input type="number" value="5" max="5" min="0"></b><br />
         <b>Bình luận:</b><br>
-        <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3" ></textarea>
+        <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3"></textarea>
         <h2>Phản hồi của khách hàng</h2>
-        <div class="comment">
-            <span><b>Hoàng Anh</b>&emsp;<b>Điểm đánh giá:</b> 5/5</span>
-            <br>
-            <span>Sản phẩm rất tốt</span>
-        </div>
+        <?php
+        $commentService = new CommentService();
+        $comments = $commentService->getAllCommentFormProduct($product->getId());
+        foreach ($comments as $comment) {
+        ?>
+            <div class="comment">
+                <span><b> HoangAnh</b>&emsp;<b>
+                    Điểm đánh giá:</b> <?php echo $comment->getRate() ?>/5</span>
+                <br>
+                <span><?php echo $comment->getContent() ?></span>
+            </div>
+        <?php
+        }
+        ?>
     </div>
 
 </body>
-<script type="text/javascript" src = <?php echo "/" . $path_project . "/" . "public/js/detail.js" ?>></script>
+<script type="text/javascript" src=<?php echo "/" . $path_project . "/" . "public/js/detail.js" ?>></script>

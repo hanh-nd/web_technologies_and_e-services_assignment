@@ -10,7 +10,7 @@ class BrandService extends DatabaseConnect implements IMapper {
     }
 
     public function insert($brand) {
-        $query = "INSERT INTO brands(brand_name, image_url) VALUES (`" . $brand->getBrandName() . "`, `" . $product->getImageUrl() . "`)";
+        $query = "INSERT INTO brands(brand_name, image_url) VALUES (`" . $brand->getBrandName() . "`, `" . $brand->getImageUrl() . "`)";
         parent::setQuery($query);
         parent::executeQuery();
     }
