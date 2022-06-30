@@ -107,13 +107,13 @@
 }
 .rate-product input[type="submit"] {
     padding: 5px 15px;
-    background-color: rgb(83, 83, 250);
+    background-color: rgb(63, 63, 222);
     color: white;
     border: none;
     border-radius: 4px;
 }
 .rate-product input[type="submit"]:hover {
-    background-color:blue;
+    background-color:rgb(70, 70, 240);
 }
 
 .rate-product input[type="number"] {
