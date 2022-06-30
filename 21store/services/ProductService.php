@@ -44,7 +44,7 @@ class ProductService extends DatabaseConnect implements IMapper {
         return $this->fromObjectArray($objArr);
     }
 
-    public function getPaginatedProducts($page, $pageSize, $searchQuery = '') {
+    public function getPaginatedProducts($page, $pageSize, $searchQuery, $sortBy, $orderBy) {
         if ($page < 1) {
             $page = 1;
         }
@@ -55,7 +55,7 @@ class ProductService extends DatabaseConnect implements IMapper {
 
         $offset = ($page - 1)  * $pageSize;
         $limit = $pageSize;
-        $query = "SELECT * FROM products WHERE product_name LIKE '%{$searchQuery}%' ORDER BY created_at DESC LIMIT " . $limit . " OFFSET " . $offset;
+        $query = "SELECT * FROM products WHERE product_name LIKE '%{$searchQuery}%' ORDER BY " . $sortBy . " " . $orderBy . " LIMIT " . $limit . " OFFSET " . $offset;
         parent::setQuery($query);
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);
