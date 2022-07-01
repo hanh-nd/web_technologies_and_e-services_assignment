@@ -16,30 +16,49 @@
 <body>
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
     <div class="profile-container">
-        <div>
+        <div class="side-bar">
             <h2>Hoang Anh</h2>
-            <a>Tài khoản của tôi</a><br>
-            <a>Đổi mật khẩu</a><br>
-            <a>Đơn mua</a><br>
+            <a href="#username">Tài khoản của tôi</a><br>
+            <a href="#password">Đổi mật khẩu</a><br>
         </div>
-        <div class="infor-profile">
-            <header>
-                <h3>Hồ Sơ Của Tôi</h3>
-                <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
-                <div class="divider"></div>
-            </header>
-            <div class="content-profile">
-                <p><label>Tên Đăng Nhập</label> &emsp;<span>hoanganh</span></p>
-                <div class="attribute" style="margin-left: 18px;">
-                    <label>Số điện thoại&emsp;</label>
-                    <input type="text" class="input-text">
+        <div style="width: 60%;">
+            <div class="infor-profile" id="#username">
+                <header>
+                    <h3>Hồ Sơ Của Tôi</h3>
+                    <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+                    <div class="divider"></div>
+                </header>
+                <div class="content-profile" style="padding-left: 70px;">
+                    <p><label>Tên Đăng Nhập</label> &emsp;<span>hoanganh</span></p>
+                    <div class="attribute" style="margin-left: 18px;">
+                        <label>Số điện thoại&emsp;</label>
+                        <input type="text" class="input-text">
+                    </div>
+                    <div class="attribute" style="margin-left: 65px;">
+                        <label>Địa chỉ&emsp;</label>
+                        <input type="text" class="input-text">
+                    </div>
+                    <input type="submit" value="Lưu thay đổi">
                 </div>
-                <div class="attribute" style="margin-left: 65px;">
-                    <label>Địa chỉ&emsp;</label>
-                    <input type="text" class="input-text">
+            </div>
+            <div class="infor-profile" id="password">
+                <header>
+                    <h3>Đổi mật khẩu</h3>
+                    <p>Để bảo mật tài khoản, vui lòng không chia sẻ mật khẩu cho người khác</p>
+                    <div class="divider"></div>
+                </header>
+                <div class="content-profile">
+                    <div class="attribute" style="margin-left: 45px;">
+                        <label>Mật Khẩu Mới&emsp;</label>
+                        <input type="text" class="input-text">
+                    </div>
+                    <div class="attribute" style="margin-left: 4px;">
+                        <label>Xác Nhận Mật Khẩu&emsp;</label>
+                        <input type="text" class="input-text">
+                    </div>
+                    <input type="submit" value="Lưu thay đổi" style="margin-left: 168px">
                 </div>
-                <input type="submit" value="Lưu thay đổi">            
             </div>
         </div>
     </div>
-</body> 
+</body>

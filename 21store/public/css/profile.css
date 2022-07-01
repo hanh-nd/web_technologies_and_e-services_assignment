@@ -1,5 +1,5 @@
 .profile-container {
-    background-color: rgb(250, 250, 250); 
+    background-color: rgb(255, 255, 255); 
     display:flex; 
     flex-direction: row;
 }
@@ -7,7 +7,6 @@
 .infor-profile {
     background-color: rgb(255, 255, 255);
     padding: 20px;
-    width: 60%;
     margin-top: 50px;
     margin-bottom: 50px;
     border-radius: 8px;
@@ -48,4 +47,19 @@ label {
 
 .content-profile input[type="submit"]:hover {
     background-color:rgb(70, 70, 240);
+}
+
+.side-bar {
+    position: absolute;
+    left: 70px;
+    top: 150px
+}
+.side-bar a {
+    color: #888;
+    font-size: 0.9rem;
+    padding-top: 5px;
+}
+
+header p {
+    margin-top: 5px;
 }

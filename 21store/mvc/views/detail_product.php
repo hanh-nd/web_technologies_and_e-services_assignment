@@ -64,7 +64,7 @@ if (isset($url_components['query'])) {
             <p>*<?php echo $product->getProductDescription() ?>*</p>
         </div>
         <div class="buy-product">
-            <h2><?php echo strtoupper($product->getProductName()) ?></h2>
+            <h2  id="buy"><?php echo strtoupper($product->getProductName()) ?></h2>
             <p> <?php echo $product->getProductType() ?></p>
             <p class="price"> <?php echo $product->getFormattedPrice() ?></p>
             <h4>Số lượng</h4>
@@ -140,6 +140,9 @@ if (isset($url_components['query'])) {
         }
         ?>
     </div>
-
+    <a href="#buy" id="up-to-top">
+        <img src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39098/preview.png" alt="up-to-top">
+        <p> Mua ngay</p>
+    </a>
 </body>
 <script type="text/javascript" src=<?php echo "/" . $path_project . "/" . "public/js/detail.js" ?>></script>

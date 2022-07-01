@@ -8,6 +8,7 @@
 .detail-container img {
     width: 410px;
     height: 600px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .infor-product {
     width: 410px;
@@ -19,7 +20,7 @@
 }
 
 .buy-product {
-    position: fixed;
+    position: absolute;
     width: 410px;
     height: 600px;
     left: 70%;
@@ -34,6 +35,8 @@
     font-size: 1.1rem;
     margin: 10px 0px 20px 0px;
 }
+
+
 .row-container {
     display: flex;
     flex-direction: row;
@@ -132,4 +135,21 @@
     border: 1px solid brown;
     margin: 10px 0px;
     padding: 5px 20px;
+}
+
+#up-to-top {
+    position: fixed;
+    padding: 5px 10px;
+    top: 670px;
+    left: 1350px;
+    background-color: transparent;
+    align-content: center;
+    align-items: center;
+    color: black;
+}
+
+#up-to-top img{
+    width: 17px;
+    height: 17px;
+    margin-left: 27px;
 }
