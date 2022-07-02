@@ -1,6 +1,17 @@
 <?php require_once ROOT . DS . 'services' . DS . "UserService.php"; ?>
+<?php require_once ROOT . DS . 'services' . DS . "BillService.php"; ?>
+<?php require_once ROOT . DS . 'services' . DS . "OrderItemService.php"; ?>
+<?php require_once ROOT . DS . 'services' . DS . "ProductService.php"; ?>
+
 <!DOCTYPE html>
 <html lang="vi">
+
+<?php
+    $status = "Tất cả";
+    if (isset($_POST['status'])) {
+        $status = $_POST['status'];
+    }
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -17,42 +28,71 @@
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
     <div class="profile-container">
         <div class="side-bar">
-            <h2>Đơn Mua</h2>
-            <a>Tất cả</a><br>
-            <a>Chờ xác nhận</a><br>
-            <a>Đang giao</a><br>
-            <a>Đã mua</a><br>
+            <h2>Đơn hàng: <?php echo $status ?></h2>
+            <form method="post" name="filter-bill">
+                <input type="radio" id="all" name="status" value="Tất cả" onChange="autoSubmit();">
+                <label for="all"> Tất cả</label><br>
+                <input type="radio" id="confirm" name="status" value="Chờ xác nhận" onChange="autoSubmit();">
+                <label for="confirm">Chờ xác nhận</label><br>
+                <input type="radio" id="ship" name="status" value="Đang giao" onChange="autoSubmit();"> 
+                <label for="ship">Đang giao</label><br>
+                <input type="radio" id="completed" name="status" value="Đã mua" onChange="autoSubmit();"> 
+                <label for="completed">Đã mua</label><br>
+            </form>
         </div>
         <div style="width: 60%;">
-            <div class="infor-profile" id="#username">
-                <header>
-                    <h3>Trạng thái đơn hàng</h3>
-                    <p>Chờ xác nhận</p>
-                    <div class="divider"></div>
-                </header>
-                <div class="purchase-infor">
-                    <img src="https://cdn.gumac.vn/image2/bo-suu-tap-web/2022/t0622/0-den-qc06068-fix060620221309474960.jpg?width=450">
-                    <div class="name-price">
-                        <p>QUầN SUôNG ốNG RộNG</p>
-                        <p>X2 <span>348,000 VND</span></p>
+            <?php
+            $billService = new BillService();
+            $orderService = new OrderItemService();
+            $allBill = $billService->getFilterBillFormUser(3, $status); //fix cung
+            if(count($allBill) == 0){
+                echo "<div class='not-buy'>Không có sẳn phẩm để hiển thị</div>";
+            }
+            else
+            foreach ($allBill as $bill) {
+            ?>
+                <div class="infor-profile" id="#username">
+
+                    <header>
+                        <h3>Trạng thái đơn hàng</h3>
+                        <p><?php echo $bill->getStatus() ?></p>
+                        <div class="divider"></div>
+                    </header>
+                    <?php
+                    $items = $orderService->getAllOrderFormBill($bill->getId());
+                    foreach ($items as $item) {
+                    ?>
+                        <?php $product = $item->getProduct(); ?>
+                        <div class="purchase-infor">
+                            <img src="<?php echo $product->getImageUrl() ?>">
+                            <div class="name-price">
+                                <p><?php echo $product->getProductName() ?></p>
+                                <p>X<?php echo $item->getQuantity() ?>
+                                    <span><?php echo $product->getFormattedPrice() ?></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                    <?php } ?>
+
+                    <div class="sum-price">
+                        <p>Tổng số tiền: &emsp;<span><?php echo $bill->getFormattedTotalAmount() ?></span></p>
+                        <div class="list-button">
+                            <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  '1' . "#rateProduct" ?>" style="color: white;">
+                                <button id="evaluate">
+                                    Đánh giá
+                                </button>
+                            </a>
+                            <!-- van dang fix cung -->
+                            <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  '1' . "#buy" ?>">
+                                <button>Mua lại</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="divider"></div>
-                <div class="sum-price">
-                    <p>Tổng số tiền: &emsp;<span>694,000 VND</span></p>
-                    <div class="list-button">
-                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  '1' . "#rateProduct" ?>" style="color: white;">
-                            <button id="evaluate">
-                                Đánh giá
-                            </button>
-                        </a>
-                        <!-- van dang fix cung -->
-                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  '1' . "#buy" ?>">
-                            <button>Mua lại</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
 </body>
+
+<script type="text/javascript" src = <?php echo "/" . $path_project . "/" . "public/js/purchase.js" ?>></script>

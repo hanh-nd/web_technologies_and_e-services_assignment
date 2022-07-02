@@ -47,3 +47,10 @@
     background-color: rgb(223, 87, 29);
     color: white;
 }
+
+.not-buy {
+    height: 400px;
+    margin-top: 40px;
+    font-size: 2rem;
+    margin-left: 30px;
+}

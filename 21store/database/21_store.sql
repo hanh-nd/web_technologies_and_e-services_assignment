@@ -75,7 +75,7 @@ CREATE TABLE bills (
     id int(10) AUTO_INCREMENT,
     user_id int(10) NOT NULL,
     total_amount int(10),
-    status varchar(100),
+    status varchar(100), 
     created_at datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES users(id)
@@ -103,3 +103,14 @@ INSERT INTO users(username, password, fullname, phone_number, address) VALUES ("
 INSERT INTO users(username, password, fullname, phone_number, address) VALUES ("ngodanghanh", "123123", "Ngo Dang Hanh", "0912975738", "Ha Noi");
 
 INSERT INTO comments(product_id, user_id, rate, content) VALUES ("1", "1", "1" ,"sp nhu biu");
+
+INSERT INTO bills(user_id, total_amount, status) VALUES (3, 512000, "Chờ xác nhận");
+
+INSERT INTO order_items(bill_id, product_id, quantity) VALUES (1, 3, 2);
+INSERT INTO order_items(bill_id, product_id, quantity) VALUES (1, 5, 4);
+
+
+INSERT INTO bills(user_id, total_amount, status) VALUES (3, 863000, "Đã mua");
+
+INSERT INTO order_items(bill_id, product_id, quantity) VALUES (2, 6, 1);
+INSERT INTO order_items(bill_id, product_id, quantity) VALUES (2, 2, 2);
