@@ -13,7 +13,37 @@
     margin: 0px 15px;
 }
 .name-price span {
-    padding-left: 650px;
+    padding-left: 620px;
     color: red;
     font-weight: 550;
+}
+
+.sum-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sum-price span {
+    color: red;
+    font-size: 1.3rem;
+    font-weight: 550;
+}
+.sum-price button {
+    padding: 10px 30px;
+    border-radius: 3px;
+    border: 0.1px solid rgb(221, 221, 221);
+    background-color: white;
+    color: rgb(74, 72, 72);
+    margin-left: 10px;
+}
+
+.list-button {
+    margin: 20px 0px 10px 0px;
+}
+
+#evaluate {
+    border: none;
+    background-color: rgb(223, 87, 29);
+    color: white;
 }

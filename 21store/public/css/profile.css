@@ -63,3 +63,10 @@ label {
 header p {
     margin-top: 5px;
 }
+
+#validate {
+    padding-left: 170px;
+    font-size: 0.9rem;
+    color: red;
+    margin-bottom: 10px;
+}
