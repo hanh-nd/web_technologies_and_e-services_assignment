@@ -41,8 +41,15 @@
                 <div class="sum-price">
                     <p>Tổng số tiền: &emsp;<span>694,000 VND</span></p>
                     <div class="list-button">
-                        <button id="evaluate">Đánh giá</button>
-                        <button>Mua lại</button>
+                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  '1' . "#rateProduct" ?>" style="color: white;">
+                            <button id="evaluate">
+                                Đánh giá
+                            </button>
+                        </a>
+                        <!-- van dang fix cung -->
+                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  '1' . "#buy" ?>">
+                            <button>Mua lại</button>
+                        </a>
                     </div>
                 </div>
             </div>
