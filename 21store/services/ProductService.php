@@ -9,8 +9,8 @@ class ProductService extends DatabaseConnect implements IMapper {
         $this->table = 'products';
     }
 
-    public function insert($product) {
-        $query = "INSERT INTO products(product_name, product_description, price, image_url, size, color, material, brand, product_type) VALUES (`" . $product->getProductName() . "`, `" . $product->getProductDescription() . "`, `" . $product->getPrice() . "`, `" . $product->getImageUrl() . "`, `" . $product->getSize() . "`, `" . $product->getColor() . "`, `" . $product->getMaterial() . "`, `" . $product->getBrand() . "`, `" . $product->getProductType() . "`)";
+    public function insert($productName, $productDescription, $price, $imageUrl, $size, $color, $material, $brandId, $productType) {
+        $query = "INSERT INTO products(product_name, product_description, price, image_url, size, color, material, brand_id, product_type) VALUES (`$productName`, `$productDescription`, `$price`, `$imageUrl`, `$size`, `$color`, `$material`, `$brandId`, `$productType`)";
         parent::setQuery($query);
         parent::executeQuery();
     }
@@ -55,7 +55,7 @@ class ProductService extends DatabaseConnect implements IMapper {
 
         $offset = ($page - 1)  * $pageSize;
         $limit = $pageSize;
-        $query = "SELECT * FROM products WHERE product_name LIKE '%{$searchQuery}%' ORDER BY " . $sortBy . " " . $orderBy . " LIMIT " . $limit . " OFFSET " . $offset;
+        $query = "SELECT * FROM products WHERE product_name LIKE '%{$searchQuery}%' ORDER BY $sortBy $orderBy LIMIT $limit OFFSET $offset";
         parent::setQuery($query);
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);

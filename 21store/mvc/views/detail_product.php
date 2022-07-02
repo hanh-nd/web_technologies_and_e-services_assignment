@@ -55,7 +55,7 @@ if (isset($url_components['query'])) {
             <h1>THÔNG TIN SẢN PHẨM</h1>
             <p><?php echo $product->getProductName() ?></p>
             <p>-Loại sản phẩm: <?php echo $product->getProductType() ?></p>
-            <p>-Thương hiệu: <?php echo $product->getBrand() ?></p>
+            <p>-Thương hiệu: <?php echo $product->getBrandName() ?></p>
             <p>-Tên Sản Phẩm: <?php echo $product->getProductName() ?></p>
             <p>-Giá Bán: <?php echo $product->getFormattedPrice() ?></p>
             <p>-Màu Sắc: <?php echo $product->getColor() ?></p>
@@ -116,12 +116,13 @@ if (isset($url_components['query'])) {
     </div>
     <div class="rate-product">
         <p>Đánh giá trung bình: <?php echo $product->getAverageRate() ?> sao</p>
-        <h2>Đánh giá của bạn</h2>
-        <form method="post">
+        <h2 id="rateProduct">Đánh giá của bạn</h2>
+        <form method="post"  name="commentForm" onsubmit="return validateComment()">
             <b>Điểm đánh giá <input name="rate" type="number" value="5" max="5" min="0"></b><br />
             <b>Bình luận:</b><br>
             <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3"
                 name="content"></textarea>
+            <p id="validateComment"></p>
             <input type="submit" value="Bình luận">            
         </form>
         <h2>Phản hồi của khách hàng</h2>

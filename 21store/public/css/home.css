@@ -109,8 +109,9 @@
     gap: 32px 8px;
 }
 
-.product-item-row,
+.product-item-row > a,
 .brand-item-row {
+    color: black;
     cursor: pointer;
 }
 

@@ -85,9 +85,11 @@
                     foreach($products as $product) {
                 ?>
                     <div class="product-item-row">
-                        <img src=<?php echo $product->getImageUrl() ?> width="250">
-                        <p><?php echo $product->getProductName() ?></p>
-                        <p><?php echo $product->getFormattedPrice() ?></p>
+                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $product->getId() ?>">
+                            <img src=<?php echo $product->getImageUrl() ?> width="250">
+                            <p><?php echo $product->getProductName() ?></p>
+                            <p><?php echo $product->getFormattedPrice() ?></p>
+                        </a>
                     </div>
                 <?php
                     }

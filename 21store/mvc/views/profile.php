@@ -4,15 +4,15 @@
 <html lang="vi">
 <?php 
     $userService = new UserService();
-    $user = $userService->getUser(1);
     if(isset($_POST['password']) && isset($_POST['confirmPassword']) == isset($_POST['password'])){
         $password = $_POST['password'];
         $userService->updatePassword($userService->getUser(1)->getId(), $password);
     }
-    if(isset($_POST['address']) && isset($_POST['phoneNumber'] )){
+    if(isset($_POST['address']) && isset($_POST['phoneNumber'])  && isset($_POST['fullname'] )){
         $address = $_POST['address'];
         $phoneNumber = $_POST['phoneNumber'];
-        $userService->updateInfor($user->getId(), $phoneNumber, $address);
+        $fullname = $_POST['fullname'];
+        $userService->updateInfor($userService->getUser(1)->getId(), $phoneNumber, $address, $fullname);
     }
 ?>
 <head>
@@ -41,10 +41,12 @@
                     <div class="divider"></div>
                 </header>
                 <form method="post" class="content-profile" style="padding-left: 70px;">
+                <?php    $user = $userService->getUser(1);?>
                     <p><label>Tên Đăng Nhập</label> &emsp;<span><?php echo $user->getUserName() ?></span></p>
                     <div class="attribute" style="margin-left: 90px;">
                         <label>Tên&emsp;</label>
-                        <input type="text" class="input-text" value="<?php echo $user->getUserName() ?>">
+                        <input type="text" class="input-text" name="fullname"
+                        value="<?php echo $user->getFullname() ?>">
                     </div>
                     <div class="attribute" style="margin-left: 18px;">
                         <label>Số điện thoại&emsp;</label>
