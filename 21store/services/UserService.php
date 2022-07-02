@@ -9,9 +9,9 @@ class UserService extends DatabaseConnect implements IMapper {
         $this->table = 'users';
     }
 
-    public function insert($user) {
+    public function insert($username, $password, $fullname, $phoneNumber, $address) {
         $query = "INSERT INTO users(username, password, phone_number, address) 
-            VALUES (`" . $user->getUserName() . "`, `" . $user->getPassword() . "`, `" .  $user->getPhoneNumber() . "`, `" .  $user->getAddress()  . "`)";
+            VALUES (`$username`, `$password`, `$fullname`, `$phoneNumber`, `$address`)";
         parent::setQuery($query);
         parent::executeQuery();
     }

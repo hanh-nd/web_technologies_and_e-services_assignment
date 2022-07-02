@@ -55,7 +55,7 @@ if (isset($url_components['query'])) {
             <h1>THÔNG TIN SẢN PHẨM</h1>
             <p><?php echo $product->getProductName() ?></p>
             <p>-Loại sản phẩm: <?php echo $product->getProductType() ?></p>
-            <p>-Thương hiệu: <?php echo $product->getBrand() ?></p>
+            <p>-Thương hiệu: <?php echo $product->getBrandName() ?></p>
             <p>-Tên Sản Phẩm: <?php echo $product->getProductName() ?></p>
             <p>-Giá Bán: <?php echo $product->getFormattedPrice() ?></p>
             <p>-Màu Sắc: <?php echo $product->getColor() ?></p>

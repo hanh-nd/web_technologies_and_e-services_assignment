@@ -19,6 +19,11 @@
     margin: 24px 0;
 }
 
+.product-item-row > a {
+    color: black;
+    cursor: pointer;
+}
+
 .pagination {
     display: inline-block;
     margin: 24px auto;

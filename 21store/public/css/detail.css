@@ -1,3 +1,8 @@
+* {
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 .detail-container {
     width: 60%;
@@ -36,7 +41,6 @@
     margin: 10px 0px 20px 0px;
 }
 
-
 .row-container {
     display: flex;
     flex-direction: row;
@@ -69,7 +73,7 @@
 .hotline {
     margin-top: 15px;
 }
-.hotline img{
+.hotline img {
     margin: 0px;
 }
 
@@ -116,7 +120,7 @@
     border-radius: 4px;
 }
 .rate-product input[type="submit"]:hover {
-    background-color:rgb(70, 70, 240);
+    background-color: rgb(70, 70, 240);
 }
 
 .rate-product input[type="number"] {
@@ -148,7 +152,7 @@
     color: black;
 }
 
-#up-to-top img{
+#up-to-top img {
     width: 17px;
     height: 17px;
     margin-left: 27px;

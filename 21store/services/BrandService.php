@@ -9,8 +9,8 @@ class BrandService extends DatabaseConnect implements IMapper {
         $this->table = 'brands';
     }
 
-    public function insert($brand) {
-        $query = "INSERT INTO brands(brand_name, image_url) VALUES (`" . $brand->getBrandName() . "`, `" . $brand->getImageUrl() . "`)";
+    public function insert($brandName, $imageUrl) {
+        $query = "INSERT INTO brands(brand_name, image_url) VALUES (`$brandName`, `$imageUrl`)";
         parent::setQuery($query);
         parent::executeQuery();
     }
@@ -33,7 +33,7 @@ class BrandService extends DatabaseConnect implements IMapper {
     }
 
     public function getAllBrands($limit = 4) {
-        $query = "SELECT * FROM brands ORDER BY created_at DESC LIMIT " . $limit;
+        $query = "SELECT * FROM brands ORDER BY created_at DESC LIMIT $limit";
         parent::setQuery($query);
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);
