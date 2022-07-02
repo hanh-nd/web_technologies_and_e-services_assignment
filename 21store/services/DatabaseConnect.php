@@ -110,4 +110,11 @@ class DatabaseConnect {
     function __destruct() {
         $this->disconnect();
     }
+    public function updateQuery(){
+        $result = mysqli_query($this->db, $this->query);
+        if(!$result){
+            echo "FAIL when update!";
+            exit();
+        }
+    }
 }

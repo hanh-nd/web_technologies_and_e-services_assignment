@@ -33,18 +33,16 @@ class UserService extends DatabaseConnect implements IMapper {
         return $this->fromObject($obj);
     }
 
-    public function updateInfor($id, $newPhoneNumber, $newAddress) {
-        $query = "UPDATE users SET address = '$newAddress', phone_number = '$newPhoneNumber' WHERE id = '$id'";
+    public function updateInfor($id, $newPhoneNumber, $newAddress, $newFullname) {
+        $query = "UPDATE users SET address = '$newAddress', phone_number = '$newPhoneNumber', fullname = '$newFullname' WHERE id = '$id'";
         parent::setQuery($query);
-        $objArr = parent::executeQuery();
-        return $this->fromObjectArray($objArr);
+        parent::updateQuery($query);
     }
 
     public function updatePassword($id, $newPassword) {
         $query = "UPDATE users SET password = '$newPassword' WHERE id = '$id'";
         parent::setQuery($query);
-        $objArr = parent::executeQuery();
-        return $this->fromObjectArray($objArr);
+        parent::updateQuery($query);
     }
 }
 ?>

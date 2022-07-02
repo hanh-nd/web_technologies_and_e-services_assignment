@@ -8,6 +8,7 @@ class User {
     private $createdAt;             // string
     private $address;               //string
     private $role;               // string
+    private $fullname;               // string
 
     public function __construct($user) {
         $this->createdAt = $user->createdAt;
@@ -17,10 +18,14 @@ class User {
         $this->id = $user->id;
         $this->address = $user->address;
         $this->role = $user->role;
+        $this->fullname = $user->fullname;
     }
 
     public function getId() {
         return $this->id;
+    }
+    public function getFullname() {
+        return $this->fullname;
     }
 
     public function getUserName() {

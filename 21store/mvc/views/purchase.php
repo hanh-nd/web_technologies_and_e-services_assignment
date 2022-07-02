@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="public/css/footer.css" type="text/css">
     <link rel="stylesheet" href="public/css/nav_bar.css" type="text/css">
     <link rel="stylesheet" href="public/css/profile.css" type="text/css">
-    <title>About</title>
+    <title>Purchase</title>
 </head>
 
 <body>
@@ -20,8 +20,8 @@
             <h2>Đơn Mua</h2>
             <a>Tất cả</a><br>
             <a>Chờ xác nhận</a><br>
-            <a>Chờ lấy hàng</a><br>
             <a>Đang giao</a><br>
+            <a>Đã mua</a><br>
         </div>
         <div style="width: 60%;">
             <div class="infor-profile" id="#username">
