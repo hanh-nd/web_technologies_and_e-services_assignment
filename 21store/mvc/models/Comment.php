@@ -1,4 +1,5 @@
 <?php
+require_once ROOT . DS . 'services' . DS . 'UserService.php';
 
 class Comment {
     private $id;                    // int
@@ -31,6 +32,11 @@ class Comment {
 
     public function getUserId() {
         return $this->userId;
+    }
+    public function getNameUser() {
+        $userService = new UserService();
+        $user = $userService->getUser($this->userId);
+        return $user->getUserName();
     }
 
     public function getCreatedAt() {

@@ -25,7 +25,7 @@ class UserService extends DatabaseConnect implements IMapper {
         foreach ($objectArray as $object) {
             array_push($result, new User($object));
         }
-        return $result;
+        return $result;// co loi khi doi thong tin tai khoan
     }
 
     public function getUser($id) {
@@ -52,11 +52,18 @@ class UserService extends DatabaseConnect implements IMapper {
         return $listUser;
     }
 
-    // public function getAllUserFormProduct($productId) {
-    //     $query = "SELECT * FROM users WHERE product_id = " . $productId;
-    //     parent::setQuery($query);
-    //     $objArr = parent::executeQuery();
-    //     return $this->fromObjectArray($objArr);
-    // }
+    public function updateInfor($id, $newPhoneNumber, $newAddress) {
+        $query = "UPDATE users SET address = '$newAddress', phone_number = '$newPhoneNumber' WHERE id = '$id'";
+        parent::setQuery($query);
+        $objArr = parent::executeQuery();
+        return $this->fromObjectArray($objArr);
+    }
+
+    public function updatePassword($id, $newPassword) {
+        $query = "UPDATE users SET password = '$newPassword' WHERE id = '$id'";
+        parent::setQuery($query);
+        $objArr = parent::executeQuery();
+        return $this->fromObjectArray($objArr);
+    }
 }
 ?>

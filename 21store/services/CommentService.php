@@ -9,8 +9,8 @@ class CommentService extends DatabaseConnect implements IMapper {
         $this->table = 'comments';
     }
 
-    public function insert($comment) {
-        $query = "INSERT INTO comments(product_id, user_id, rate, content) VALUES (`" . $comment->getProductId() . "`, `" . $comment->getUserId() . "`, `" .  $comment->getRate() . "`, `" .  $comment->getContent()  . "`)";
+    public function insert($productId, $userId, $rate, $content) {
+        $query = "INSERT INTO comments (product_id, user_id, rate, content) VALUES ('$productId', '$userId', '$rate', '$content')";
         parent::setQuery($query);
         parent::executeQuery();
     }
