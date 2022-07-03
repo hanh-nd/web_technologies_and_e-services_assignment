@@ -18,13 +18,13 @@ if (isset($url_components['query'])) {
 }
 ?>
 
-<?php 
-    if(isset($_POST['content'])){
-        $content = $_POST['content'];
-        $rate =  $_POST['rate'];
-        $commentService = new CommentService();
-        $commentService->insert($id, 2 ,$rate, $content);
-    }//van dang hard code user
+<?php
+if (isset($_POST['content'])) {
+    $content = $_POST['content'];
+    $rate =  $_POST['rate'];
+    $commentService = new CommentService();
+    $commentService->insert($id, 2, $rate, $content);
+} //van dang hard code user
 ?>
 
 <!DOCTYPE html>
@@ -64,20 +64,30 @@ if (isset($url_components['query'])) {
             <p>*<?php echo $product->getProductDescription() ?>*</p>
         </div>
         <div class="buy-product">
-            <h2  id="buy"><?php echo strtoupper($product->getProductName()) ?></h2>
+            <h2 id="buy"><?php echo strtoupper($product->getProductName()) ?></h2>
             <p> <?php echo $product->getProductType() ?></p>
             <p class="price"> <?php echo $product->getFormattedPrice() ?></p>
             <h4>Số lượng</h4>
-            <input type="number" value="1" min="1"></input><br />
-            <button class="buy-now">
-                <span>MUA NGAY</span>
-                <p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p>
-            </button>
-            <button class="add-to-cart">
-                <img src="https://gumac.vn/Content/Image/WebImage/addcart.png" style="width:30px; height:30px" />
-                <span>THÊM VÀO GIỎ HÀNG</span>
-            </button>
-            <h3>TỔNG ĐÀI HỖ TRỢ</h3>
+            <input type="number" value="1" min="1" max="<?php echo $product->getQuantity() ?>"></input><br />
+            <span style="color: red; font-size:0.9rem; font-weight:550;">
+                Còn lại <?php echo $product->getQuantity() ?> sản phẩm
+            </span>
+            <?php
+            if ($product->getQuantity() <= 0)
+                echo "<button class='out-of-stock'><span>ĐÃ HẾT HÀNG!!</span><p>Hàng mới về sau 5 - 10 ngày</p></button>";
+            else
+                echo "<button class='buy-now'><span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></button>";
+            ?>
+            <?php
+            if ($product->getQuantity() > 0)
+                echo "
+                <button class='add-to-cart'>
+                    <img src='https://gumac.vn/Content/Image/WebImage/addcart.png' style='width:30px; height:30px' />
+                    <span>THÊM VÀO GIỎ HÀNG</span>
+                </button>";
+            ?>
+
+            <h3 style="margin-top: 20px">TỔNG ĐÀI HỖ TRỢ</h3>
             <div class="row-container hotline">
                 <img src="https://gumac.vn/Content/Image/WebImage/iconphone.png" style="width:25px; height:25px" />
                 <span>Hotline Mua Hàng: <b style="font-size: 1.2rem;">18006013 </b>(Miễn phí)</span>
@@ -117,13 +127,12 @@ if (isset($url_components['query'])) {
     <div class="rate-product">
         <p>Đánh giá trung bình: <?php echo $product->getAverageRate() ?> sao</p>
         <h2 id="rateProduct">Đánh giá của bạn</h2>
-        <form method="post"  name="commentForm" onsubmit="return validateComment()">
-            <b>Điểm đánh giá <input name="rate" type="number" value="5" max="5" min="0"></b><br />
+        <form method="post" name="commentForm" onsubmit="return validateComment()">
+            <b>Điểm đánh giá <input name="rate" type="number" value="5" max="5" min="1"></b><br />
             <b>Bình luận:</b><br>
-            <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3"
-                name="content"></textarea>
+            <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3" name="content"></textarea>
             <p id="validateComment"></p>
-            <input type="submit" value="Bình luận">            
+            <input type="submit" value="Bình luận">
         </form>
         <h2>Phản hồi của khách hàng</h2>
         <?php
@@ -133,7 +142,7 @@ if (isset($url_components['query'])) {
         ?>
             <div class="comment">
                 <span><b><?php echo $comment->getNameUser() ?></b>&emsp;<b>
-                    Điểm đánh giá:</b> <?php echo $comment->getRate() ?>/5</span>
+                        Điểm đánh giá:</b> <?php echo $comment->getRate() ?>/5</span>
                 <br>
                 <span><?php echo $comment->getContent() ?></span>
             </div>

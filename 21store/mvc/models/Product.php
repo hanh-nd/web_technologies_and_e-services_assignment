@@ -49,7 +49,9 @@ class Product {
     public function getPrice() {
         return $this->price;
     }
-
+    public function getQuantity() {
+        return $this->quantity;
+    }
     public function getFormattedPrice() {
         return number_format($this->price, 0, '', ',') . " VND";
     }

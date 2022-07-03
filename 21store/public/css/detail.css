@@ -59,7 +59,7 @@
 }
 
 .add-to-cart {
-    margin: 10px 0px 20px 0px;
+    margin:  10px 0px 0px 0px;
     color: white;
     background-color: rgb(27, 80, 63);
     padding: 10px;
@@ -162,4 +162,16 @@
     font-size: 0.9rem;
     color: red;
     padding: 10px 0px;
+}
+
+.out-of-stock {
+    padding: 7px 20px;
+    color: rgb(255, 255, 255);
+    width: 400px;
+    background-color: rgb(104, 104, 104);
+    border: none;
+    margin: 10px 0px;
+}
+.out-of-stock span {
+    font-size: 1.3rem;
 }
