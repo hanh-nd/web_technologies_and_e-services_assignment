@@ -4,33 +4,31 @@
 
     $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "/";
     $url_components = parse_url($url);
+
+    $page = 1;
+    $searchQuery = '';
+    $sortBy = 'created_at';
+    $orderBy = 'desc';
+    
     if (isset($url_components['query'])) {
         parse_str($url_components['query'], $params);
         if (isset($params['page'])) {
             $page = $params['page'];
-        } else {
-            $page = 1;
         }
 
         if (isset($params['q'])) {
             $searchQuery = $params['q'];
-        } else {
-            $searchQuery = '';
         }
 
         if (isset($params['sort'])) {
             $sort = explode(':', $params['sort']);
             $sortBy = $sort[0];
             $orderBy = $sort[1];
-        } else {
-            $sortBy = 'created_at';
-            $orderBy = 'desc';
         }
-    } else {
-        $page = 1;
-        $searchQuery = '';
-        $sortBy = 'created_at';
-        $orderBy = 'desc';
+
+        if (isset($params['brand_id'])) {
+            $brandId = $params['brand_id'];
+        }
     }
 ?>
 
@@ -52,14 +50,22 @@
             <div class="content-header">
                 Danh sách sản phẩm: <?php 
                     $service = new ProductService();
-                    $totalRows = $service->getTotalProducts($searchQuery);
+                    $filters = new stdClass();
+                    $filters->searchQuery = $searchQuery;
+                    if (isset($brandId)) $filters->brandId = $brandId;
+                    $totalRows = $service->getTotalProducts($filters);
                     $totalPages = ceil($totalRows / 4);
                     echo $totalRows . ' sản phẩm';
                 ?>
             </div>
             <div class="filters">
-                <form class="filters-form" action="products?q=v" method="GET" >
-                    <input type="hidden" name="q" value="<?= $searchQuery ?>" />
+                <form class="filters-form" action="" method="GET" >
+                    <?php if (isset($searchQuery)) { ?>
+                        <input type="hidden" name="q" value="<?= $searchQuery ?>" />
+                    <?php } ?>
+                    <?php if (isset($brandId)) { ?>
+                        <input type="hidden" name="brand_id" value="<?= $brandId ?>" />
+                    <?php } ?>
                     <select class="" name="sort">
                         <option disabled <?php if ($sortBy . ":" . $orderBy == "created_at:desc") echo 'selected'?>>
                             Sắp xếp
@@ -82,7 +88,7 @@
             </div>
             <div class="product-list">
                 <?php
-                    $products = $service->getPaginatedProducts($page, 4, $searchQuery, $sortBy, $orderBy);
+                    $products = $service->getPaginatedProducts($page, 4, $filters, $sortBy, $orderBy);
                     foreach($products as $product) {
                 ?>
                     <div class="product-item-row">

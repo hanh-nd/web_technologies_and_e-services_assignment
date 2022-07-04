@@ -11,9 +11,9 @@ class OrderItem {
     public function __construct($order) {
         $this->id = $order->id;
         $this->billId = $order->billId;
-        $this->createdAt = $order->createdAt;
         $this->productId = $order->productId;
         $this->quantity = $order->quantity;
+        $this->createdAt = $order->createdAt;
     }
 
     public function getId() {

@@ -11,14 +11,14 @@ class User {
     private $fullname;               // string
 
     public function __construct($user) {
-        $this->createdAt = $user->createdAt;
+        $this->id = $user->id;
         $this->username = $user->username;
         $this->password = $user->password;
+        $this->fullname = $user->fullname;
         $this->phoneNumber = $user->phoneNumber;
-        $this->id = $user->id;
         $this->address = $user->address;
         $this->role = $user->role;
-        $this->fullname = $user->fullname;
+        $this->createdAt = $user->createdAt;
     }
 
     public function getId() {

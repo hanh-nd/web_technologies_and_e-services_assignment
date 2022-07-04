@@ -10,12 +10,12 @@ class Comment {
     private $rate;             // int
 
     public function __construct($comment) {
-        $this->createdAt = $comment->createdAt;
+        $this->id = $comment->id;
         $this->productId = $comment->productId;
         $this->userId = $comment->userId;
         $this->content = $comment->content;
-        $this->id = $comment->id;
         $this->rate = $comment->rate;
+        $this->createdAt = $comment->createdAt;
     }
 
     public function getId() {

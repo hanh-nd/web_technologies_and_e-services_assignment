@@ -7,6 +7,7 @@ class Brand {
     private $createdAt;             // string
 
     public function __construct($brand) {
+        $this->id = $brand->id;
         $this->brandName = $brand->brandName;
         $this->imageUrl = $brand->imageUrl;
         $this->createdAt = $brand->createdAt;
