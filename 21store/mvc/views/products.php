@@ -58,7 +58,8 @@
                 ?>
             </div>
             <div class="filters">
-                <form class="filters-form" action="" method="GET" >
+                <form class="filters-form" action="products?q=v" method="GET" >
+                    <input type="hidden" name="q" value="<?= $searchQuery ?>" />
                     <select class="" name="sort">
                         <option disabled <?php if ($sortBy . ":" . $orderBy == "created_at:desc") echo 'selected'?>>
                             Sắp xếp
