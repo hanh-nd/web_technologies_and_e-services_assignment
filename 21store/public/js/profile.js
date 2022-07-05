@@ -13,6 +13,7 @@ function validateForm() {
         document.getElementById("validate").innerHTML = "Mật khẩu phải nhiều hơn 6 kí tự!!";
         return false;
     }
+    alert('Đổi mật khẩu thành công')
 }
 
 function validateFormInfor() {
@@ -24,8 +25,7 @@ function validateFormInfor() {
         document.getElementById("validate2").innerHTML = "Hãy điền đủ thông tin!!";
         return false;
     }
-    if (z.length < 10) {
-        document.getElementById("validate2").innerHTML = "Số điện thoại phải lớn hơn 9 chữ số!!";
-        return false;
+    else{
+        alert('Lưu thay đổi')
     }
 }

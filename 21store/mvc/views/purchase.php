@@ -67,7 +67,7 @@
                     foreach ($items as $item) {
                     ?>
                         <?php $product = $item->getProduct(); ?>
-                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $item->getId() ?>" class="purchase-infor">
+                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $item->getProductId() ?>" class="purchase-infor">
                             <img src="<?php echo $product->getImageUrl() ?>">
                             <div class="name-price">
                                 <p><?php echo $product->getProductName() ?></p>
@@ -82,13 +82,13 @@
                     <div class="sum-price">
                         <p>Tổng số tiền: &emsp;<span><?php echo $bill->getFormattedTotalAmount() ?></span></p>
                         <div class="list-button">
-                            <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $items[0]->getId() . "#rateProduct" ?>" style="color: white;">
+                            <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $items[0]->getProductId() . "#rateProduct" ?>" style="color: white;">
                                 <button id="evaluate">
                                     Đánh giá
                                 </button>
                             </a>
                             <!-- van dang fix cung -->
-                            <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" . $items[0]->getId() . "#buy" ?>">
+                            <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" . $items[0]->getProductId() . "#buy" ?>">
                                 <button>Mua lại</button>
                             </a>
                         </div>
