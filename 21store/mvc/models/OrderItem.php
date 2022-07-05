@@ -37,7 +37,7 @@ class OrderItem {
     }
     public function getProduct() {
         $productService = new ProductService();
-        return $productService->getProduct($this->id);
+        return $productService->getProduct($this->productId);
     }
 }
 ?>
