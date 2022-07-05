@@ -73,7 +73,7 @@ CREATE TABLE cart_items (
 
 -- Trigger update total amount in cart session after create cart items --
 DELIMITER $$
-CREATE TRIGGER update_cart_sessions
+CREATE TRIGGER update_cart_sessions_after_insert
 AFTER INSERT ON `cart_items` FOR EACH ROW
 begin
     declare existed_cart_session_id Boolean;
@@ -92,6 +92,28 @@ begin
     END IF;
 END; $$
 DELIMITER  ;
+
+DELIMITER $$
+CREATE TRIGGER update_cart_sessions_after_delete
+AFTER DELETE ON `cart_items` FOR EACH ROW
+BEGIN
+    declare existed_cart_session_id Boolean;
+    -- Check cart sessions table --
+    SELECT 1
+    INTO @existed_cart_session_id
+    FROM cart_sessions
+    WHERE cart_sessions.id = OLD.cart_session_id;
+
+    IF @existed_cart_session_id = 1
+    THEN
+        SET @price = (SELECT price FROM products WHERE id = OLD.product_id);
+        UPDATE cart_sessions
+        SET total_amount = total_amount - OLD.quantity * @price
+        WHERE id = OLD.cart_session_id;
+    END IF;
+END; $$
+DELIMITER  ;
+-- end trigger
 
 CREATE TABLE bills (
     id int(10) AUTO_INCREMENT,
@@ -116,7 +138,7 @@ CREATE TABLE order_items (
 
 -- Trigger update total amount in bill after create order items --
 DELIMITER $$
-CREATE TRIGGER update_bill
+CREATE TRIGGER update_bills_after_insert
 AFTER INSERT ON `order_items` FOR EACH ROW
 begin
     declare existed_bill_id Boolean;
@@ -135,6 +157,28 @@ begin
     END IF;
 END; $$
 DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER update_bills_after_delete
+AFTER DELETE ON `order_items` FOR EACH ROW
+BEGIN
+    declare existed_bill_id Boolean;
+    -- Check bills table --
+    SELECT 1
+    INTO @existed_bill_id
+    FROM bills
+    WHERE bills.id = OLD.bill_id;
+
+    IF @existed_bill_id = 1
+    THEN
+        SET @price = (SELECT price FROM products WHERE id = OLD.product_id);
+        UPDATE bills
+        SET total_amount = total_amount - OLD.quantity * @price
+        WHERE id = OLD.bill_id;
+    END IF;
+END; $$
+DELIMITER  ;
+-- end trigger
 
 INSERT INTO brands(brand_name, image_url) VALUES ("ARMANI", "https://static.cdnlogo.com/logos/e/41/emporio-armani.svg"), ("FENDI", "https://i.pinimg.com/originals/97/f8/f8/97f8f8332d2e31fe20877f1b8ee3a8e9.png"), ("VERSACE", "https://global-uploads.webflow.com/5e157548d6f7910beea4e2d6/5ed97c67c917b86429019e61_Versace%20(1).png"), ("BURBERRY", "https://logos-world.net/wp-content/uploads/2020/08/Burberry-Logo-2018-present.jpg"), ("CHANEL", "https://cdn.elly.vn/uploads/2021/01/06205934/y-nghia-logo-thuong-hieu-chanel.png"), ("PRADA", "https://www.elleman.vn/wp-content/uploads/2019/07/27/logo-thu%CC%9Bo%CC%9Bng-hie%CC%A3%CC%82u-prada-nguye%CC%82n-ba%CC%89n.jpg"), ("HERMES", "https://bazaarvietnam.vn/wp-content/uploads/2022/03/BZ-logo-hermes-stories-history-meaning-01.jpg"), ("GUCCI", "https://i.pinimg.com/originals/0e/9e/df/0e9edf68a71c691ba32b5e88847588f8.png"), ("LOUIS VUITTON", "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Louis_Vuitton_logo_and_wordmark.svg/1679px-Louis_Vuitton_logo_and_wordmark.svg.png");
 
@@ -158,3 +202,5 @@ INSERT INTO bills(user_id, status) VALUES (3, "Đã mua");
 
 INSERT INTO order_items(bill_id, product_id, quantity) VALUES (2, 6, 1);
 INSERT INTO order_items(bill_id, product_id, quantity) VALUES (2, 2, 2);
+
+DELETE FROM order_items WHERE id = 4;
