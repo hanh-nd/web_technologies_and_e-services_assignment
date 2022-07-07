@@ -87,14 +87,8 @@ class DatabaseConnect {
         return $this->executeQuery();
     }
 
-    public function getTotalRows() {
-        $this->query = 'SELECT COUNT(*) FROM `' . $this->table . '`';
-        $this->result = mysqli_query($this->db, $this->query);
-        return mysqli_fetch_row($this->result)[0];
-    }
-
-    public function getTotalRowsWithKeyword($column, $searchQuery) {
-        $this->query = "SELECT COUNT(*) FROM `" . $this->table . "` WHERE " . $column . " LIKE '%{$searchQuery}%'";
+    public function getTotalRows($query) {
+        $this->query = $query;
         $this->result = mysqli_query($this->db, $this->query);
         return mysqli_fetch_row($this->result)[0];
     }
@@ -109,5 +103,12 @@ class DatabaseConnect {
 
     function __destruct() {
         $this->disconnect();
+    }
+    public function updateQuery(){
+        $result = mysqli_query($this->db, $this->query);
+        if(!$result){
+            echo "FAIL when update!";
+            exit();
+        }
     }
 }

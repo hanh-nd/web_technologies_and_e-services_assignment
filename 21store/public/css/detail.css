@@ -1,3 +1,8 @@
+* {
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 .detail-container {
     width: 60%;
@@ -8,6 +13,7 @@
 .detail-container img {
     width: 410px;
     height: 600px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .infor-product {
     width: 410px;
@@ -19,7 +25,7 @@
 }
 
 .buy-product {
-    position: fixed;
+    position: absolute;
     width: 410px;
     height: 600px;
     left: 70%;
@@ -34,6 +40,7 @@
     font-size: 1.1rem;
     margin: 10px 0px 20px 0px;
 }
+
 .row-container {
     display: flex;
     flex-direction: row;
@@ -52,7 +59,7 @@
 }
 
 .add-to-cart {
-    margin: 10px 0px 20px 0px;
+    margin:  10px 0px 0px 0px;
     color: white;
     background-color: rgb(27, 80, 63);
     padding: 10px;
@@ -66,7 +73,7 @@
 .hotline {
     margin-top: 15px;
 }
-.hotline img{
+.hotline img {
     margin: 0px;
 }
 
@@ -105,6 +112,17 @@
 .rate-product h2 {
     margin: 10px 0px;
 }
+.rate-product input[type="submit"] {
+    padding: 5px 15px;
+    background-color: rgb(63, 63, 222);
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.rate-product input[type="submit"]:hover {
+    background-color: rgb(70, 70, 240);
+}
+
 .rate-product input[type="number"] {
     margin-left: 20px;
     text-align: center;
@@ -119,6 +137,41 @@
 .comment {
     width: 90%;
     border: 1px solid brown;
-    margin: 0px;
+    margin: 10px 0px;
     padding: 5px 20px;
+}
+
+#up-to-top {
+    position: fixed;
+    padding: 5px 10px;
+    top: 670px;
+    left: 1350px;
+    background-color: transparent;
+    align-content: center;
+    align-items: center;
+    color: black;
+}
+
+#up-to-top img {
+    width: 17px;
+    height: 17px;
+    margin-left: 27px;
+}
+
+#validateComment {
+    font-size: 0.9rem;
+    color: red;
+    padding: 10px 0px;
+}
+
+.out-of-stock {
+    padding: 7px 20px;
+    color: rgb(255, 255, 255);
+    width: 400px;
+    background-color: rgb(104, 104, 104);
+    border: none;
+    margin: 10px 0px;
+}
+.out-of-stock span {
+    font-size: 1.3rem;
 }

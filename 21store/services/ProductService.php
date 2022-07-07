@@ -9,8 +9,8 @@ class ProductService extends DatabaseConnect implements IMapper {
         $this->table = 'products';
     }
 
-    public function insert($product) {
-        $query = "INSERT INTO products(product_name, product_description, price, image_url, size, color, material, brand, product_type) VALUES (`" . $product->getProductName() . "`, `" . $product->getProductDescription() . "`, `" . $product->getPrice() . "`, `" . $product->getImageUrl() . "`, `" . $product->getSize() . "`, `" . $product->getColor() . "`, `" . $product->getMaterial() . "`, `" . $product->getBrand() . "`, `" . $product->getProductType() . "`)";
+    public function insert($productName, $productDescription, $price, $imageUrl, $size, $color, $material, $brandId, $productType) {
+        $query = "INSERT INTO products(product_name, product_description, price, image_url, size, color, material, brand_id, product_type) VALUES (`$productName`, `$productDescription`, `$price`, `$imageUrl`, `$size`, `$color`, `$material`, `$brandId`, `$productType`)";
         parent::setQuery($query);
         parent::executeQuery();
     }
@@ -44,7 +44,9 @@ class ProductService extends DatabaseConnect implements IMapper {
         return $this->fromObjectArray($objArr);
     }
 
-    public function getPaginatedProducts($page, $pageSize, $searchQuery = '') {
+    public function getPaginatedProducts($page, $pageSize, $filters, $sortBy, $orderBy) {
+        $searchQuery = $filters->searchQuery;
+        
         if ($page < 1) {
             $page = 1;
         }
@@ -55,14 +57,23 @@ class ProductService extends DatabaseConnect implements IMapper {
 
         $offset = ($page - 1)  * $pageSize;
         $limit = $pageSize;
-        $query = "SELECT * FROM products WHERE product_name LIKE '%{$searchQuery}%' ORDER BY created_at DESC LIMIT " . $limit . " OFFSET " . $offset;
+        $query = "SELECT * FROM products WHERE product_name LIKE '%{$searchQuery}%'";
+        if (isset($filters->brandId)) {
+            $query = $query . " AND brand_id = $filters->brandId";
+        }
+        $query = $query . " ORDER BY $sortBy $orderBy LIMIT $limit OFFSET $offset";
         parent::setQuery($query);
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);
     }
 
-    public function getTotalProducts($searchQuery) {
-        return parent::getTotalRowsWithKeyword('product_name', $searchQuery);
+    public function getTotalProducts($filters) {
+        $searchQuery = $filters->searchQuery;
+        $query = "SELECT COUNT(*) FROM `$this->table` WHERE product_name LIKE '%{$searchQuery}%'";
+        if (isset($filters->brandId)) {
+            $query = $query . " AND brand_id = $filters->brandId";
+        }
+        return parent::getTotalRows($query);
     }
 }
 ?>

@@ -49,11 +49,10 @@
 					?>
 							<div class="product-item-row">
 								<a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $product->getId() ?>">
-									<img src=<?php echo $product->getImageUrl() ?> width="250">							
+									<img src=<?php echo $product->getImageUrl() ?> width="250">		
+									<p><?php echo $product->getProductName() ?></p>
+									<p><?php echo $product->getFormattedPrice() ?></p>					
 								</a>
-								<p><?php echo $product->getProductName() ?></p>
-								<p><?php echo $product->getFormattedPrice() ?></p>
-
 							</div>
 					<?php
 						}
@@ -71,7 +70,9 @@
 						foreach($brands as $brand) {
 					?>
 							<div class="brand-item-row">
-								<img src=<?php echo $brand->getImageUrl() ?> width="150">
+								<a href="<?php echo  "/" . $path_project . "/" . "products?brand_id=" . $brand->getId() ?>">
+									<img src=<?php echo $brand->getImageUrl() ?> width="150">					
+								</a>
 							</div>
 					<?php
 						}

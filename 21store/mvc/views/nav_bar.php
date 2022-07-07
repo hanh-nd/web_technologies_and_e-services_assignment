@@ -2,7 +2,7 @@
     global $path_project;
 
     if (array_key_exists("search_request", $_POST)) {
-		if($_POST['search_request'] != "") {
+		if(isset($_POST['search_request'])) {
             $search_keys = $_POST['search_request'];
             header("Location: " . "products?q=" . $search_keys);
             exit();
@@ -37,7 +37,7 @@
             </div>
             <nav id = "nav">
                 <ul>
-                    <li><a href=<?php echo "/" . $path_project . "/" . "#" ?>>Theo dõi đơn hàng</a></li>
+                    <li><a href=<?php echo "/" . $path_project . "/" . "purchase" ?>>Theo dõi đơn hàng</a></li>
                     <li><a href=<?php echo "/" . $path_project . "/" . "#" ?>>Giỏ hàng</a></li>
                     <li><a href=<?php echo "/" . $path_project . "/" . "profile" ?>>Tài khoản</a></li>
                 </ul>
