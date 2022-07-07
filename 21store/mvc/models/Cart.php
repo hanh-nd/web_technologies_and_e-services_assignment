@@ -1,35 +1,32 @@
 <?php
 
 class Cart {
-    private $username;          // String
-    private $listProducts;      // array
-    private $date;              // date
-    private $quantity;          // int
+    private $id;                    // int
+    private $userId;               // int
+    private $totalAmount;          // int
+    private $createdAt;            // datetime
     
-    public function __construct($username, $listProducts, $quantity) {
-        $this->username = $username;
-        $this->listProducts = $listProducts;
-        $this->date = date("Y-m-d");
-        $this->quantity = $quantity;
+    public function __construct($cart) {
+        $this->id = $cart->id;
+        $this->userId = $cart->userId;
+        $this->totalAmount = $cart->totalAmount;
+        $this->createdAt = $cart->createdAt;
+
     }
     
     
-    public function getUsername(){
-        return $this->username;
+    public function getUserId(){
+        return $this->userId;
     }
 
 
-    public function getListProduct(){
-        return $this->listProduct;
+    public function getTotalAmount(){
+        return $this->totalAmount;
     }
 
 
-    public function getDate(){
-        return $this->date;
-    }
-
-    public function getQuantity(){
-        return $this->quantity;
+    public function getCreatedAt(){
+        return $this->createdAt;
     }
     
 }
