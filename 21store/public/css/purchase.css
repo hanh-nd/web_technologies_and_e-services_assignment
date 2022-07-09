@@ -1,3 +1,36 @@
+.purchase-container {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255); 
+    margin-top: 50px;
+    align-content: center;
+}
+.infor-bill {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin-bottom: 50px;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 100%;
+}
+
+.side-bar {
+    margin-left: 3%;
+    margin-top: 0px;
+    width: 20%;
+    margin-right: 0px;
+}
+.side-bar a {
+    color: #888;
+    font-size: 0.9rem;
+    padding-top: 5px;
+}
+
+.bill-container {
+    width: 60%;
+}
+
+
 .purchase-infor {
     display: flex;
     flex-direction: row;
@@ -11,11 +44,17 @@
 
 .name-price {
     margin: 0px 15px;
+    width: 100%;
 }
+.quantity {
+    display: flex;
+    justify-content: space-between;
+}
+
 .name-price span {
-    padding-left: 550px;
     color: red;
     font-weight: 550;
+    padding-left: 70%;
 }
 
 .sum-price {
@@ -53,4 +92,81 @@
     margin-top: 40px;
     font-size: 2rem;
     margin-left: 30px;
+}
+
+label {
+    width: fit-content;
+}
+@media (max-width: 1000px) {
+    .purchase-container {
+        display: block;
+        align-content: center;
+    }
+    .filter-bill input[type='radio']{
+        width: fit-content;
+        margin-left: 20px;
+        margin-right: 3px;
+    }
+    .side-bar {
+        width: 60%;
+        margin-left: 10%;
+        margin-bottom: 30px;
+        align-content: center;
+    }
+    .filter-bill {
+        display: flex;
+        flex-direction: row;
+    }
+    .bill-container{
+        width: 75%;
+    }
+    .side-bar h2{
+        display: none;
+    }
+    .filter-bill label {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .purchase-container {
+        display: block;
+        align-content: center;
+    }
+    .side-bar {
+        width: fit-content;
+        margin-bottom: 20px;
+        margin-left: 3%;
+    }
+    .bill-container{
+        width: 95%;
+    }
+    .filter-bill input[type='radio']{
+        width: fit-content;
+        margin-left: 10px;
+        margin-right: 3px;
+    }
+    .filter-bill label {
+        font-size: 0.8rem;
+    }
+
+    .name-price {
+        font-size: 0.9rem;
+    }
+
+    .name-price span {
+        padding-left: 60%;
+    }
+    .sum-price span {
+        color: red;
+        font-size: 1rem;
+        font-weight: 550;
+    }
+    .list-button {
+        display: none;
+    }
+    .purchase-infor img{
+        width: 64px;
+        height: 64px;
+    }
 }

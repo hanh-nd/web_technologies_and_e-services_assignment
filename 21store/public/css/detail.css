@@ -3,12 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 .detail-container {
-    width: 60%;
     display: flex;
     flex-direction: row;
     margin: 3% 7%;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 .detail-container img {
     width: 410px;
@@ -17,18 +18,17 @@
 }
 .infor-product {
     width: 410px;
-    height: 600px;
-    margin-right: 20px;
+    margin-top: 0px;
+    height: fit-content;
 }
 .infor-product p {
     margin-top: 3px;
 }
 
 .buy-product {
-    position: absolute;
+    margin-top: 10px;
     width: 410px;
     height: 600px;
-    left: 70%;
 }
 .buy-product p {
     margin-top: 5px;
@@ -65,6 +65,10 @@
     padding: 10px;
     width: 400px;
     border: none;
+}
+.add-to-cart img {
+    width: 30px;
+    height: 30px;
 }
 .add-to-cart span {
     font-size: 1.1rem;
@@ -144,8 +148,8 @@
 #up-to-top {
     position: fixed;
     padding: 5px 10px;
-    top: 670px;
-    left: 1350px;
+    top: 87%;
+    left: 85%;
     background-color: transparent;
     align-content: center;
     align-items: center;
@@ -174,4 +178,69 @@
 }
 .out-of-stock span {
     font-size: 1.3rem;
+}
+
+@media (max-width: 600px) {
+    .detail-container {
+        font-size: 0.8rem;
+    }
+    .detail-container img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    .infor-product h1 {
+        font-size: 1rem;
+    }
+    .buy-product {
+        height: auto;
+    }
+    h2 {
+        font-size: 1rem;
+    }
+    i {
+        font-size: 1rem;
+    }
+    .price {
+        font-size: 0.9rem;
+    }
+    .add-to-cart, .out-of-stock, .buy-now{
+        padding: 5px 10px;
+        width: 98%;
+        border: none;
+        margin: 10px 0px;
+        font-size: 0.8rem;
+        align-content: center;
+    }
+    .add-to-cart, .out-of-stock, .buy-now span {
+        font-size: 1rem;
+    }
+    .guide {
+        width: 100%;
+    }
+    .add-to-cart img {
+        display: none;
+    }
+    .hotline {
+        margin-top: 0px;
+    }
+    .hotline img {
+        margin: 10px 0px 10px 10px;
+    }
+    .rate-product {
+        width: 100%;
+        margin-left: 10px;
+    }
+    .rate-product textarea {
+        width: 100%;
+    }
+    .comment {
+        width: 100%;
+    }
+    #validateComment {
+        font-size: 0.75rem;
+    }
+    #up-to-top {
+        display: none;
+    }
 }
