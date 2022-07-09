@@ -70,7 +70,9 @@
 						foreach($brands as $brand) {
 					?>
 							<div class="brand-item-row">
-								<img src=<?php echo $brand->getImageUrl() ?> width="150">
+								<a href="<?php echo  "/" . $path_project . "/" . "products?brand_id=" . $brand->getId() ?>">
+									<img src=<?php echo $brand->getImageUrl() ?> width="150">					
+								</a>
 							</div>
 					<?php
 						}

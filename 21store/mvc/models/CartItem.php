@@ -1,27 +1,27 @@
 
 <?php require_once ROOT . DS . 'services' . DS . "ProductService.php";
 
-class OrderItem {
+class CartItem {
     private $id;                  
-    private $billId;            
+    private $cartId;            
     private $productId;              
     private $quantity;           
     private $createdAt;              
 
-    public function __construct($order) {
-        $this->id = $order->id;
-        $this->billId = $order->billId;
-        $this->productId = $order->productId;
-        $this->quantity = $order->quantity;
-        $this->createdAt = $order->createdAt;
+    public function __construct($cartItem) {
+        $this->id = $cartItem->id;
+        $this->cartId = $cartItem->cartSessionId;
+        $this->productId = $cartItem->productId;
+        $this->quantity = $cartItem->quantity;
+        $this->createdAt = $cartItem->createdAt;
     }
 
     public function getId() {
         return $this->id;
     }
 
-    public function getBillId() {
-        return $this->billId;
+    public function getCartId() {
+        return $this->cartId;
     }
 
     public function getProductId() {

@@ -19,6 +19,7 @@ class Product {
     private $createdAt;             // string
 
     public function __construct($product) {
+        $this->id = $product->id;
         $this->productName = $product->productName;
         $this->productDescription = $product->productDescription;
         $this->price = $product->price;
@@ -31,7 +32,6 @@ class Product {
         $this->rate = $product->rate;
         $this->quantity = $product->quantity;
         $this->createdAt = $product->createdAt;
-        $this->id = $product->id ;
     }
 
     public function getId() {
