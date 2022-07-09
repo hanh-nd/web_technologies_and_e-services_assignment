@@ -11,6 +11,7 @@ if(array_key_exists("username", $_POST)){
     $password = $_POST['password'];
     $checker = $service->valid($username, $password);
     if($checker === True){
+        echo "votienbac";
         $_SESSION['admin_username'] = $username;
         $_SESSION['admin_password'] = $password;
     } else {

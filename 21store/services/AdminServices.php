@@ -5,8 +5,8 @@ class AdminServices extends DatabaseConnect {
     public function valid($username, $password){
         $query = "select * from admin where admin_username = '$username' and admin_password = '$password'";
 
-        parent::setQuerry($query);
-        $result = parent::executeQuery();
+        parent::setQuery($query);
+        $result = parent::executeQuery1();
         if(mysqli_fetch_array($result)){
             return True;
         } else {
@@ -18,7 +18,7 @@ class AdminServices extends DatabaseConnect {
         $query = "insert admin (admin_username, admin_password)
                   value('$username', '$password')";
 
-        parent::setQuerry($query);
+        parent::setQuery($query);
         parent::updateQuery();
     }
 }

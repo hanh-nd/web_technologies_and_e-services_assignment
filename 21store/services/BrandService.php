@@ -14,6 +14,50 @@ class BrandService extends DatabaseConnect implements IMapper {
         parent::setQuery($query);
         parent::executeQuery();
     }
+      /**
+     * The method support delete row in database
+     * @param int $id
+     */
+    public function delete($id){
+
+        
+        //delete product in table comment
+        $query = "update products set brand_id = null where brand_id = " .$id;
+        parent::setQuerry($query);
+        parent::updateQuery();
+        
+        $query = "delete from brands
+                  where id = " . $id;
+        parent::addQuerry($query);
+        parent::updateQuery();
+
+
+    }
+
+    /**
+     * The method update data to database
+     * @param Product $product
+     */
+    public function update($product) {
+        // update to products table
+        //product_name, product_description, price, image_url, size, color, material, brand_id, product_type, quantity
+        $query = "update products
+                    set " .
+                    "product_name = " . "'" . getProductName() . "' ," .
+                    "product_description = " . "'" . $product->getProductDescription() . "' ," .
+                    "price = " . $product->getPrice() . "," .
+                    "image_url = " . $product->getImageUrl() . "," .
+                    "color = " . "'" . $product->getColor() . "' ," .
+                    "size = " . $product->getSize() . "," .
+                    "material = " . "'" . $product->getMaterial() . "' ," .
+                    "brand_id = " . "'" . $product->getBrandId() . "' ," .
+                    "product_type = " . $product->getProductType() . "' ," .
+                    "quantity = " . $product->getQuantity() . " " .
+                    "where id = " . $product->getId() 
+                    . "";
+        parent::setQuerry($query);
+        parent::updateQuery();
+    }
 
     public function fromObject($object) {
         return new Brand($object);

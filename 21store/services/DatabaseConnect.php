@@ -72,6 +72,17 @@ class DatabaseConnect {
             return $objRes;
         }
     }
+
+    public function executeQuery1(){
+        $result = mysqli_query($this->db, $this->query);
+
+        if(!$result){
+            echo "FAIL when execute!";
+            exit();
+        }
+
+        return $result;
+    }
     public function updateQuery(){
         $result = mysqli_query($this->db, $this->query);
 
