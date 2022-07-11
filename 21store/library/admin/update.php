@@ -1,5 +1,5 @@
 <?php
-    require_once '../lib_config.php';
+    require_once '../library_config.php';
 
     require_once ROOT . DS . 'mvc' . DS . 'models' . DS . 'Product.php';
     require_once ROOT . DS . 'mvc' . DS . 'models' . DS . 'Brand.php';
@@ -23,10 +23,8 @@
 
     if($type=='1'){
         $service= new ProductService();
-        $product=new Product($id,$name,$des, $price, $image_url,
+        $service->update($id,$name,$des, $price, $image_url,
         $size, $color, $material, $brand, $product_type, $quantity);
-
-        $service->update($product);
         echo "Update success!";
     }
     else if($type=='2'){

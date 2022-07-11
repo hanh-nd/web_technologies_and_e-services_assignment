@@ -63,7 +63,7 @@
                                 <p class="form-left p-add">Tên sản phẩm</p>
                                 <input class="form-left" type="text" id="pd-name">
                                 <p class="form-left">Size</p>
-                                <input class="form-left" type="number" id="pd-size">
+                                <input class="form-left" type="text" id="pd-size">
                                 <p class="form-left" >Màu sắc</p>
                                 <input class="form-left" type="text" id="pd-color">
                                 <p class="form-left">Chất liệu</p>
@@ -117,7 +117,6 @@
             </div>
         </div>
 
-        //TODO
         <!--Tìm kiếm sản phẩm-->
         <div id='ql_sp' style=" display: none;">
             <div style="display: flex; background-color: rgb(97, 182, 133); border-top-left-radius: 20px; border-top-right-radius: 20px;">
@@ -142,13 +141,9 @@
                     <div style="float: left; width: 25%;">
                         <p class="form-left">Thương hiệu</p>
                         <select style="width:70%;" class="form-left" id="brand-search">
-                            <option></option>
-                            <option>Dell</option>
-                            <option>Hp</option>
-                            <option>Lenovo</option>
-                            <option>Asus</option>
-                            <option>MSI</option>
-                            <option>Acer</option>
+                            <option>Gucci</option>
+                            <option>LV</option>
+                            <option>Dolce</option>
                         </select>
                     </div>
                     <div style="float: left; width: 10%;">
@@ -212,10 +207,10 @@
                     <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Size</p>
                 </div>
                 <div style="width:40%;">
-                    <input disabled="" type="number" value="" id="edit_w" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
+                    <input disabled="" type="text" value="" id="edit_size" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
                 </div>
                 <div style="width:10%;">
-                    <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_w" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_size" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                 </div>
             </div>
             <hr>
@@ -236,10 +231,10 @@
                     <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Số lượng</p>
                 </div>
                 <div style="width:40%;">
-                    <input disabled="" type="number" value="" id="edit_num" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
+                    <input disabled="" type="number" value="" id="edit_quantity" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
                 </div>
                 <div style="width:10%;">
-                    <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_number" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_quantity" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                 </div>
             </div>
             <hr>
@@ -248,7 +243,7 @@
                     <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Phân loại</p>
                 </div>
                 <div style="width:40%;">
-                    <input disabled="" type="text" value="" id="edit_supplier" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
+                    <input disabled="" type="text" value="" id="edit_type" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
                 </div>
                 <div style="width:10%;">
                     <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_type" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
@@ -260,18 +255,31 @@
                     <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Thương hiệu</p>
                 </div>
                 <div style="width:40%;">
-                    <input disabled="" type="text" value="" id="edit_supplier" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
+                    <input disabled="" type="text" value="" id="edit_brand" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
                 </div>
                 <div style="width:10%;">
                     <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_brand" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                 </div>
             </div>
-            <hr><div style="display: flex;">
+            <hr>
+            <div style="display: flex;">
+                <div style="width:50%;">
+                    <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Chất liệu</p>
+                </div>
+                <div style="width:40%;">
+                    <input disabled="" type="text" value="" id="edit_material" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
+                </div>
+                <div style="width:10%;">
+                    <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_material" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <hr>
+            <div style="display: flex;">
                 <div style="width:50%;">
                     <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Description</p>
                 </div>
                 <div style="width:40%;">
-                    <textarea cols="60" rows="10" id="edit_dep"></textarea>
+                    <textarea cols="60" rows="10" id="edit_des"></textarea>
                 </div>
                 <div style="width:10%;">
                     <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_des" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
@@ -324,7 +332,7 @@
                     <input disabled="" type="text" value="" id="edit_name" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
                 </div>
                 <div style="width:10%;">
-                    <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_nameth" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                    <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_name" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
                 </div>
             </div>
             <hr>
@@ -360,8 +368,9 @@
         var price =document.getElementById('edit_price').value;
         var size =document.getElementById('edit_size').value;
         var color =document.getElementById('edit_color').value;
-        var number =document.getElementById('edit_number').value;
+        var quantity =document.getElementById('edit_quantity').value;
         var brand =document.getElementById('edit_brand').value;
+        var material =document.getElementById('edit_material').value;
         var typeProduct =document.getElementById('edit_type').value;
         var description =document.getElementById('edit_des').value;
 
@@ -372,10 +381,7 @@
         if(price<=0){
             str+="price must be greater than 0\n";
         }
-        if(size<=0){
-            str+="size must be greater than 0\n";
-        }
-        if(number<0){
+        if(quantity<0){
             str+="(product number must be greater than 0 or equal to 0\n";
         }
         if(str!=""){
@@ -396,7 +402,7 @@
             }
         }
         var str1= "type="+type+"&id="+id+"&name="+name+"&image_url="+img_text+"&price="+price+"&size="+size+
-        "&color="+color+"&number="+number+"&brand="+brand+"&product_type="+typeOfProduct+"&des="+des;
+        "&color="+color+"&quantity="+quantity+"&material="+material+"&brand="+brand+"&product_type="+typeProduct+"&des="+description;
         var str2 =  "type="+type+"&id="+id+"&name="+name+"&image_url="+img_text;
         var xhttp;
         xhttp = new XMLHttpRequest();
@@ -405,7 +411,7 @@
                 alert(this.responseText);
             }
         };
-        xhttp.open("POST", "library/admin/updateProduct.php", false);
+        xhttp.open("POST", "library/admin/update.php", false);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         if(type == 1) xhttp.send(str1);
         else xhttp.send(str2);
@@ -415,7 +421,7 @@
         var price =document.getElementById('edit_price').style.border='none';
         var size =document.getElementById('edit_size').style.border='none';
         var color =document.getElementById('edit_color').style.border='none';
-        var number =document.getElementById('edit_number').style.border='none';
+        var number =document.getElementById('edit_quantity').style.border='none';
         var brand =document.getElementById('edit_brand').style.border='none';
         var typeProduct =document.getElementById('edit_type').style.border='none';
         var description =document.getElementById('edit_des').style.border='none';
@@ -557,41 +563,21 @@
                 document.getElementById('edit_price').value=s[3];
                 document.getElementById('edit_size').value=s[4];
                 document.getElementById('edit_color').value=s[5];
-                document.getElementById('edit_number').value=s[6];
-                document.getElementById('edit_brand').value=s[7];
-                document.getElementById('edit_des').value=s[8];
-                document.getElementById('edit_type').value=s[9];
+                document.getElementById('edit_quantity').value=s[6];
+                document.getElementById('edit_type').value=s[7];
+                document.getElementById('edit_brand').value=s[8];
+                document.getElementById('edit_material').value=s[9];
+                document.getElementById('edit_des').value=s[10];
+                
             }
         };
-        xhttp.open("GET","library/admin/getProductById.php?id="+id+'&type='+type, true);
+        xhttp.open("GET","library/admin/getById.php?id="+id+'&type='+type, true);
         xhttp.send();
     }
     // quay lại trang quản lý sp
     function back_qlsp(){
         document.getElementById('ql_sp').style.display='inherit';
         document.getElementById('ct_sp').style.display='none';
-        // var id = document.getElementById('edit_id').style.border='none';
-        // var model =document.getElementById('edit_model').style.border='none';
-        // var img =document.getElementById('edit_img2').style.border='none';
-        // var price =document.getElementById('edit_price').style.border='none';
-        // var w =document.getElementById('edit_w').style.border='none';
-        // var color =document.getElementById('edit_color').style.border='none';
-        // var num =document.getElementById('edit_num').style.border='none';
-        // var supplier =document.getElementById('edit_supplier').style.border='none';
-        // var cpu =document.getElementById('edit_cpu').style.border='none';
-        // var ram =document.getElementById('edit_ram').style.border='none';
-        // var storage =document.getElementById('edit_storage').style.border='none';
-        // var screen =document.getElementById('edit_screen').style.border='none';
-        // var card =document.getElementById('edit_card').style.border='none';
-        // var mc =document.getElementById('edit_mc').style.border='none';
-        // var os =document.getElementById('edit_os').style.border='none';
-        // var bat =document.getElementById('edit_bat').style.border='none';
-        // var dep =document.getElementById('edit_dep').style.border='none';
-        // var cas =document.getElementById('edit_case').style.border='none';
-        // var sc =document.getElementById('edit_sc').style.border='none';
-        // var cp =document.getElementById('edit_cp').style.border='none';
-        // var led =document.getElementById('edit_led').style.border='none';
-        // var size =document.getElementById('edit_size').style.border='none';
         get_data_search();
     }
 
@@ -608,8 +594,8 @@
         var type = document.getElementById('pd-type').value;
         var imgs = img.split("\\");
         var img_text=imgs[2];
-        //$producName,$productDescription, $price, $image_url, $size, $color, $material, $brand_id, $product_type, $quantity
-        var str="&producName="+name+
+        //$productName,$productDescription, $price, $image_url, $size, $color, $material, $brand_id, $product_type, $quantity
+        var str="&productName="+name+
         "&productDescription="+des+
         "&price="+price+
         "&image_url="+img_text+

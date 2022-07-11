@@ -8,9 +8,8 @@
     $all_pd=$service->getAllProducts();
     //product_name, product_description, price, image_url, size, color, material, brand_id, product_type, quantity
 
-    $type=$_POST['type'];
-
-    $producName=$_POST['productName'];
+    
+    $productName=$_POST['productName'];
     $price=$_POST['price'];
     $productDescription=$_POST['productDescription'];
     $color=$_POST['color'];
@@ -20,13 +19,13 @@
     $product_type=$_POST['product_type'];
     $quantity=$_POST['quantity'];
     $image_url='public/images/products/' . $_POST['image_url'];
-
+    echo "$price";
 
     $service= new ProductService();
-    $product=new Product($producName,$productDescription, $price, $image_url,
-    $size, $color, $material, $brand_id, $product_type, $quantity);
+    // $product=new Product();
 
-    $service->insert($product);
+    $service->insert($productName,$productDescription, $price, $image_url,
+    $size, $color, $material, $brand_id, $product_type, $quantity);
     echo "Insert success!";
 
 ?>
