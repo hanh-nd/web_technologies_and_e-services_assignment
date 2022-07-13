@@ -1,6 +1,7 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_URI} /about$ [OR]
+    RewriteCond %{REQUEST_URI} /login$ [OR]
     RewriteCond %{REQUEST_URI} /profile$ [OR]
     RewriteCond %{REQUEST_URI} /purchase$ [OR]
     RewriteCond %{REQUEST_URI} /detail$ [OR]
