@@ -9,7 +9,7 @@ class BillService extends DatabaseConnect implements IMapper {
         $this->table = 'bills';
     }
 
-    // public function insert($productId, $userId, $rate, $content) {
+    // public function insert($userId) {
     //     $query = "INSERT INTO comments (product_id, user_id, rate, content) VALUES ('$productId', '$userId', '$rate', '$content')";
     //     parent::setQuery($query);
     //     parent::executeQuery();
