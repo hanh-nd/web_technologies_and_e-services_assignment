@@ -9,6 +9,7 @@
 }
 
 .home-content {
+    padding: 0 16px;
     max-width: 1120px;
 }
 
@@ -109,12 +110,30 @@
     gap: 32px 8px;
 }
 
+.product-item-row:hover,
+.brand-item-row:hover {
+    transform: scale(1.05);
+    transition-duration: 0.3s;
+}
+
 .product-item-row > a,
 .brand-item-row {
     color: black;
     cursor: pointer;
 }
 
+.brand-item-row img {
+    max-width: 150px;
+}
+
 .brand-container {
     height: 300px;
+}
+
+@media only screen and (max-width: 880px) {
+    .product-list {
+        grid-template-columns: auto auto;
+        justify-content: space-evenly;
+        gap: 32px 8px;
+    }
 }

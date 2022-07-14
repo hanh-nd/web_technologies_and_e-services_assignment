@@ -9,6 +9,7 @@
     flex-direction: column;
     justify-content: center;
     max-width: 1120px;
+    padding: 16px;
 }
 
 .product-list {
@@ -17,6 +18,11 @@
     justify-content: space-between;
     gap: 32px 8px;
     margin: 24px 0;
+}
+
+.product-item-row:hover {
+    transform: scale(1.05);
+    transition-duration: 0.3s;
 }
 
 .product-item-row > a {
@@ -86,4 +92,11 @@ select {
     font-weight: bold;
     color: black;
     padding: 8px 38px 10px 0;
+}
+
+@media only screen and (max-width: 900px) {
+    .product-list {
+        grid-template-columns: auto auto;
+        justify-content: space-evenly;
+    }
 }

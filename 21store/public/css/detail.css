@@ -6,7 +6,8 @@
 .detail-container {
     display: flex;
     flex-direction: row;
-    margin: 3% 7%;
+    padding: 0 16px;
+    max-width: 1120px;
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
@@ -50,7 +51,7 @@
     padding: 7px 20px;
     color: white;
     width: 400px;
-    background-color: red;
+    background-color: #ea2624;
     border: none;
     margin: 10px 0px;
 }
@@ -59,7 +60,7 @@
 }
 
 .add-to-cart {
-    margin:  10px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
     color: white;
     background-color: rgb(27, 80, 63);
     padding: 10px;
@@ -83,7 +84,7 @@
 
 .price {
     font-size: 1.2rem;
-    color: red;
+    color: #ea2624;
     font-weight: 600;
     margin: 5px 0px 20px 0px;
 }
@@ -118,7 +119,7 @@
 }
 .rate-product input[type="submit"] {
     padding: 5px 15px;
-    background-color: rgb(63, 63, 222);
+    background-color: #ea2624;
     color: white;
     border: none;
     border-radius: 4px;
@@ -126,12 +127,12 @@
 
 input[type="submit"]:disabled {
     background-color: rgb(99, 99, 99);
-} 
+}
 .rate-product input[type="submit"]:disabled:hover {
     background-color: rgb(99, 99, 99);
 }
 .rate-product input[type="submit"]:hover {
-    background-color: rgb(33, 33, 134);
+    opacity: 0.5;
 }
 
 .rate-product input[type="number"] {
@@ -211,7 +212,9 @@ input[type="submit"]:disabled {
     .price {
         font-size: 0.9rem;
     }
-    .add-to-cart, .out-of-stock, .buy-now{
+    .add-to-cart,
+    .out-of-stock,
+    .buy-now {
         padding: 5px 10px;
         width: 98%;
         border: none;
@@ -219,7 +222,9 @@ input[type="submit"]:disabled {
         font-size: 0.8rem;
         align-content: center;
     }
-    .add-to-cart, .out-of-stock, .buy-now span {
+    .add-to-cart,
+    .out-of-stock,
+    .buy-now span {
         font-size: 1rem;
     }
     .guide {

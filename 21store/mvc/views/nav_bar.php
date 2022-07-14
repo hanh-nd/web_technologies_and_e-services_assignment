@@ -37,31 +37,45 @@
             </div>
             <nav id = "nav">
                 <ul>
-                    <li><a href=<?php
-                        if(isset($_COOKIE['userId'])){
-                            echo "/" . $path_project . "/" . "purchase"; 
-                        }else{
-                            echo "/" . $path_project . "/" . "login" ;
-                        }
-                    ?>>Theo dõi đơn hàng</a></li>
-                    <li><a href=<?php echo "/" . $path_project . "/" . "#" ?>>Giỏ hàng</a></li>
-                    <li><a href=<?php 
-                        if(isset($_COOKIE['userId'])){
-                            echo "/" . $path_project . "/" . "profile"; 
-                        }else{
-                            echo "/" . $path_project . "/" . "login" ;
-                        }
-                    ?>>Tài khoản</a></li>
+                    <li>
+                        <a href=<?php
+                            if(isset($_COOKIE['userId'])){
+                                echo "/" . $path_project . "/" . "purchase"; 
+                            }else{
+                                echo "/" . $path_project . "/" . "login" ;
+                            }
+                        ?>>
+                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-order.png" ?> width="28"/>
+                            <span>Theo dõi đơn hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=<?php echo "/" . $path_project . "/" . "#" ?>>
+                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-cart.png" ?> width="28" />
+                            <span>Giỏ hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href=<?php 
+                            if(isset($_COOKIE['userId'])){
+                                echo "/" . $path_project . "/" . "profile"; 
+                            }else{
+                                echo "/" . $path_project . "/" . "login" ;
+                            }
+                        ?>>
+                        <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-account.png" ?> width="28"/>
+                        <span>Tài khoản</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>	
         </div>
         <div class="category-bar">
-            <nav>
-                <ul>
-                    <li><a href=<?php echo "/" . $path_project . "/" ?>>Trang chủ</a></li>
-                    <li><a href=<?php echo "/" . $path_project . "/" . "products" ?>>Danh sách sản phẩm</a></li>
-                </ul>
-            </nav>
+            <button class="category-title">Menu</button>
+            <div class="category">
+                <a href=<?php echo "/" . $path_project . "/" ?>>Trang chủ</a>
+                <a href=<?php echo "/" . $path_project . "/" . "products" ?>>Danh sách sản phẩm</a>
+            </div>
         </div>
     </div>
 </div>

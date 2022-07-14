@@ -1,7 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .purchase-container {
     display: flex;
     flex-direction: row;
-    background-color: rgb(255, 255, 255); 
+    background-color: rgb(255, 255, 255);
     margin-top: 50px;
     align-content: center;
 }
@@ -30,13 +36,12 @@
     width: 60%;
 }
 
-
 .purchase-infor {
     display: flex;
     flex-direction: row;
 }
 
-.purchase-infor img{
+.purchase-infor img {
     width: 80px;
     height: 80px;
     margin: 0px;
@@ -102,7 +107,7 @@ label {
         display: block;
         align-content: center;
     }
-    .filter-bill input[type='radio']{
+    .filter-bill input[type="radio"] {
         width: fit-content;
         margin-left: 20px;
         margin-right: 3px;
@@ -117,10 +122,10 @@ label {
         display: flex;
         flex-direction: row;
     }
-    .bill-container{
+    .bill-container {
         width: 75%;
     }
-    .side-bar h2{
+    .side-bar h2 {
         display: none;
     }
     .filter-bill label {
@@ -138,10 +143,10 @@ label {
         margin-bottom: 20px;
         margin-left: 3%;
     }
-    .bill-container{
+    .bill-container {
         width: 95%;
     }
-    .filter-bill input[type='radio']{
+    .filter-bill input[type="radio"] {
         width: fit-content;
         margin-left: 10px;
         margin-right: 3px;
@@ -165,7 +170,7 @@ label {
     .list-button {
         display: none;
     }
-    .purchase-infor img{
+    .purchase-infor img {
         width: 64px;
         height: 64px;
     }
