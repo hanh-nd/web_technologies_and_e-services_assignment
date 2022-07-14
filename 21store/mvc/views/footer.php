@@ -19,11 +19,13 @@
 		<div class="footer-center">
 			<div>
 				<i class="fa fa-map-marker"></i>
-				<p><span>Số 1 Đại Cồ Việt</span> Hai Bà Trưng, Hà Nội</p>
+				<p><a href="http://maps.google.com/?q=Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội." target="blank">
+					<span>Số 1 Đại Cồ Việt</span> Hai Bà Trưng, Hà Nội
+				</a></p>
 			</div>
 			<div>
 				<i class="fa fa-phone"></i>
-				<p>1900 1001</p>
+				<p><a href="tel:1900 1001">1900 1001</a></p>
 			</div>
 			<div>
 				<i class="fa fa-envelope"></i>
