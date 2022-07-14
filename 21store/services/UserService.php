@@ -56,6 +56,11 @@ class UserService extends DatabaseConnect implements IMapper {
         parent::updateQuery($query);
     }
 
-
+    public function login($username, $password) {
+        $query = "SELECT * FROM users WHERE password LIKE '$password' AND username LIKE '$username'";
+        parent::setQuery($query);
+        $objArr = parent::executeQuery();
+        return $this->fromObjectArray($objArr);
+    }
 }
 ?>
