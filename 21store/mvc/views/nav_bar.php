@@ -37,9 +37,21 @@
             </div>
             <nav id = "nav">
                 <ul>
-                    <li><a href=<?php echo "/" . $path_project . "/" . "purchase" ?>>Theo dõi đơn hàng</a></li>
+                    <li><a href=<?php
+                        if(isset($_COOKIE['userId'])){
+                            echo "/" . $path_project . "/" . "purchase"; 
+                        }else{
+                            echo "/" . $path_project . "/" . "login" ;
+                        }
+                    ?>>Theo dõi đơn hàng</a></li>
                     <li><a href=<?php echo "/" . $path_project . "/" . "#" ?>>Giỏ hàng</a></li>
-                    <li><a href=<?php echo "/" . $path_project . "/" . "profile" ?>>Tài khoản</a></li>
+                    <li><a href=<?php 
+                        if(isset($_COOKIE['userId'])){
+                            echo "/" . $path_project . "/" . "profile"; 
+                        }else{
+                            echo "/" . $path_project . "/" . "login" ;
+                        }
+                    ?>>Tài khoản</a></li>
                 </ul>
             </nav>	
         </div>

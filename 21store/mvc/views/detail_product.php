@@ -19,12 +19,12 @@ if (isset($url_components['query'])) {
 ?>
 
 <?php
-if (isset($_POST['content'])) {
+if (isset($_POST['content']) && isset($_COOKIE['userId'])) {
     $content = $_POST['content'];
     $rate =  $_POST['rate'];
     $commentService = new CommentService();
-    $commentService->insert($id, 2, $rate, $content);
-} //van dang hard code user
+    $commentService->insert($id, $_COOKIE['userId'], $rate, $content);
+}
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +132,10 @@ if (isset($_POST['content'])) {
                 <b>Bình luận:</b><br>
                 <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3" name="content"></textarea>
                 <p id="validateComment"></p>
-                <input type="submit" value="Bình luận">
+                <input type="submit" value="Bình luận" <?php 
+                if(!isset($_COOKIE['userId'])){
+                    echo "disabled";
+                }?>>
             </form>
             <h2>Phản hồi của khách hàng</h2>
             <?php

@@ -36,7 +36,7 @@ class Comment {
     public function getNameUser() {
         $userService = new UserService();
         $user = $userService->getUser($this->userId);
-        return $user->getUserName();
+        return $user->getFullname();
     }
 
     public function getCreatedAt() {
