@@ -1,49 +1,46 @@
 <?php
-require_once ROOT . DS . 'services' . DS . 'UserServices.php';
-// require_once ROOT . DS . 'services' . DS . 'GuestServices.php';
-// require_once ROOT . DS . 'services' . DS . 'products' . DS . 'LaptopServices.php';
-// require_once ROOT . DS . 'services' . DS . 'products' . DS . 'PCServices.php';
-// require_once ROOT . DS . 'services' . DS . 'products' . DS . 'ComputerMouseProductsServices.php';
-//require_once ROOT . DS . 'services' . DS . 'TypeProductsServices.php';
-//require_once ROOT . DS . 'mvc' . DS . 'models' . DS . 'products' . DS . 'Type.php';
+require_once ROOT . DS . 'services' . DS . 'UserService.php';
+require_once ROOT . DS . 'services' . DS . 'OrderItemService.php';
+require_once ROOT . DS . 'services' . DS . 'BillService.php';
 
-$service= new UserServices();
-$users=$service->getAll();
-//$listTmpBill = $service->getAllListProductsBill();
+$userService= new UserService();
+$allUser=$userService->getAll();
 
-$user = "";
-$phone= "";
-//$name = "";
+$billService = new BillService();
+$listTmpBill = $billService->getAllBill();
 
-if(array_key_exists("user", $_POST)){
-  $user = strtolower($_POST['user']);
+$orderService = new OrderItemService();
+
+
+$phoneNumber= "";
+$fullname = "";
+
+
+if(array_key_exists("fullname", $_POST)){
+  $fullname = strtolower($_POST['fullname']);
 }
-// if(array_key_exists("name", $_POST)){
-//   $name = strtolower($_POST['name']);
-// }
-if(array_key_exists("phone", $_POST)){
-  $phone = strtolower($_POST['phone']);
+if(array_key_exists("phoneNumber", $_POST)){
+  $phoneNumber = strtolower($_POST['phoneNumber']);
 }
 
 $users= array();
-//$listBill = array();
-foreach($users as $g){
-  $guser= strtolower($g-> getUsername());
-  //$gname= strtolower($g->getName());
-  $gphone= strtolower($g->getTelephone());
-  if(($user=="" || strpos($guser, $user) !== false)  &&
-        ( $phone=="" || strpos($gphone, $phone) !== false)){
+$listBill = array();
+foreach($allUser as $g){
+  $gfullname= strtolower($g->getFullname());
+  $gphoneNumber= strtolower($g->getPhoneNumber());
+  if(($fullname=="" || strpos($gfullname, $fullname) !== false)  &&
+        ( $phoneNumber=="" || strpos($gphoneNumber, $phoneNumber) !== false)){
           array_push($users, $g);
   }
 }
 
-// foreach ($listTmpBill as $tmpBill) {
-//     $username = $tmpBill->getUsername();
-//     $user = $service->get($username);
-//     if(in_array($user, $users)){
-//         array_push($listBill, $tmpBill);
-//     }
-// }
+foreach ($listTmpBill as $tmpBill) {
+    $userId = $tmpBill->getUserId();
+    $user = $userService->getUser($userId);
+    if(in_array($user, $users)){
+        array_push($listBill, $tmpBill);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +48,7 @@ foreach($users as $g){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Management | MTHH</title>
+    <title>Quản lý đơn hàng người dùng | 21store</title>
     <style>
         p {
         color:rgb(35, 102, 226); font-size: 25px; margin-bottom:0px;
@@ -83,15 +80,10 @@ foreach($users as $g){
 
     </head>
     <body>
-        <div style="color:rgb(35, 102, 226);"><center><h1>ACCOUNT MANAGEMENT</h1></center></div>
+        <div style="color:rgb(35, 102, 226);"><center><h1>Quản lý đơn hàng, tài khoản</h1></center></div>
         <hr>
         <form action="" method="post">
             <div>
-                <div style="width:28%; float:left; height: 70px;">
-                    <p>User</p>
-                    <input class="input1" type="text" name="user">
-                </div>
-
                 <div style="width:28%; float:left; height: 70px;">
                     <p>Name</p>
                     <input class="input1" type="text" name="name">
@@ -125,78 +117,73 @@ foreach($users as $g){
             ?>
             <tr>
                 <td><?php echo $u->getUsername()?></td>
-                <td><?php echo $u->getName()?></td> -->
-                <td><?php echo $u->getTelephone()?></td>
+                <td><?php echo $u->getFullname()?></td> -->
+                <td><?php echo $u->getPhoneNumber()?></td>
                 <td><?php echo $u->getAddress()?></td>
             </tr>
             <?php } ?>
         </table>
         <?php
-            $sum_success = 0;
-            $cnt = 0;
+            $total_turnover = 0;
+            $total_bill = 0;
             foreach ($listBill as $bill) {
-                $product;
-                $type = TypeProductsServices::checkType($bill->getProductID());
-                if($type == Type::PC){
-                  $service = new PCServices();
-                  $product = $service->get($bill->getProductID());
-                } else if ($type == Type::LAPTOP){
-                  $service = new LaptopServices();
-                  $product = $service->get($bill->getProductID());
-                } else if ($type == Type::MOUSE){
-                  $service = new ComputerMouseProductsServices();
-                  $product = $serice->get($bill->getProductID());
-                }
 
-                if($bill->getStatus() == 1){
-                    $sum_success += $product->getPrice();
-                    $cnt++;
+
+                if($bill->getStatus() == "Đã mua"){
+                    $total_turnover += $bill->getTotalAmount();
+                    $total_bill++;
                 }
 
             }
         ?>
         <br /><br /><br /><br />
-        <h2>Sản phẩm đặt hàng</h2><h2>Tổng số tiền đã bán thành công : <?php echo $sum_success ?></h2><h2>Tổng số sản phẩm đã bán thành công : <?php echo $cnt ?></h2>
+        <h2>Sản phẩm đặt hàng</h2><h2>Tổng số tiền đã bán thành công : <?php echo $total_turnover ?></h2><h2>Tổng số đơn hàng đã bán thành công : <?php echo $total_bill ?></h2>
         <div class="products-container" b>
           <table border="1" style="width:100%;">
               <tr>
-                  <td>Sản phẩm</td>
                   <td>Khách hàng</td>
                   <td>Ngày đặt hàng</td>
-                  <td>Tên sản phẩm</td>
-                  <td>Số lượng</td>
+                  <td>Chi tiết đơn hàng</td>
+                  <td>Tổng tiền</td>
                   <td>Trạng thái</td>
                   <td>Hành động</td>
               </tr>
           <?php
               for ($i=count($listBill)-1; $i>=0; $i--) {
                 $bill = $listBill[$i];
-                $product;
-                $type = TypeProductsServices::checkType($bill->getProductID());
-                if($type == Type::PC){
-                  $service = new PCServices();
-                  $product = $service->get($bill->getProductID());
-                } else if ($type == Type::LAPTOP){
-                  $service = new LaptopServices();
-                  $product = $service->get($bill->getProductID());
-                } else if ($type == Type::MOUSE){
-                  $service = new ComputerMouseProductsServices();
-                  $product = $serice->get($bill->getProductID());
-                }
+                $user = $userService->getUser($bill->getUserId());
+                $listOrderItem = $orderService->getAllOrderFormBill($bill->getId())
           ?>
             <tr>
-                <form action="library/bill_success.php" method="POST">
-                  <input type="text" name="bill_id" value="<?php echo $bill->getBillID() ?>" style="display: none">
-                  <td><img src="<?php echo $product->getImage() ?>" alt="" style="max-height : 100px;"></td>
-                  <td><?php echo $bill->getUsername() ?></td>
-                  <td><p id = 'deal'><?php echo $bill->getDateBill() ?></p></td>
-                  <td><p><?php echo $product->getModel() ?></p></td>
-                  <td><p id = 'quantity'>x<?php echo $bill->getQuantity() ?></p></td>
+                <form action="library/UpdateBill.php" method="POST">
+                  <input type="text" name="bill_id" value="<?php echo $bill->getID() ?>" style="display: none">
+                  <td><?php echo $user->getFullname() ?></td>
+                  <td><p id = 'deal'><?php echo $bill->getCreatedAt() ?></p></td>
+                  <td><p><?php                     foreach ($listOrderItem as $item) {
+                    ?>
+                        <?php $product = $item->getProduct(); ?>
+                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $item->getProductId() ?>" class="purchase-infor">
+                            <div>
+                                <p><?php echo $product->getProductName() ?></p>
+                                <p class="quantity">X<?php echo $item->getQuantity() ?>
+                                    <span><?php echo $product->getFormattedPrice() ?></span>
+                                </p>
+                            </div>
+                        </a>
+                        <div class="divider"></div>
+                    <?php } ?></p></td>
+                  <td><p id = 'total_amount'>x<?php echo $bill->getTotalAmount() ?></p></td>
                   <td><p id = 'status'><?php
-                    if($bill->getStatus() == 0) echo "Đang đặt hàng";
-                    else echo "Thành công";
+                    echo $bill->getStatus()
                     ?></p></td>
-                    <td style="text-align : center"><input type="submit" value="Hoàn thành"></td>
+                    <td style="text-align : center">
+                      <select name="status">
+                          
+                          <option value="Đang giao">Đang giao</option>
+                          <option value="Đã mua">Hoàn thành</option>
+                      </select>
+                      <input type="submit">
+                    </td>
                 </form>
             </tr>
         <?php } ?>

@@ -41,5 +41,17 @@ class BillService extends DatabaseConnect implements IMapper {
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);
     }
+    public function getAllBill() {
+        $query = "SELECT * FROM bills";
+        parent::setQuery($query);
+        $objArr = parent::executeQuery();
+        return $this->fromObjectArray($objArr);
+    }
+
+    public function updateStatus($id, $status){
+        $query = "UPDATE bills SET status = '$status' WHERE id = '$id'";
+        parent::setQuery($query);
+        parent::updateQuery($query);
+    }
 }
 ?>

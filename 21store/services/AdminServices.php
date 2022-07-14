@@ -2,8 +2,8 @@
 require_once ROOT . DS . 'services' . DS . 'DatabaseConnect.php';
 
 class AdminServices extends DatabaseConnect {
-    public function valid($username, $password){
-        $query = "select * from admin where admin_username = '$username' and admin_password = '$password'";
+    public function valid($username, $password, $role){
+        $query = "select * from users where username = '$username' and password = '$password' and role = '$role'";
 
         parent::setQuery($query);
         $result = parent::executeQuery1();
@@ -14,11 +14,4 @@ class AdminServices extends DatabaseConnect {
         }
     }
 
-    public function create($username, $password){
-        $query = "insert admin (admin_username, admin_password)
-                  value('$username', '$password')";
-
-        parent::setQuery($query);
-        parent::updateQuery();
-    }
 }
