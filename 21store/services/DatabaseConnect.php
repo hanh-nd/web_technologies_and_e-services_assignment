@@ -73,6 +73,26 @@ class DatabaseConnect {
         }
     }
 
+    public function executeQuery1(){
+        $result = mysqli_query($this->db, $this->query);
+
+        if(!$result){
+            echo "FAIL when execute!";
+            exit();
+        }
+
+        return $result;
+    }
+    public function updateQuery(){
+        $result = mysqli_query($this->db, $this->query);
+
+        if(!$result){
+            echo "FAIL when update!";
+            exit();
+        }
+
+    }
+
     function snakeToCamel($input) {
         return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
     }
@@ -104,11 +124,5 @@ class DatabaseConnect {
     function __destruct() {
         $this->disconnect();
     }
-    public function updateQuery(){
-        $result = mysqli_query($this->db, $this->query);
-        if(!$result){
-            echo "FAIL when update!";
-            exit();
-        }
-    }
+
 }

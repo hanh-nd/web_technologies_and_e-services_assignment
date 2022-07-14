@@ -28,6 +28,7 @@ class RouteController
         $controller = $urlArray[0];
         array_shift($urlArray);
         $id = -1;
+
         // check if admin -> no footer
         if (
             strcmp($controller, "admin") == 0
@@ -38,10 +39,12 @@ class RouteController
         ) {
             $this->_is_footer = 0;
         }
+
         $controller = str_replace('-', ' ', $controller);
         $controller = ucwords($controller);
         $controller = str_replace(' ', '', $controller);
         $controller .= "Controller";
+
 
         require_once ROOT . DS . 'mvc' . DS . 'controllers' . DS . $controller . '.php';
         if ($id == -1) {

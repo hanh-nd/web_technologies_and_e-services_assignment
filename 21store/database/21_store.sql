@@ -204,3 +204,10 @@ INSERT INTO order_items(bill_id, product_id, quantity) VALUES (2, 6, 1);
 INSERT INTO order_items(bill_id, product_id, quantity) VALUES (2, 2, 2);
 
 DELETE FROM order_items WHERE id = 4;
+
+create table admin(
+	admin_username varchar(50) not null,
+    admin_password varchar(50)
+);
+insert admin(admin_username, admin_password)
+value('admin', 'admin');
