@@ -1,7 +1,7 @@
 <?php
 require_once ROOT . DS . 'services' . DS . "IMapper.php";
 require_once ROOT . DS . 'services' . DS . "DatabaseConnect.php";
-require_once ROOT . DS . 'mvc' . DS . 'models' . DS . 'user.php';
+require_once ROOT . DS . 'mvc' . DS . 'models' . DS . 'User.php';
 
 class UserService extends DatabaseConnect implements IMapper { 
     public function __construct() {
@@ -34,10 +34,13 @@ class UserService extends DatabaseConnect implements IMapper {
     }
 
     public function getUserByUserName($username) {
-        $query = "select * from users where username = '$username'";
+        $query = "SELECT * FROM users WHERE username = '$username'";
         parent::setQuery($query);
         $result = parent::executeQuery();
-        return $this->fromObject($result);
+        if (empty($result)) {
+            return false;
+        }
+        return $this->fromObject($result[0]);
     }
     public function getAll(){
         $listUser = array();
