@@ -83,7 +83,6 @@ if (isset($_POST['content'])) {
                 echo "
                 <button class='add-to-cart'>
                     <img src='https://gumac.vn/Content/Image/WebImage/addcart.png'' />
-                    <a href=<?php echo "/" . $path_project . "/" . "cart" ?>>
                     <span>THÊM VÀO GIỎ HÀNG</span>
                     </a>
                 </button>";

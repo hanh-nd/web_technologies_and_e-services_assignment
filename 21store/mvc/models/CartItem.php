@@ -35,6 +35,7 @@ class CartItem {
     public function getCreatedAt() {
         return $this->createdAt;
     }
+    
     public function getProduct() {
         $productService = new ProductService();
         return $productService->getProduct($this->productId);
