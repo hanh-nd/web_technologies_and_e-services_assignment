@@ -135,7 +135,7 @@ if (isset($_POST['content']) && isset($_COOKIE['userId'])) {
                 <textarea placeholder="Hãy đưa ra đánh giá cho chúng mình nhé" rows="3" name="content"></textarea>
                 <p id="validateComment"></p>
                 <input type="submit" value="Bình luận" <?php 
-                if(!isset($_COOKIE['userId'])){
+                if (!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) {
                     echo "disabled";
                 }?>>
             </form>

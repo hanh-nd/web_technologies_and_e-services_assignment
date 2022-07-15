@@ -38,34 +38,50 @@
             <nav id = "nav">
                 <ul>
                     <li>
-                        <a href=<?php
-                            if(isset($_COOKIE['userId'])){
+                        <a href="<?php
+                            if(isset($_COOKIE['userId']) && !empty($_COOKIE['userId'])){
                                 echo "/" . $path_project . "/" . "purchase"; 
                             }else{
                                 echo "/" . $path_project . "/" . "login" ;
                             }
-                        ?>>
+                        ?>">
                             <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-order.png" ?> width="28"/>
                             <span>Theo dõi đơn hàng</span>
                         </a>
                     </li>
                     <li>
-                        <a href=<?php echo "/" . $path_project . "/" . "#" ?>>
+                        <a href="<?php echo "/" . $path_project . "/" . "#" ?>">
                             <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-cart.png" ?> width="28" />
                             <span>Giỏ hàng</span>
                         </a>
                     </li>
-                    <li>
-                        <a href=<?php 
-                            if(isset($_COOKIE['userId'])){
-                                echo "/" . $path_project . "/" . "profile"; 
-                            }else{
-                                echo "/" . $path_project . "/" . "login" ;
-                            }
-                        ?>>
-                        <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-account.png" ?> width="28"/>
-                        <span>Tài khoản</span>
-                        </a>
+                    <li class="profile-bar">
+                        <button class="profile-title">
+                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-account.png" ?> width="28"/>
+                            <a href="<?php 
+                                if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) {
+                                    echo "/" . $path_project . "/" . "login"; 
+                                } else {
+                                    echo "javascript:void(0);";
+                                }
+                                ?>"><span>Tài khoản</span></a>
+                        </button>
+                        <div class="profile">
+                            <a 
+                                style="<?php if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) echo "display: none;" ?>" 
+                                href="<?php 
+                                    echo "/" . $path_project . "/" . "profile"; 
+                                ?>">
+                                <span>Chi tiết tài khoản</span>
+                            </a>
+                            <a 
+                                style="<?php if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) echo "display: none;" ?>" 
+                                href="<?php 
+                                        echo "/" . $path_project . "/" . "logout";
+                                    ?>">
+                                <span>Đăng xuất</span>
+                            </a>
+                        </div>
                     </li>
                 </ul>
             </nav>	

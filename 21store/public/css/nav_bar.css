@@ -54,7 +54,9 @@ nav img {
 }
 
 .nav-bar nav ul li a:hover,
-.category a:hover {
+.category a:hover,
+.profile-title:hover {
+    cursor: pointer;
     background: darkgrey;
 }
 
@@ -96,6 +98,48 @@ nav img {
     display: none;
 }
 
+.profile-title {
+    border: none;
+    outline: none;
+    color: #111517;
+    background: #f4f4ec;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 0;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.profile-title img {
+    display: none;
+}
+
+.profile {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.profile a {
+    float: none;
+    padding: 12px 16px !important;
+    display: block;
+    text-align: left;
+}
+
+.profile-bar {
+    position: relative;
+    justify-content: unset;
+}
+
+.profile-bar:hover .profile {
+    display: block;
+}
 @media only screen and (max-width: 700px) {
     nav img {
         display: unset;
@@ -103,6 +147,10 @@ nav img {
 
     nav ul li span {
         display: none;
+    }
+
+    .profile a span {
+        display: unset;
     }
 
     .search-field {
@@ -126,6 +174,14 @@ nav img {
         margin: 0;
     }
 
+    .profile-title img {
+        display: unset;
+    }
+
+    .profile-title span {
+        display: none;
+    }
+
     .category-title:hover {
         background: darkgrey;
     }
@@ -134,6 +190,7 @@ nav img {
         display: none;
         position: absolute;
         top: 40px;
+        left: 0;
         background-color: #f9f9f9;
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -142,7 +199,7 @@ nav img {
 
     .category a {
         float: none;
-        color: black;
+        color: #111517;
         padding: 12px 16px;
         text-decoration: none;
         display: block;

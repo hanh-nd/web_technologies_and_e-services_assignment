@@ -12,7 +12,7 @@
 		if(count($login) == 1){
 			setcookie('userId', $login[0]->getId(), time() + (86400 * 30), "/");
 			header("Location: home");
-			exit;
+			exit();
 		}else {
 			echo "<script>alert('Wrong username or password')</script>";
 		}
@@ -26,7 +26,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="public/css/login.css" type="text/css">
-	<title>Login</title>
+	<title>Đăng nhập</title>
 </head>
 
 <body>
@@ -34,11 +34,11 @@
 		<img src="https://cdn.haitrieu.com/wp-content/uploads/2021/07/Hinh-anh-fast-fashion-la-gi.png" alt="img">
 		<div class="form">
 			<form class="login-form" method="post" name="formLogin" onsubmit="return validateLogin()">
-				<input type="text" placeholder="username" name="username"/>
-				<input type="password" placeholder="password" name="password"/>
+				<input type="text" placeholder="Tên tài khoản" name="username"/>
+				<input type="password" placeholder="Mật khẩu" name="password"/>
 				<p id="validateLogin"></p>
-				<button type="submit">login</button>
-				<p class="message">Not registered? <a href="<?php echo "/" . $path_project . "/" . "register"?>">Create an account</a></p>
+				<button type="submit">Đăng nhập</button>
+				<p class="message">Chưa có tài khoản? <a href="<?php echo "/" . $path_project . "/" . "register"?>">Đăng ký</a></p>
 			</form>
 		</div>
 	</div>
