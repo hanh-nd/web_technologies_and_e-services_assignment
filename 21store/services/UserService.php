@@ -77,5 +77,11 @@ class UserService extends DatabaseConnect implements IMapper {
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);
     }
+
+    public function register($username, $password, $fullname = '', $phoneNumber = '', $address = '') {
+        $query = "INSERT INTO users (username, password, fullname, phone_number, address) VALUES (`$username`, `$password`, `$fullname`, `$phoneNumber`, `$address`)";
+        parent::setQuery($query);
+        parent::executeQuery();
+    }
 }
 ?>

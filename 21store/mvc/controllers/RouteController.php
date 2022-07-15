@@ -36,6 +36,8 @@ class RouteController
             || strcmp($controller, "account-management") == 0
             || strcmp($controller, "login-admin") === 0
             || strcmp($controller, "login") === 0
+            || strcmp($controller, "register") === 0
+
         ) {
             $this->_is_footer = 0;
         }

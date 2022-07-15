@@ -17,6 +17,17 @@
     height: 600px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
+.product-image-wrapper {
+    margin: 0;
+    padding: 16px 0;
+}
+
+.right-container {
+    margin: 0;
+    padding: 16px 0;
+}
+
 .infor-product {
     width: 410px;
     margin-top: 0px;
@@ -89,8 +100,9 @@
     margin: 5px 0px 20px 0px;
 }
 .guide {
-    width: 60%;
-    margin-left: 7%;
+    /* width: 60%;
+    margin-left: 7%; */
+    padding: 0 16px;
 }
 .guide h2 {
     margin: 10px 0px;
@@ -187,8 +199,13 @@ input[type="submit"]:disabled {
 .out-of-stock span {
     font-size: 1.3rem;
 }
+@media only screen and (max-width: 850px) {
+    .detail-container {
+        justify-content: center;
+    }
+}
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     .detail-container {
         font-size: 0.8rem;
     }

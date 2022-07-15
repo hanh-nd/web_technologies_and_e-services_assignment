@@ -1,5 +1,6 @@
 <?php
-require_once ROOT . DS . 'services' . DS . 'UserService.php';
+    global $path_project;
+	require_once ROOT . DS . 'services' . DS . 'UserService.php';
 ?>
 
 <?php 
@@ -37,7 +38,7 @@ require_once ROOT . DS . 'services' . DS . 'UserService.php';
 				<input type="password" placeholder="password" name="password"/>
 				<p id="validateLogin"></p>
 				<button type="submit">login</button>
-				<p class="message">Not registered? <a href="#">Create an account</a></p>
+				<p class="message">Not registered? <a href="<?php echo "/" . $path_project . "/" . "register"?>">Create an account</a></p>
 			</form>
 		</div>
 	</div>
