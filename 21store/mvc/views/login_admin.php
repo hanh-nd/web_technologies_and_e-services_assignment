@@ -24,7 +24,7 @@ if (isset($_SESSION['admin_username'])
     && isset($_SESSION['admin'])
     && !empty($_SESSION['admin'])
 ) {
-    header("Location: admin");
+    header("Location: account-management");
 }
 ?>
 <!DOCTYPE html>
@@ -40,21 +40,17 @@ if (isset($_SESSION['admin_username'])
 </head>
 
 <body>
-    <p style="text-align : center">Chú ý : Bạn đang đăng nhập vào trang quản trị của hệ thống</p>
-    <form action="" method="POST">
-        <div class="login-box">
-            <h1>Login Admin</h1>
-            <div class="textbox">
-                <i class="fa fa-user" aria-hidden="true"></i>
+    <h4>Trang quản trị hệ thống 21-Store</h4>
+    <div class="login-page">
+        <div class="form">
+            <form action="" method="POST" class="login-form">
+                <h2>Login By Admin</h2>
                 <input type="text" placeholder="Username" name="username" value="">
-            </div>
-            <div class="textbox">
-                <i class="fa fa-lock" aria-hidden="true"></i>
                 <input type="password" placeholder="Password" name="password" value="">
-            </div>
-            <input class="button" type="submit" name="login" value="Đăng nhập">
+                <button type="submit" name="login">Đăng nhập</button>
         </div>
-    </form>
+        </form>
+    </div>
 </body>
 
 </html>
