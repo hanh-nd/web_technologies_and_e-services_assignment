@@ -9,6 +9,7 @@ global $path_project;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý sản phẩm | 21store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/product_management.css">
     <link rel="stylesheet" href="public/css/admin.css">
@@ -22,19 +23,23 @@ global $path_project;
             <div class="form__header">
                 <h1 class="form__title">Quản lý sản phẩm | Danh sách sản phẩm </h1>
             </div>
-            <div id="main">       
+            <div id="main">    
+                <!-- <div id="main" style="display: flex;">
+                    <div style="background-color: rgb(212, 188, 109);" class="main">
+                        <center>
+                            <img src="images/admin/laptop.jpg" alt="" class="img-icon">
+                            <h1 style="color: white">Sản phẩm</h1>
+                            <div>
+                                <button class="btn-icon" onclick="sc_product()">Thêm sản phẩm</button>
+                            </div>
+                            <div>
+                                <button class="btn-icon" onclick="ql_product()">Quản lý sản phẩm</button>
+                            </div>
+                        </center>
+                    </div>
+                </div>    -->
                 <!--Tìm kiếm sản phẩm-->
                 <div id='ql_sp'>
-                    <div style="display: flex; background-color: rgb(97, 182, 133); border-top-left-radius: 20px; border-top-right-radius: 20px;">
-                        <div style="width: 10%;">
-                            <center><button class="btn-back" onclick="back_main()">&lt&lt&lt</button></center>
-                        </div>
-                        <div style="width: 80%;">
-                            <center>
-                                <h2 style="color:white;" id="ql_sp_text"></h2>
-                            </center>
-                        </div>
-                    </div>
                     <div class="form-add">
                         <form action="">
                             <input type="text" id="type-search">

@@ -129,6 +129,8 @@ function get_data_search(){
     xhttp.open("GET", "library/admin/Search.php"+str, false);
     xhttp.send();
 }
+get_data_search();
+
 // xóa sp theo id
 function delete_by_id(x){
     var id = x.value;
