@@ -6,18 +6,30 @@
 .detail-container {
     display: flex;
     flex-direction: row;
-    margin: 3% 7%;
+    padding: 0 16px;
+    max-width: 1120px;
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
 }
 .detail-container img {
-    width: 410px;
+    max-width: 410px;
     height: 600px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
+.product-image-wrapper {
+    margin: 0;
+    padding: 32px 0;
+}
+
+.right-container {
+    margin: 0;
+    padding: 32px 0;
+}
+
 .infor-product {
-    width: 410px;
+    max-width: 410px;
     margin-top: 0px;
     height: fit-content;
 }
@@ -27,7 +39,7 @@
 
 .buy-product {
     margin-top: 10px;
-    width: 410px;
+    max-width: 410px;
     height: 600px;
 }
 .buy-product p {
@@ -50,7 +62,7 @@
     padding: 7px 20px;
     color: white;
     width: 400px;
-    background-color: red;
+    background-color: #ea2624;
     border: none;
     margin: 10px 0px;
 }
@@ -59,7 +71,7 @@
 }
 
 .add-to-cart {
-    margin:  10px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
     color: white;
     background-color: rgb(27, 80, 63);
     padding: 10px;
@@ -83,13 +95,14 @@
 
 .price {
     font-size: 1.2rem;
-    color: red;
+    color: #ea2624;
     font-weight: 600;
     margin: 5px 0px 20px 0px;
 }
 .guide {
-    width: 60%;
-    margin-left: 7%;
+    /* width: 60%;
+    margin-left: 7%; */
+    padding: 0 16px;
 }
 .guide h2 {
     margin: 10px 0px;
@@ -107,8 +120,9 @@
 }
 
 .rate-product {
-    width: 60%;
-    margin: 30px 0px 30px 7%;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 24px;
 }
 .rate-product p {
     color: brown;
@@ -118,13 +132,20 @@
 }
 .rate-product input[type="submit"] {
     padding: 5px 15px;
-    background-color: rgb(63, 63, 222);
+    background-color: #ea2624;
     color: white;
     border: none;
     border-radius: 4px;
 }
+
+input[type="submit"]:disabled {
+    background-color: rgb(99, 99, 99);
+}
+.rate-product input[type="submit"]:disabled:hover {
+    background-color: rgb(99, 99, 99);
+}
 .rate-product input[type="submit"]:hover {
-    background-color: rgb(70, 70, 240);
+    opacity: 0.5;
 }
 
 .rate-product input[type="number"] {
@@ -179,8 +200,13 @@
 .out-of-stock span {
     font-size: 1.3rem;
 }
+@media only screen and (max-width: 850px) {
+    .detail-container {
+        justify-content: center;
+    }
+}
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     .detail-container {
         font-size: 0.8rem;
     }
@@ -204,7 +230,9 @@
     .price {
         font-size: 0.9rem;
     }
-    .add-to-cart, .out-of-stock, .buy-now{
+    .add-to-cart,
+    .out-of-stock,
+    .buy-now {
         padding: 5px 10px;
         width: 98%;
         border: none;
@@ -212,7 +240,9 @@
         font-size: 0.8rem;
         align-content: center;
     }
-    .add-to-cart, .out-of-stock, .buy-now span {
+    .add-to-cart,
+    .out-of-stock,
+    .buy-now span {
         font-size: 1rem;
     }
     .guide {
@@ -233,6 +263,7 @@
     }
     .rate-product textarea {
         width: 100%;
+        padding-bottom: 4px;
     }
     .comment {
         width: 100%;

@@ -93,7 +93,7 @@
                 ?>
                     <div class="product-item-row">
                         <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $product->getId() ?>">
-                            <img src=<?php echo $product->getImageUrl() ?> width="250">
+                            <img src=<?php echo $product->getImageUrl() ?> width="100%">
                             <p><?php echo $product->getProductName() ?></p>
                             <p><?php echo $product->getFormattedPrice() ?></p>
                         </a>

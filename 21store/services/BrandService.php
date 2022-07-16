@@ -10,7 +10,38 @@ class BrandService extends DatabaseConnect implements IMapper {
     }
 
     public function insert($brandName, $imageUrl) {
-        $query = "INSERT INTO brands(brand_name, image_url) VALUES (`$brandName`, `$imageUrl`)";
+        $query = "INSERT INTO brands(brand_name, image_url) VALUES ('$brandName', '$imageUrl')";
+        parent::setQuery($query);
+        parent::executeQuery();
+    }
+      /**
+     * The method support delete row in database
+     * @param int $id
+     */
+    public function delete($id){
+
+        
+        //delete product in table comment
+        $query = "update products set brand_id = null where brand_id = " .$id;
+        parent::setQuery($query);
+        parent::updateQuery();
+        
+        $query = "delete from brands
+                  where id = " . $id;
+        parent::addQuery($query);
+        parent::updateQuery();
+
+
+    }
+
+    /**
+     * The method update data to database
+     * @param Product $product
+     */
+    public function update($id, $brandName, $imageUrl) {
+        $query = "UPDATE brands
+        SET brand_name =  '$brandName',
+        image_url = '$imageUrl' where id = '$id'";
         parent::setQuery($query);
         parent::executeQuery();
     }

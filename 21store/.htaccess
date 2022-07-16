@@ -1,12 +1,18 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_URI} /about$ [OR]
+    RewriteCond %{REQUEST_URI} /login$ [OR]
+    RewriteCond %{REQUEST_URI} /logout$ [OR]
+    RewriteCond %{REQUEST_URI} /register$ [OR]
     RewriteCond %{REQUEST_URI} /profile$ [OR]
     RewriteCond %{REQUEST_URI} /purchase$ [OR]
     RewriteCond %{REQUEST_URI} /detail$ [OR]
     RewriteCond %{REQUEST_URI} /home$ [OR]
     RewriteCond %{REQUEST_URI} /products$ [OR]
-    RewriteCond %{REQUEST_URI} /cart$ [OR]
+    RewriteCond %{REQUEST_URI} /admin$ [OR]
+    RewriteCond %{REQUEST_URI} /account-management [OR]
+    RewriteCond %{REQUEST_URI} /product-management [OR]
+    RewriteCond %{REQUEST_URI} /login-admin [OR]
     RewriteCond %{REQUEST_URI} .jpg|.png|.svg [OR]
     RewriteCond %{REQUEST_URI} /$
     RewriteRule (.*) public/$1 [L]

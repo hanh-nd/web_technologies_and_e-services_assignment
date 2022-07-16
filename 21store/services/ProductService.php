@@ -10,7 +10,63 @@ class ProductService extends DatabaseConnect implements IMapper {
     }
 
     public function insert($productName, $productDescription, $price, $imageUrl, $size, $color, $material, $brandId, $productType) {
-        $query = "INSERT INTO products(product_name, product_description, price, image_url, size, color, material, brand_id, product_type) VALUES (`$productName`, `$productDescription`, `$price`, `$imageUrl`, `$size`, `$color`, `$material`, `$brandId`, `$productType`)";
+        $query = "INSERT INTO products(product_name, product_description, price, image_url, size, color, material, brand_id, product_type)
+            VALUES ('$productName', '$productDescription', '$price', '$imageUrl', '$size', '$color', '$material', '$brandId', '$productType')";
+        parent::setQuery($query);
+        parent::executeQuery();
+    }
+     /**
+     * The method support delete row in database
+     * @param int $id
+     */
+    public function delete($id){
+        
+
+
+        //delete product in table comment
+        $query = "delete from comments
+                  where product_id = " . $id;
+        parent::setQuery($query);
+        parent::updateQuery();
+
+
+        //delete product in order_items table
+        $query = "delete from order_items
+                  where product_id = " . $id;
+        parent::setQuery($query);
+        parent::updateQuery();
+
+        //delete product in cart_items table
+        $query = "delete from cart_items
+                  where product_id = " . $id;
+        parent::setQuery($query);
+        parent::updateQuery();
+
+        $query = "delete from products
+        where id = " . $id;
+        parent::setQuery($query);
+        parent::updateQuery();
+
+    }
+
+    /**
+     * The method update data to database
+     * @param Product $product
+     */
+    public function update($id,$name,$des, $price, $image_url,
+    $size, $color, $material, $brand, $product_type, $quantity) {
+        $query = "UPDATE products
+                    SET product_name =  '$name',
+                    product_description = '$des',
+                    price = '$price',
+                    image_url = '$image_url',
+                    color = '$color',
+                    size = '$size',
+                    material = '$material',
+                    -- brand_id = '$brand',
+                    product_type ='$product_type',
+                    quantity ='$quantity'
+                    WHERE id = '$id'";
         parent::setQuery($query);
         parent::executeQuery();
     }

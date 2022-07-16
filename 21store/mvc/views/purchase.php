@@ -47,9 +47,9 @@
             <?php
             $billService = new BillService();
             $orderService = new OrderItemService();
-            $allBill = $billService->getFilterBillFormUser(3, $status); //fix cung
+            $allBill = $billService->getFilterBillFormUser($_COOKIE['userId'], $status);
             if(count($allBill) == 0){
-                echo "<div class='not-buy'>Không có sẳn phẩm để hiển thị</div>";
+                echo "<div class='not-buy'>Không có sản phẩm để hiển thị</div>";
             }
             else
             foreach ($allBill as $bill) {

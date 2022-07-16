@@ -34,7 +34,7 @@ function addCookie(){
 function loadCookie () {
 	var allCookie = getCookie("cookie")
 	let start = 0;
-	let stop = allCookie.length;
+	let stop = allCookie.length();
 	let i = 0;
 	while(true){
 		for (i=start; i<stop; i++){

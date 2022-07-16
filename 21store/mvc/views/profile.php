@@ -3,16 +3,17 @@
 <!DOCTYPE html>
 <html lang="vi">
 <?php
+$userId = $_COOKIE['userId'];
 $userService = new UserService();
 if (isset($_POST['password']) && isset($_POST['confirmPassword']) == isset($_POST['password'])) {
     $password = $_POST['password'];
-    $userService->updatePassword($userService->getUser(1)->getId(), $password);
+    $userService->updatePassword($userService->getUser($userId)->getId(), $password);
 }
 if (isset($_POST['address']) && isset($_POST['phoneNumber'])  && isset($_POST['fullname'])) {
     $address = $_POST['address'];
     $phoneNumber = $_POST['phoneNumber'];
     $fullname = $_POST['fullname'];
-    $userService->updateInfor($userService->getUser(1)->getId(), $phoneNumber, $address, $fullname);
+    $userService->updateInfor($userService->getUser($userId)->getId(), $phoneNumber, $address, $fullname);
 }
 ?>
 
@@ -30,7 +31,7 @@ if (isset($_POST['address']) && isset($_POST['phoneNumber'])  && isset($_POST['f
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
     <div class="profile-container">
         <div class="side-bar">
-            <h2><?php echo $userService->getUser(1)->getUserName() ?></h2>
+            <h2><?php echo $userService->getUser($userId)->getFullname() ?></h2>
             <a href="#username">Tài khoản của tôi</a><br>
             <a href="#password">Đổi mật khẩu</a><br>
         </div>
@@ -42,7 +43,7 @@ if (isset($_POST['address']) && isset($_POST['phoneNumber'])  && isset($_POST['f
                     <div class="divider"></div>
                 </header>
                 <form method="post" class="content-profile" name="formInfor" onsubmit="return validateFormInfor()">
-                    <?php $user = $userService->getUser(1); ?>
+                    <?php $user = $userService->getUser($userId); ?>
                     <p><label>Tên Đăng Nhập</label><span class="input-text"><?php echo $user->getUserName() ?></span></p>
                     <div class="attribute">
                         <label>Tên&emsp;</label>
@@ -71,11 +72,11 @@ if (isset($_POST['address']) && isset($_POST['phoneNumber'])  && isset($_POST['f
                 <form method="post" class="content-profile" name="myForm" onsubmit="return validateForm()">
                     <div class="attribute">
                         <label>Mật Khẩu Mới</label>
-                        <input type="text" class="input-text" name="password">
+                        <input type="password" class="input-text" name="password">
                     </div>
                     <div class="attribute">
                         <label>Xác Nhận Mật Khẩu</label>
-                        <input type="text" class="input-text" name="confirmPassword">
+                        <input type="password" class="input-text" name="confirmPassword">
                     </div>
                     <div class="submit">
                         <p id="validate"></p>
