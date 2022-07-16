@@ -40,9 +40,10 @@
 }
 
 .form__add {
-    margin: 50px 0px 30px 0px;
+    margin: 20px 0px 30px 0px;
 }
 
+.form__add select,
 .form__add input,
 .form__add textarea {
     display: inline-block;

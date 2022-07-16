@@ -63,8 +63,12 @@ class BrandService extends DatabaseConnect implements IMapper {
         return $this->fromObject($obj);
     }
 
-    public function getAllBrands($limit = 4) {
-        $query = "SELECT * FROM brands ORDER BY created_at DESC LIMIT $limit";
+    public function getAllBrands($limit = "") {
+        $query = "SELECT * FROM brands ORDER BY created_at DESC";
+        if (!empty($limit)) {
+            $query = $query . "LIMIT $limit";
+
+        }
         parent::setQuery($query);
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);

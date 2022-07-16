@@ -66,7 +66,7 @@
 				<div class="brand brand-list">
 					<?php
 						$service = new BrandService();
-						$brands = $service->getAllBrands();
+						$brands = $service->getAllBrands(4);
 						foreach($brands as $brand) {
 					?>
 							<div class="brand-item-row">

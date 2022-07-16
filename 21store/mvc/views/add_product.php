@@ -1,5 +1,5 @@
 <?php
-
+	require_once ROOT . DS . 'services' . DS . 'BrandService.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,17 @@
                             <label class="form-left">Giá</label><br>
                             <input class="form-left" type="number" id="pd-price"><br>
                             <label class="form-left">Brand</label><br>
-                            <input class="form-left" type="text" id="pd-brand"><br>
+                            <select class="form-left" type="text" id="pd-brand">
+                                <?php
+                                    $service = new BrandService();
+                                    $brands = $service->getAllBrands();
+                                    foreach($brands as $brand) {
+                                ?>
+                                <option value=<?php echo $brand->getId()?>> <?php echo $brand->getBrandName() ?></option>
+                                <?php
+                                    }
+                                ?>	
+                            </select><br>
                             <label class="form-left">Hình ảnh</label><br>
                             <input type="file" id="pd-img"><br>
                             <label class="form-left">Miêu tả về sản phẩm</label><br>

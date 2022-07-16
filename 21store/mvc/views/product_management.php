@@ -1,5 +1,6 @@
 <?php
-global $path_project;
+    global $path_project;
+    require_once ROOT . DS . 'services' . DS . 'BrandService.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,186 +24,107 @@ global $path_project;
             <div class="form__header">
                 <h1 class="form__title">Quản lý sản phẩm | Danh sách sản phẩm </h1>
             </div>
+            <div class="divider"></div>
             <div id="main">    
-                <!-- <div id="main" style="display: flex;">
-                    <div style="background-color: rgb(212, 188, 109);" class="main">
-                        <center>
-                            <img src="images/admin/laptop.jpg" alt="" class="img-icon">
-                            <h1 style="color: white">Sản phẩm</h1>
-                            <div>
-                                <button class="btn-icon" onclick="sc_product()">Thêm sản phẩm</button>
-                            </div>
-                            <div>
-                                <button class="btn-icon" onclick="ql_product()">Quản lý sản phẩm</button>
-                            </div>
-                        </center>
-                    </div>
-                </div>    -->
                 <!--Tìm kiếm sản phẩm-->
                 <div id='ql_sp'>
-                    <div class="form-add">
+                    <div class="form__search">
                         <form action="">
-                            <input type="text" id="type-search">
-                            <div style="float: left; width: 25%;">
-                                <p class="form-left">Tên sản phẩm</p>
-                                <input class="form-left" type="text" id="name-search">
-                            </div>
-                            <div style="float: left; width: 10%;">
-                                <button class="submit" onclick="get_data_search()" style="width: 70%;" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                            </div>
+                            <input type="text" id="type-search" style="display: none;">
+                            <label class="form-left">Tên sản phẩm</label><br>
+                            <input class="form-left" type="text" id="name-search">
+                            <button class="submit button" onclick="get_data_search()"  type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
                     </div>
-                    <div class="" id="display_s"></div>
+                    <div class="product-list" id="display_s"></div>
                 </div>
                     
                     
                 <!--CHI TIẾT SẢN PHẨM -->
                 <div id='ct_sp' style="display: none;">
-                    <div style="display: flex; background-color: rgb(97, 182, 133); border-top-left-radius: 20px; border-top-right-radius: 20px;">
-                        <div style="width: 10%;">
-                            <center><button class="btn-back" onclick="back_qlsp()">&lt&lt&lt</button></center>
-                        </div>
-                        <div style="width: 80%;">
-                            <center>
-                                <h2 style="color:white;">Chi tiết sản phẩm</h2>
-                            </center>
-                        </div>
+                    <div class="detail-title">
+                        <button class="button" onclick="back_qlsp()">Trở về</button>
+                        <h4 class="detail-title__text">Chi tiết sản phẩm</h4>
                     </div>
-                    <div>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">ID(not edit)</p>
+                    <div class="divider"></div>
+                    <div class="detail-product__wrapper">
+                        <div class="detail-product">
+                            <div class="section left">
+                                <div>
+                                    <label>ID(not edit)</label><br>
+                                    <input disabled="" type="number" value="" id="edit_id">
+                                    <button class="button" value="edit_id" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                                <div >
+                                    <label>Tên sản phẩm</label><br>
+                                    <input disabled="" type="text" value="" id="edit_name" >
+                                    <button class="button" onclick="edit(this.value)" value="edit_name" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                                <div>
+                                    <label>Giá</label><br>
+                                    <input disabled="" type="number" value="" id="edit_price" >
+                                    <button class="button" onclick="edit(this.value)" value="edit_price" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                                <div>
+                                    <label>Size</label><br>
+                                    <input disabled="" type="text" value="" id="edit_size" >
+                                    <button class="button" onclick="edit(this.value)" value="edit_size" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                                <div >
+                                    <label>Màu sắc</label><br>
+                                    <input disabled="" type="text" value="" id="edit_color">
+                                    <button class="button" onclick="edit(this.value)" value="edit_color" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                                <div >
+                                    <label>Số lượng</label><br>
+                                    <input disabled="" type="number" value="" id="edit_quantity" >
+                                    <button class="button" onclick="edit(this.value)" value="edit_quantity" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                                <div >
+                                    <label>Phân loại</label><br>
+                                    <input disabled="" type="text" value="" id="edit_type" >
+                                    <button class="button" onclick="edit(this.value)" value="edit_type" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                                <div >
+                                    <label>Thương hiệu</label><br>
+                                    <select disabled="" id="edit_brand">
+                                        <?php
+                                            $service = new BrandService();
+                                            $brands = $service->getAllBrands();
+                                            foreach($brands as $brand) {
+                                        ?>
+                                        <option id="<?php echo $brand->getId()?>" value="<?php echo $brand->getId()?>"> <?php echo $brand->getBrandName() ?></option>
+                                        <?php
+                                            }
+                                        ?>	
+                                    </select>
+                                    <button class="button" onclick="edit(this.value)" value="edit_brand" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
+                                <div >
+                                    <label>Chất liệu</label><br>
+                                    <input disabled="" type="text" value="" id="edit_material" >
+                                    <button class="button" onclick="edit(this.value)" value="edit_material" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                </div>
                             </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="number" value="" id="edit_id" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" value="edit_id" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Tên sản phẩm</p>
-                            </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="text" value="" id="edit_name" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_name" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Giá</p>
-                            </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="number" value="" id="edit_price" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_price" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Size</p>
-                            </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="text" value="" id="edit_size" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_size" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Màu sắc</p>
-                            </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="text" value="" id="edit_color" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_color" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Số lượng</p>
-                            </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="number" value="" id="edit_quantity" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_quantity" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Phân loại</p>
-                            </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="text" value="" id="edit_type" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_type" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+
+                            <div class="section right">
+                                <div>
+                                    <label>Description</label><br>
+                                    <div class="textarea-wrapper">
+                                        <textarea rows="9" id="edit_des"></textarea>
+                                        <button class="button" onclick="edit(this.value)" value="edit_des" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>Hình ảnh</label><br>
+                                    <img src="" alt="anh" width="100%" id="edit_img1">
+                                    <input type="file" id="edit_img2">
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Thương hiệu</p>
-                            </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="text" value="" id="edit_brand" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_brand" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Chất liệu</p>
-                            </div>
-                            <div style="width:40%;">
-                                <input disabled="" type="text" value="" id="edit_material" style="margin: 20px; font-size: 25px; border: none;  border-radius: 5px; color:dodgerblue;">
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_material" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Description</p>
-                            </div>
-                            <div style="width:40%;">
-                                <textarea cols="60" rows="10" id="edit_des"></textarea>
-                            </div>
-                            <div style="width:10%;">
-                                <button style="margin: 20px; font-size: 25px;" onclick="edit(this.value)" value="edit_des" type="button"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                        <hr>
-                        <div style="display: flex;">
-                            <div style="width:50%;">
-                                <p style="margin: 20px; padding:0px; color:dodgerblue; font-size: 25px;">Hình ảnh</p>
-                            </div>
-                            <div style="width:30%;">
-                                <img src="" alt="anh" width="70%" id="edit_img1">
-                            </div>
-                            <div style="width:20%;">
-                                <input type="file" id="edit_img2">
-                            </div>
-                        </div>
-                        <hr>
-                        <center><button type="button" onclick="update()" style="width: 70%;" class="submit">Cập nhật</button></center>
+                        <button class="button update" type="button" onclick="update()"  class="submit">Cập nhật</button>
                     </div>
+                    
                 </div>
             </div>
         </div>

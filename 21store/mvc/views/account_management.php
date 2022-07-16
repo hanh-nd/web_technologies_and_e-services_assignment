@@ -67,11 +67,11 @@ foreach ($listTmpBill as $tmpBill) {
                 <form action="" method="post" class="search-user">
                     <div class="input-search">
                         <label>Name</label>
-                        <input type="text" name="name">
+                        <input type="text" name="fullname">
                     </div>
                     <div class="input-search">
                         <label>Phone</label>
-                        <input type="text" name="phone">
+                        <input type="text" name="phoneNumber">
                     </div>
                     <div>
                         <input type="submit" value="Tìm kiếm">
@@ -157,8 +157,8 @@ foreach ($listTmpBill as $tmpBill) {
                                     </td>
                                     <td>
                                         <select name="status">
-                                            <option value="Đang giao">Đang giao</option>
-                                            <option value="Đã mua">Hoàn thành</option>
+                                            <option <?php if ($bill->getStatus() != "Đang giao") echo "selected" ?> value="Đang giao">Đang giao</option>
+                                            <option <?php if ($bill->getStatus() == "Đã mua") echo "selected" ?> value="Đã mua">Hoàn thành</option>
                                         </select>
                                         <input type="submit" value="Xác nhận">
                                     </td>
