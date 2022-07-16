@@ -1,6 +1,8 @@
 <?php
 	global $path_project;
 	require_once ROOT . DS . 'services' . DS . 'UserService.php';
+	require_once ROOT . DS . 'services' . DS . 'CartService.php';
+
 ?>
 
 <?php 
@@ -20,9 +22,11 @@
 		}
 
         $userService->register($username, $password, $fullname, $phoneNumber, $address);
-        
+
         // Login after register
 		$login = $userService->login($username, $password);
+		$cartService = new CartService();
+		$cartService->insert( $login[0]->getId());
 		if(count($login) == 1){
 			setcookie('userId', $login[0]->getId(), time() + (86400 * 30), "/");
 			header("Location: home");

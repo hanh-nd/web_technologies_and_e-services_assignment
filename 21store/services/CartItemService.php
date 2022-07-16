@@ -10,10 +10,11 @@ class CartItemService extends DatabaseConnect implements IMapper {
     }
 
     public function insert($cartSessionId, $productId, $quantity) {
-        $query = "SELECT * FROM cart_items WHERE cart_session_id = $cartSessionId AND product_id = $productId";
+        $query = "SELECT * FROM cart_items WHERE cart_session_id = '$cartSessionId' AND product_id = '$productId' ";
         parent::setQuery($query);
-        $existedCartItem = parent::executeQuery();
-        if (isset($existedCartItem)) {
+        $existedCartItemRow =parent::executeQuery();
+        if (isset($existedCartItemRow) && !empty($existedCartItemRow)) {
+            $existedCartItem =  $this->fromObject($existedCartItemRow[0]);
             $oldQuantity = $existedCartItem->getQuantity();
             $newQuantity = $oldQuantity + $quantity;
             $query = "UPDATE cart_items SET quantity = '$newQuantity'";
@@ -66,18 +67,12 @@ class CartItemService extends DatabaseConnect implements IMapper {
         return $this->fromObject($obj);
     }
     public function getAllCartItemsFormCart($userId) {
-        $query = "SELECT * FROM cart_items
-        WHERE cart_session_id = (
-            SELECT id 
-            FROM cart_sessions 
-            WHERE user_id = ".$userId" 
-            ORDER BY created_at DESC
-            LIMIT 1
-        )";
+        $query = "SELECT * FROM cart_items WHERE cart_session_id = (SELECT id FROM cart_sessions WHERE user_id = '$userId' ORDER BY created_at DESC LIMIT 1)";
         parent::setQuery($query);
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);
     }
+
 
 }
 ?>

@@ -13,6 +13,10 @@ class Cart {
         $this->createdAt = $cart->createdAt;
 
     }
+
+    public function getId(){
+        return $this->id;
+    }
     
     
     public function getUserId(){

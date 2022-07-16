@@ -74,11 +74,18 @@ if (isset($_POST['content']) && isset($_COOKIE['userId'])) {
                     Còn lại <?php echo $product->getQuantity() ?> sản phẩm
                 </span>
                 <?php
-                if ($product->getQuantity() <= 0)
+                if ($product->getQuantity() <= 0){
                     echo "<button class='out-of-stock'><span>ĐÃ HẾT HÀNG!!</span><p>Hàng mới về sau 5 - 10 ngày</p></button>";
-                    else
-                    echo "<button class='buy-now' href="<?php echo  "/" . $path_project . "/" . "cart?id="  ?>">
-                    <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></button>";
+                }
+                    else if (!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])){
+                        echo "<a href=" . "/" . $path_project . "/" . "login" . " ><button class='buy-now'> 
+                        <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></button></a>";
+                    }
+                    else {
+                        echo "<a href=" . "/" . $path_project . "/" . "cart?&product_id=" . $product->getId() . "&quantity=1" . "><button class='buy-now'> 
+                        <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></button></a>";
+                    }
+                    
                     ?>
                 <?php
                 if ($product->getQuantity() > 0)

@@ -4,6 +4,7 @@
     RewriteCond %{REQUEST_URI} /login$ [OR]
     RewriteCond %{REQUEST_URI} /logout$ [OR]
     RewriteCond %{REQUEST_URI} /register$ [OR]
+    RewriteCond %{REQUEST_URI} /cart$ [OR]
     RewriteCond %{REQUEST_URI} /profile$ [OR]
     RewriteCond %{REQUEST_URI} /purchase$ [OR]
     RewriteCond %{REQUEST_URI} /detail$ [OR]
