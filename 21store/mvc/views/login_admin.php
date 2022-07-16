@@ -9,18 +9,18 @@ if(array_key_exists("username", $_POST)){
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $checker = $service->valid($username, $password);
+    $checker = $service->valid($username, $password, "admin");
     if($checker === True){
-        echo "votienbac";
-        $_SESSION['admin_username'] = $username;
-        $_SESSION['admin_password'] = $password;
+        $_SESSION['username'] = $username;
+        $_SESSION['password'] = $password;
+        $_SESSION['admin'] = "admin";
     } else {
         echo "<script>alert('FALSE')</script>";
     }
 }
 
-if(isset($_SESSION['admin_username']) && isset($_SESSION['admin_password'])){
-		if($_SESSION['admin_username'] != '' && $_SESSION['admin_password'] != '') {
+if(isset($_SESSION['username']) && isset($_SESSION['password']) && isset($_SESSION['admin'])){
+		if($_SESSION['username'] != '' && $_SESSION['password'] != '' && $_SESSION['admin'] != '') {
 				header("Location: admin");
 		}
 }

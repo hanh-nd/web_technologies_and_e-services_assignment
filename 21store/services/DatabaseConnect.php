@@ -73,16 +73,16 @@ class DatabaseConnect {
         }
     }
 
-    public function executeQuery1(){
-        $result = mysqli_query($this->db, $this->query);
+    // public function executeQuery1(){
+    //     $result = mysqli_query($this->db, $this->query);
 
-        if(!$result){
-            echo "FAIL when execute!";
-            exit();
-        }
+    //     if(!$result){
+    //         echo "FAIL when execute!";
+    //         exit();
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
     public function updateQuery(){
         $result = mysqli_query($this->db, $this->query);
 

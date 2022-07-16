@@ -43,23 +43,8 @@ class UserService extends DatabaseConnect implements IMapper {
         return $this->fromObject($result[0]);
     }
     public function getAll(){
-        $listUser = array();
-        $query = "select * from users";
-        parent::setQuery($query);
-        $result = parent::executeQuery();
-
-        while($row = mysqli_fetch_array($result)){
-            $username = $row["user_name"];
-            $password = $row["password"];
-            $phoneNumber = $row["phone_number"];
-            $address = $row["address"];
-
-            $user = new User($username, $password, $phoneNumber, $address);
-
-            array_push($listUser, $user);
-        }
-
-        return $listUser;
+        $objArr = $this->selectAll();
+        return $this->fromObjectArray($objArr);
     }
 
     public function updateInfor($id, $newPhoneNumber, $newAddress, $newFullname) {
