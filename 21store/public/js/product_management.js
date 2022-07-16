@@ -84,17 +84,6 @@ function sc_product(){
     div_add_product.style.display='inherit';
 }
 
-// quay lại main
-function back_main(){
-    var div_main = document.getElementById('main');
-    var div_add_product=document.getElementById('add_product');
-    var div_add_brand=document.getElementById('add_brand');
-    var ql_sp=document.getElementById('ql_sp');
-    div_main.style.display='flex';
-    div_add_product.style.display='none';
-    div_add_brand.style.display='none';
-    ql_sp.style.display='none';
-}
 // quản lý product
 function ql_product(){
     var div_main = document.getElementById('main');
