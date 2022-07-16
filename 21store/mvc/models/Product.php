@@ -72,6 +72,10 @@ class Product {
         return $this->material;
     }
 
+    public function getBrandId() {
+        return $this->brandId;
+    }
+
     public function getBrandName() {
         $brandService = new BrandService();
         $brand = $brandService->getBrand($this->brandId);

@@ -21,7 +21,7 @@
     . $product->getColor() . '&'
     . $product->getQuantity() . '&'
     . $product->getProductType() . '&'
-    .  $product-> getBrandName() . '&'
+    .  $product-> getBrandId() . '&'
     .  $product->getMaterial() . '&'
     .  $product->getProductDescription() . '&' 
     . " "  . '&'

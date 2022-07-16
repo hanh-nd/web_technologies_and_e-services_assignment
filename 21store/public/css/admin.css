@@ -1,11 +1,11 @@
 .sidebar {
-    width: 15%;
+    width: 250px;
+    min-width: 250px;
     background-color: #282a2a;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    padding: 40px 15px;
-    position: fixed;
+    min-height: 100vh;
+    padding: 40px 0 40px 15px;
 }
 
 .title {
@@ -14,14 +14,21 @@
 }
 
 .sidebar-button {
-    width: 100%;
     text-decoration: none;
     color: #b9cccc;
     padding: 15px 0px 15px 5px;
 }
 
-.sidebar-button:hover{
+.sidebar-button:hover {
     background-color: #6a7171;
     text-decoration: none;
     color: aliceblue;
+}
+
+.menu {
+    cursor: pointer;
+}
+
+.sub-menu {
+    margin-left: 15px;
 }

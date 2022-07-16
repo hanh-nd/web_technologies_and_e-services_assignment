@@ -19,8 +19,6 @@
     $product_type=$_POST['product_type'];
     $quantity=$_POST['quantity'];
     $image_url='public/images/products/' . $_POST['image_url'];
-    echo "$price";
-
     $service= new ProductService();
     // $product=new Product();
 
