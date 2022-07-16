@@ -173,3 +173,12 @@ textarea:focus {
 }
 
 /*ql-sp*/
+
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+.content {
+    margin: 30px 15% 2% 20%;
+}
