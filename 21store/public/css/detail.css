@@ -40,7 +40,6 @@
 .buy-product {
     margin-top: 10px;
     max-width: 410px;
-    height: 600px;
 }
 .buy-product p {
     margin-top: 5px;
@@ -122,7 +121,7 @@
 .rate-product {
     width: 100%;
     margin: 0;
-    padding-bottom: 24px;
+    margin: 24px 0px;
 }
 .rate-product p {
     color: brown;
