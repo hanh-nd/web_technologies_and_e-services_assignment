@@ -3,7 +3,7 @@
 .register-page {
     display: flex;
     flex-direction: row;
-    margin: 10% 14%;
+    margin: 0px 14%;
 }
 .register-page img {
     width: 60%;
@@ -104,7 +104,7 @@
 .container .info span .fa {
     color: #ef3b3a;
 }
-#validateLogin {
+#validateRegister {
     font-size: 0.7rem;
     font-weight: 600;
     color: red;

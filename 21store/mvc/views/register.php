@@ -51,17 +51,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="public/css/register.css" type="text/css">
+	<link rel="stylesheet" href="public/css/logo.css" type="text/css">
 	<title>Đăng ký</title>
 </head>
 
 <body>
+	<div class="logo-3">
+		<a href="<?php echo "/" . $path_project . "/" . "home" ?>">
+			<h3>21Store</h3>
+			<p>Fast Fashion</p>
+		</a>
+	</div>
 	<div class="register-page">
 		<img src="https://cdn.haitrieu.com/wp-content/uploads/2021/07/Hinh-anh-fast-fashion-la-gi.png" alt="img">
 		<div class="form">
 			<form class="register-form" method="post" name="formRegister" onsubmit="return validateRegister()">
-				<input type="text" placeholder="Tên đăng ký (*)" name="username"/>
-				<input type="password" placeholder="Mật khẩu (*)" name="password"/>
-                <input type="password" placeholder="Nhập lại mật khẩu (*)" name="rePassword"/>
+				<input type="text" placeholder="Tên đăng ký" name="username"/>
+				<input type="password" placeholder="Mật khẩu" name="password"/>
+                <input type="password" placeholder="Nhập lại mật khẩu" name="rePassword"/>
                 <input type="text" placeholder="Tên của bạn" name="fullname"/>
 				<input type="text" placeholder="Số điện thoại" name="phoneNumber"/>
 				<input type="text" placeholder="Địa chỉ" name="address"/>
@@ -79,7 +86,11 @@
         const username = document.forms["formRegister"]["username"].value;
         const password = document.forms["formRegister"]["password"].value;
         const rePassword = document.forms["formRegister"]["rePassword"].value;
-        if (username === "" || password === "") {
+        const fullname = document.forms["formRegister"]["fullname"].value;
+        const phoneNumber = document.forms["formRegister"]["phoneNumber"].value;
+        const address = document.forms["formRegister"]["address"].value;
+
+        if (username === "" || password === "" || fullname === "" || phoneNumber === "" || address === "" ) {
             document.getElementById("validateRegister").innerHTML = "Hãy điền đủ thông tin !!";
             return false;
         }

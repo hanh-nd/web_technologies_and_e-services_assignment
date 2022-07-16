@@ -3,7 +3,7 @@
 .login-page {
     display: flex;
     flex-direction: row;
-    margin: 10% 14%;
+    margin: 0px 14%;
 }
 .login-page img {
     width: 60%;

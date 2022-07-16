@@ -2,12 +2,8 @@
 // check session
 ob_start();
 session_start();
-if(!isset($_SESSION['admin_username'])){
+if (!isset($_SESSION['admin_username']) || empty($_SESSION['admin_username'])) {
     header("Location: login-admin");
-} else {
-    if($_SESSION['admin_username'] == ""){
-        header("Location: login-admin");
-    }
 }
 
 ?>
