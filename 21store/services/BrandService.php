@@ -66,7 +66,7 @@ class BrandService extends DatabaseConnect implements IMapper {
     public function getAllBrands($limit = "") {
         $query = "SELECT * FROM brands ORDER BY created_at DESC";
         if (!empty($limit)) {
-            $query = $query . "LIMIT $limit";
+            $query = $query . " LIMIT $limit";
 
         }
         parent::setQuery($query);
