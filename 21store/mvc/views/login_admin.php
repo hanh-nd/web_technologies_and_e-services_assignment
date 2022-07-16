@@ -1,28 +1,30 @@
 <?php
 ob_start();
 session_start();
+require_once ROOT . DS . 'services' . DS . 'AdminService.php';
 
 if(array_key_exists("username", $_POST)){
-    echo "hello world";
-    require_once ROOT . DS . 'services' . DS . 'AdminServices.php';
-    $service = new AdminServices();
-
+    $service = new AdminService();
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $checker = $service->valid($username, $password, "admin");
-    if($checker === True){
-        $_SESSION['username'] = $username;
-        $_SESSION['password'] = $password;
+    $isValid = $service->valid($username, $password, "admin");
+    if($isValid == True){
+        $_SESSION['admin_username'] = $username;
+        $_SESSION['admin_password'] = $password;
         $_SESSION['admin'] = "admin";
     } else {
         echo "<script>alert('FALSE')</script>";
     }
 }
 
-if(isset($_SESSION['username']) && isset($_SESSION['password']) && isset($_SESSION['admin'])){
-		if($_SESSION['username'] != '' && $_SESSION['password'] != '' && $_SESSION['admin'] != '') {
-				header("Location: admin");
-		}
+if (isset($_SESSION['admin_username']) 
+    && !empty($_SESSION['admin_username'])
+    && isset($_SESSION['admin_password']) 
+    && !empty($_SESSION['admin_password'])
+    && isset($_SESSION['admin'])
+    && !empty($_SESSION['admin'])
+) {
+    header("Location: admin");
 }
 ?>
 <!DOCTYPE html>
