@@ -112,6 +112,7 @@
 .product-item-row {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 5px;
+    text-transform: capitalize;
 }
 
 .product-item-row:hover,
@@ -128,6 +129,7 @@
 
 .product-item-row img {
     max-width: 250px;
+    height: 384.5px;
 }
 
 .product-item-row p {
@@ -153,5 +155,15 @@
         grid-template-columns: repeat(2, 1fr);
         justify-content: space-evenly;
         gap: 32px 8px;
+    }
+    .product-item-row img {
+        max-height: 200px;
+    }
+    .product-item-row {
+        font-size: 0.8rem;
+        height: 270px;
+    }
+    .price-pr {
+        font-size: 0.8rem
     }
 }

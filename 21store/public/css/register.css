@@ -124,3 +124,12 @@ body {
         display: none;
     }
 }
+
+@media (max-width: 500px) {
+    .register-page {
+        margin: 0px 5%;
+    }
+    .form {
+        padding: 25px;
+    }
+}

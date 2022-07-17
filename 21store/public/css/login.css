@@ -124,3 +124,13 @@ body {
         display: none;
     }
 }
+
+@media (max-width: 500px) {
+    .login-page {
+        margin: 0px 5%;
+    }
+    .form {
+        margin-top: 50px;
+        padding: 25px;
+    }
+}
