@@ -2,6 +2,8 @@
 require_once ROOT . DS . 'services' . DS . 'ProductService.php';
 require_once ROOT . DS . 'services' . DS . 'BrandService.php';
 require_once ROOT . DS . 'services' . DS . 'CommentService.php';
+require_once ROOT . DS . 'services' . DS . 'CartService.php';
+require_once ROOT . DS . 'services' . DS . 'CartItemService.php';
 
 
 $url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "/";
@@ -24,6 +26,17 @@ if (isset($_POST['content']) && isset($_COOKIE['userId'])) {
     $rate =  $_POST['rate'];
     $commentService = new CommentService();
     $commentService->insert($id, $_COOKIE['userId'], $rate, $content);
+}
+?>
+<?php
+if (isset($_COOKIE['userId']) && isset($_POST['quantity'])){
+    $cartService = new CartService();
+    $cartSessionId = $cartService->getCartSessionByUserId($_COOKIE['userId'])->getId();
+    $cartItemService = new CartItemService();
+    $cartItemService->insert($cartSessionId, $id, $_POST['quantity']);
+}
+if (isset($_COOKIE['userId']) && isset($_POST['buy-now'])){
+    header("Location: cart");
 }
 ?>
 
@@ -64,12 +77,12 @@ if (isset($_POST['content']) && isset($_COOKIE['userId'])) {
                 <p>-Kích cỡ: <?php echo $product->getSize() ?></p>
                 <p>*<?php echo $product->getProductDescription() ?>*</p>
             </div>
-            <div class="buy-product">
+            <form class="buy-product" method = "post">
                 <h2 id="buy"><?php echo strtoupper($product->getProductName()) ?></h2>
                 <p> <?php echo $product->getProductType() ?></p>
                 <p class="price"> <?php echo $product->getFormattedPrice() ?></p>
                 <h4>Số lượng</h4>
-                <input type="number" value="1" min="1" max="<?php echo $product->getQuantity() ?>"></input><br />
+                <input type="number" name="quantity" value="1" min="1" max="<?php echo $product->getQuantity() ?>"></input><br />
                 <span style="color: red; font-size:0.9rem; font-weight:550;">
                     Còn lại <?php echo $product->getQuantity() ?> sản phẩm
                 </span>
@@ -78,23 +91,32 @@ if (isset($_POST['content']) && isset($_COOKIE['userId'])) {
                     echo "<button class='out-of-stock'><span>ĐÃ HẾT HÀNG!!</span><p>Hàng mới về sau 5 - 10 ngày</p></button>";
                 }
                     else if (!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])){
-                        echo "<a href=" . "/" . $path_project . "/" . "login" . " ><button class='buy-now'> 
-                        <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></button></a>";
+                        echo "<a href=" . "/" . $path_project . "/" . "login" . " ><div class='buy-now'> 
+                        <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></div></a>";
                     }
                     else {
-                        echo "<a href=" . "/" . $path_project . "/" . "cart?&product_id=" . $product->getId() . "&quantity=1" . "><button class='buy-now'> 
-                        <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></button></a>";
+                        echo "<a href=" . "/" . $path_project . "/" . "cart" . " ><div class='buy-now'><input  type='submit'  />
+                        <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></div></a>";
                     }
                     
                     ?>
                 <?php
-                if ($product->getQuantity() > 0)
-                echo "
-                <button class='add-to-cart'>
-                    <img src='https://gumac.vn/Content/Image/WebImage/addcart.png'' />
-                    <span>THÊM VÀO GIỎ HÀNG</span>
-                    </a>
-                </button>";
+                if ($product->getQuantity() > 0){
+                    if (!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])){
+                        echo " <a href=" . "/" . $path_project . "/" . "login" . " ><div class='add-to-cart'>
+                            <img src='https://gumac.vn/Content/Image/WebImage/addcart.png'' />
+                            <span>THÊM VÀO GIỎ HÀNG</span>
+                            </div></a>";
+                    }
+                    else {
+                        echo "<a href=" . "/" . $path_project . "/" . "cart" . " ><div class='add-to-cart'><input type='submit' />
+                            <img src='https://gumac.vn/Content/Image/WebImage/addcart.png'' />
+                            <span>THÊM VÀO GIỎ HÀNG</span>
+                            </div></a>";
+                    }
+
+            }
+                ;
                 ?>
 
                 <h3 style="margin-top: 20px">TỔNG ĐÀI HỖ TRỢ</h3>
@@ -106,7 +128,7 @@ if (isset($_POST['content']) && isset($_COOKIE['userId'])) {
                     <img src="https://gumac.vn/Content/Image/WebImage/iconphone.png" style="width:25px; height:25px" />
                     <span>Hotline Hỗ trợ, khiếu nại: <b> 0972 333 444</b></span>
                 </div>
-            </div>
+                </form>
         </div>
         <div class="guide">
             <h2>Hướng dẫn bảo quản</h2>

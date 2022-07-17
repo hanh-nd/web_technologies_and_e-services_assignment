@@ -33,15 +33,18 @@
                 </a>
             </div>
             <div class="logo">
-                <a href=<?php echo "/" . $path_project . "/" ?>><img src=<?php echo "/" . $path_project . "/" . "images/logo/logo-notext-transparent.png" ?> width="50px"></a>
+                <a href=<?php echo "/" . $path_project . "/" ?>><img
+                        src=<?php echo "/" . $path_project . "/" . "images/logo/logo-notext-transparent.png" ?>
+                        width="50px"></a>
             </div>
             <div class="search-field">
                 <form action="" method="POST">
-                    <input name="search_request" id="search_request" type="text" placeholder="Nhập nội dung tìm kiếm" value="<?php echo $searchQuery ?>" />
+                    <input name="search_request" id="search_request" type="text" placeholder="Nhập nội dung tìm kiếm"
+                        value="<?php echo $searchQuery ?>" />
                     <input type="submit" hidden />
                 </form>
             </div>
-            <nav id = "nav">
+            <nav id="nav">
                 <ul>
                     <li>
                         <div class="category">
@@ -57,19 +60,28 @@
                                 echo "/" . $path_project . "/" . "login" ;
                             }
                         ?>">
-                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-order.png" ?> width="28"/>
+                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-order.png" ?>
+                                width="28" />
                             <span>Đơn hàng</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo "/" . $path_project . "/" . "#" ?>">
-                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-cart.png" ?> width="28" />
+                        <a href="<?php 
+                            if(isset($_COOKIE['userId']) && !empty($_COOKIE['userId'])){
+                                echo "/" . $path_project . "/" . "cart"; 
+                            }else{
+                                echo "/" . $path_project . "/" . "login" ;
+                            }
+                         ?>">
+                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-cart.png" ?>
+                                width="28" />
                             <span>Giỏ hàng</span>
                         </a>
                     </li>
                     <li class="profile-bar">
                         <div class="profile-title">
-                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-account.png" ?> width="28"/>
+                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-account.png" ?>
+                                width="28" />
                             <a href="<?php 
                                 if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) {
                                     echo "/" . $path_project . "/" . "login"; 
@@ -79,15 +91,13 @@
                                 ?>"><span>Tài khoản</span></a>
                         </div>
                         <div class="profile">
-                            <a 
-                                style="<?php if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) echo "display: none;" ?>" 
+                            <a style="<?php if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) echo "display: none;" ?>"
                                 href="<?php 
                                     echo "/" . $path_project . "/" . "profile"; 
                                 ?>">
                                 <span>Chi tiết tài khoản</span>
                             </a>
-                            <a 
-                                style="<?php if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) echo "display: none;" ?>" 
+                            <a style="<?php if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) echo "display: none;" ?>"
                                 href="<?php 
                                         echo "/" . $path_project . "/" . "logout";
                                     ?>">
@@ -96,7 +106,7 @@
                         </div>
                     </li>
                 </ul>
-            </nav>	
+            </nav>
         </div>
         <div class="category-bar">
             <button class="category-title">Menu</button>
@@ -108,4 +118,4 @@
     </div>
 </div>
 
-<script type="text/javascript" src = <?php echo "/" . $path_project . "/" . "public/js/nav_bar.js" ?>></script>
+<script type="text/javascript" src=<?php echo "/" . $path_project . "/" . "public/js/nav_bar.js" ?>></script>

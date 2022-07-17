@@ -8,18 +8,28 @@ $url_components = parse_url($url);
 $userId = $_COOKIE['userId'];
 if (isset($url_components['query'])) {
     parse_str($url_components['query'], $params);
-    if (isset($params['product_id'])) {
-        $product_id = $params['product_id'];
-    }
-    if (isset($params['quantity'])) {
-        $quantity = $params['quantity'];
-    }
 }
-$cartService = new CartService();
-$cartSession = $cartService->getCartSessionByUserId($userId);
-$cartItemService = new CartItemService();
-$cartItemService->insert($cartSession->getId(), $product_id, $quantity);
+
 ?>
+
+<?php
+
+$cartItemService = new CartItemService();
+
+if (isset ($_POST['decrease'])){
+    print_r($_POST['decrease'][0]);
+    $cartItemService->update($_POST['decrease'][0], false);
+}
+if (isset ($_POST['increase'])){
+    $cartItemService->update($_POST['increase'][0], true);
+}
+if (isset ($_POST['buy'])){
+    $cartService = new CartService();
+    $cartService->buy($_COOKIE['userId']);
+    header("Location: purchase");
+}
+?>
+
 
 
 <!DOCTYPE html>
@@ -41,6 +51,14 @@ $cartItemService->insert($cartSession->getId(), $product_id, $quantity);
     <div class="detail-container">
 
         <h1>GIỎ HÀNG CỦA BẠN</h1>
+        <?php 
+        $cartItemService = new CartItemService();
+        $productService = new ProductService();
+        $allCartItems = $cartItemService-> getAllCartItemsFormCart($userId);
+        if (empty($allCartItems)){
+        echo "<div class='not-buy'>Không có sản phẩm để hiển thị</div>";
+    }
+        ?>
         <form method="post">
             <table id="cart-table">
                 <tbody>
@@ -52,23 +70,23 @@ $cartItemService->insert($cartSession->getId(), $product_id, $quantity);
                         <th>Thành tiền</th>
                     </tr>
                     <?php
-        $cartItemService = new CartItemService();
-        $productService = new ProductService();
-        $allCartItems = $cartItemService-> getAllCartItemsFormCart($userId);
+
+        $sum  = 0;
         foreach($allCartItems as $item){
             $productId = $item -> getProductId();
             $product = $productService->getProduct($productId);
-            print_r($product);
+            $id = $item -> getId();
+            $currentQuantity = $item->getQuantity();
+            $sum = $sum + $currentQuantity * $product->getPrice();
         ?>
                     <tr>
                         <td><img src=<?php echo $product->getImageUrl(); ?> /></td>
                         <td><?php echo $product->getProductName() ?></td>
                         <td>
-                            <?php $currentQuantity = $item->getQuantity();
-                        ?>
-                            <button onclick="<?php $currentQuantity = $currentQuantity +1 ?>">+</button>
+                            
+                            <button onclick="" type="submit" name="decrease[]" value='<?php echo $id?>'>-</button>
                             <?php echo $currentQuantity; ?>
-                            <button onclick="<?php $currentQuantity = $currentQuantity -1 ?>">-</button>
+                            <button onclick="" type="submit" name="increase[]" value='<?php echo $id?>' >+</button>
                         </td>
                         <td><?php echo ($currentQuantity * $product -> getPrice())?></td>
                     </tr>
@@ -77,7 +95,8 @@ $cartItemService->insert($cartSession->getId(), $product_id, $quantity);
 ?>
                 </tbody>
             </table>
-            <input type="submit" value = "Đặt hàng"></input>
+            TỔNG: <label name = "totalAmount"><?php echo $sum?></label>
+            <input type="submit" value = "Đặt hàng" name="buy"></input>
         </form>
     </div>
 

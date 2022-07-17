@@ -17,35 +17,38 @@ class CartItemService extends DatabaseConnect implements IMapper {
             $existedCartItem =  $this->fromObject($existedCartItemRow[0]);
             $oldQuantity = $existedCartItem->getQuantity();
             $newQuantity = $oldQuantity + $quantity;
-            $query = "UPDATE cart_items SET quantity = '$newQuantity'";
+            $query = "UPDATE cart_items SET quantity = '$newQuantity' WHERE product_id = '$productId' AND cart_session_id = '$cartSessionId' ";
         }
         else 
-        $query = "INSERT INTO cart_items (cart_session_id, product_id, quantity) VALUES ('$cartSessionId', '$productId', '$productId')";
+        $query = "INSERT INTO cart_items (cart_session_id, product_id, quantity) VALUES ('$cartSessionId', '$productId', '$quantity')";
         parent::setQuery($query);
         parent::executeQuery();
     }
 
     public function update($cartItemId, $isIncrease) {
-        $query = "SELECT * FROM cart_items WHERE id = $cartItemId";
+        $query = "SELECT * FROM cart_items WHERE id = '$cartItemId' ";
         parent::setQuery($query);
         $existedCartItem = parent::executeQuery();
+        $existedCartItem = $this->fromObject($existedCartItem[0]);
         $currentQuantity = $existedCartItem->getQuantity();
         if ($isIncrease == true){
             $currentQuantity = $currentQuantity + 1;
         }
         else {
             $currentQuantity = $currentQuantity - 1;
-            if ($currentQuantity < 0) 
-                $currentQuantity = 0;
-
         }
-        $query = "UPDATE cart_items SET quantity = '$currentQuantity'";
+        if ($currentQuantity>0){
+            $query = "UPDATE cart_items SET quantity = '$currentQuantity' WHERE id = '$cartItemId' ";
+        }
+        else {
+            $query = "DELETE FROM cart_items WHERE id = '$cartItemId'";
+        }
         parent::setQuery($query);
         parent::executeQuery();
     }
 
     public function delete($cartItemId) {
-        $query = "DELETE FROM cartItem WHERE id = $cartItemId";
+        $query = "DELETE FROM cartItem WHERE id = '$cartItemId' ";
         parent::setQuery($query);
         parent::executeQuery();
     }

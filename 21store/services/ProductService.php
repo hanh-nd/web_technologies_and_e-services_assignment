@@ -131,5 +131,15 @@ class ProductService extends DatabaseConnect implements IMapper {
         }
         return parent::getTotalRows($query);
     }
+
+    public function updateQuantity($productId, $quantity){
+        $query = "SELECT * FROM products WHERE id = '$productId' ";
+        parent::setQuery($query);
+        $res = parent::executeQuery();
+        $res = $this->fromObjectArray($res);
+        $currentQuantity = $res[0]->getQuantity() - $quantity;
+        $query = "UPDATE FROM products SET quantity = '$currentQuantity' WHERE id = '$productId'";
+    }
+
 }
 ?>
