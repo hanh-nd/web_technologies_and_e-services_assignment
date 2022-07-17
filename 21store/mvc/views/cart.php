@@ -26,7 +26,7 @@ if (isset ($_POST['increase'])){
 if (isset ($_POST['buy'])){
     $cartService = new CartService();
     $cartService->buy($_COOKIE['userId']);
-    header("Location: purchase");
+    //header("Location: purchase");
 }
 ?>
 

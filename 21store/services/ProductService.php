@@ -99,7 +99,7 @@ class ProductService extends DatabaseConnect implements IMapper {
         $objArr = parent::executeQuery();
         return $this->fromObjectArray($objArr);
     }
-
+          
     public function getPaginatedProducts($page, $pageSize, $filters, $sortBy = "created_at", $orderBy = "asc") {
         $searchQuery = $filters->searchQuery;
         
@@ -138,7 +138,12 @@ class ProductService extends DatabaseConnect implements IMapper {
         $res = parent::executeQuery();
         $res = $this->fromObjectArray($res);
         $currentQuantity = $res[0]->getQuantity() - $quantity;
-        $query = "UPDATE FROM products SET quantity = '$currentQuantity' WHERE id = '$productId'";
+        echo "hoho";
+        echo $productId;
+        echo $quantity;
+        $query = "UPDATE products SET quantity = $currentQuantity WHERE id = $productId";
+        parent::setQuery($query);
+        parent::executeQuery();
     }
 
 }
