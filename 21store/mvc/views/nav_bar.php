@@ -62,7 +62,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="<?php echo "/" . $path_project . "/" . "#" ?>">
+                        <a href="<?php echo "/" . $path_project . "/" . "cart" ?>">
                             <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-cart.png" ?> width="28" />
                             <span>Giỏ hàng</span>
                         </a>
