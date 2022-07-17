@@ -26,6 +26,12 @@
 <div class="nav-container">
     <div class="nav-content">
         <div class="nav-bar">
+            <div class="logo-3">
+                <a href="<?php echo "/" . $path_project . "/" . "home" ?>">
+                    <h3>21Store</h3>
+                    <p>Fast Fashion</p>
+                </a>
+            </div>
             <div class="logo">
                 <a href=<?php echo "/" . $path_project . "/" ?>><img src=<?php echo "/" . $path_project . "/" . "images/logo/logo-notext-transparent.png" ?> width="50px"></a>
             </div>
@@ -38,6 +44,12 @@
             <nav id = "nav">
                 <ul>
                     <li>
+                        <div class="category">
+                            <a href=<?php echo "/" . $path_project . "/" ?>>Trang chủ</a>
+                            <a href=<?php echo "/" . $path_project . "/" . "products" ?>>Sản phẩm</a>
+                        </div>
+                    </li>
+                    <li>
                         <a href="<?php
                             if(isset($_COOKIE['userId']) && !empty($_COOKIE['userId'])){
                                 echo "/" . $path_project . "/" . "purchase"; 
@@ -46,7 +58,7 @@
                             }
                         ?>">
                             <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-order.png" ?> width="28"/>
-                            <span>Theo dõi đơn hàng</span>
+                            <span>Đơn hàng</span>
                         </a>
                     </li>
                     <li>
@@ -56,7 +68,7 @@
                         </a>
                     </li>
                     <li class="profile-bar">
-                        <button class="profile-title">
+                        <div class="profile-title">
                             <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-account.png" ?> width="28"/>
                             <a href="<?php 
                                 if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) {
@@ -65,7 +77,7 @@
                                     echo "javascript:void(0);";
                                 }
                                 ?>"><span>Tài khoản</span></a>
-                        </button>
+                        </div>
                         <div class="profile">
                             <a 
                                 style="<?php if(!isset($_COOKIE['userId']) || empty($_COOKIE['userId'])) echo "display: none;" ?>" 

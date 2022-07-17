@@ -51,7 +51,7 @@
 								<a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $product->getId() ?>">
 									<img src="<?php echo $product->getImageUrl() ?>" width="100%">		
 									<p><?php echo $product->getProductName() ?></p>
-									<p><?php echo $product->getFormattedPrice() ?></p>					
+									<p class="price-pr"><?php echo $product->getFormattedPrice() ?></p>					
 								</a>
 							</div>
 					<?php
@@ -59,6 +59,7 @@
 					?>	
 				</div>
 			</div>
+			<br><br>
 			<div class="brand-container">
 				<div class="brand title">
 					Danh sách thương hiệu

@@ -109,6 +109,10 @@
     justify-content: space-between;
     gap: 32px 8px;
 }
+.product-item-row {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+}
 
 .product-item-row:hover,
 .brand-item-row:hover {
@@ -126,12 +130,22 @@
     max-width: 250px;
 }
 
+.product-item-row p {
+    padding: 3px 10px;
+}
+
 .brand-item-row img {
     max-width: 150px;
 }
 
 .brand-container {
     height: 300px;
+}
+
+.price-pr {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: red;
 }
 
 @media only screen and (max-width: 880px) {
