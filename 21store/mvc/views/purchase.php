@@ -85,7 +85,6 @@
                                     Đánh giá
                                 </button>
                             </a>
-                            <!-- van dang fix cung -->
                             <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" . $items[0]->getProductId() . "#buy" ?>">
                                 <button type="button">Mua lại</button>
                             </a>

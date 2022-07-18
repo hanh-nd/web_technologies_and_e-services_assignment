@@ -73,7 +73,7 @@
     font-size: 1.3rem;
     font-weight: 550;
 }
-.sum-price button {
+.sum-price button{
     padding: 10px 30px;
     border-radius: 3px;
     border: 0.1px solid rgb(221, 221, 221);
@@ -81,6 +81,32 @@
     color: rgb(74, 72, 72);
     margin-left: 10px;
 }
+#add {
+    padding: 0px 17px;
+    font-size: 1rem;
+    border-radius: 3px;
+    border: 0.1px solid rgb(221, 221, 221);
+    background-color: white;
+    color: rgb(74, 72, 72);
+}
+
+#cart-price {
+    color: red; 
+    font-weight: 550; 
+    padding-left: 40%;
+}
+
+.change-quantity {
+    margin-top: 20px;
+}
+.change-quantity input[type='number']{
+    padding-left: 8px;
+    font-size: 1rem;
+    width: 100px;
+    border-radius: 3px;
+    border: 0.1px solid rgb(221, 221, 221);
+}
+
 
 .list-button {
     margin: 20px 0px 10px 0px;
@@ -136,6 +162,9 @@ label {
     .filter-bill label {
         font-size: 1rem;
     }
+    #cart-price {
+        padding-left: 0px;
+    }
 }
 
 @media (max-width: 700px) {
@@ -178,5 +207,15 @@ label {
     .purchase-infor img {
         width: 64px;
         height: 64px;
+    }
+    .change-quantity {
+        margin-top: 10px;
+    }
+    .change-quantity input[type='number']{
+        font-size: 0.9rem
+    }
+    #add {
+        padding: 0px 13px;
+        font-size: 0.9rem;
     }
 }

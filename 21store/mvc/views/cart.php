@@ -15,20 +15,21 @@ if (isset($url_components['query'])) {
 <?php
 $cartItemService = new CartItemService();
 $productService = new ProductService();
-$allCartItems = $cartItemService-> getAllCartItemsFormCart($userId);
+$allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
 
-if (isset ($_POST['quantity'])) {
-    foreach ($allCartItems as $index=>$cartItem) {
+if (isset($_POST['quantity'])) {
+    foreach ($allCartItems as $index => $cartItem) {
         if ($cartItem->getQuantity() != $_POST['quantity'][$index]) {
             $cartItemService->updateQuantity($cartItem->getId(), $_POST['quantity'][$index]);
         }
     }
-} else if (isset ($_POST['decrease'])){
+}
+if (isset($_POST['decrease'])) {
     $cartItemService->update($_POST['decrease'][0], false);
-} else if (isset ($_POST['increase'])){
+} else if (isset($_POST['increase'])) {
     $cartItemService->update($_POST['increase'][0], true);
-} 
-if (isset ($_POST['buy'])){
+}
+if (isset($_POST['buy'])) {
     $cartService = new CartService();
     $cartService->buy($_COOKIE['userId']);
     header("Location: purchase");
@@ -43,64 +44,66 @@ if (isset ($_POST['buy'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css"
-        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="public/css/footer.css" type="text/css">
     <link rel="stylesheet" href="public/css/nav_bar.css" type="text/css">
-    <link rel="stylesheet" href="public/css/detail.css" type="text/css">
-    <title>Detail</title>
+    <link rel="stylesheet" href="public/css/purchase.css" type="text/css">
+    <title>Cart</title>
 </head>
 
 <body>
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
-    <div class="detail-container">
-
-        <h1>GIỎ HÀNG CỦA BẠN</h1>
-        <?php 
-        if (empty($allCartItems)){
-        echo "<div class='not-buy'>Không có sản phẩm để hiển thị</div>";
-    }
-        ?>
+    <div class="bill-container" style="margin-top: 3%; min-height: 50vh">
         <form method="post">
-            <table id="cart-table">
-                <tbody>
-                    <tr>
-                        <th></th>
-                        <th>Sản phẩm</th>
-                        <th>Đơn giá</th>
-                        <th>Số lượng</th>
-                        <th>Thành tiền</th>
-                    </tr>
+            <?php
+            if (empty($allCartItems)) {
+                echo "<div class='not-buy'>Không có sản phẩm để hiển thị</div>";
+            } else { ?>
+                <div class="infor-bill" id="#username">
+                    <header>
+                        <h3>Giỏ hàng của bạn</h3>
+                        <p>Hiện đang có: <?php echo count($allCartItems) ?> sản phẩm</p>
+                        <div class="divider"></div>
+                    </header>
+                    <?php $sum  = 0;
+                    $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
+                    foreach ($allCartItems as $item) {
+                        $productId = $item->getProductId();
+                        $product = $productService->getProduct($productId);
+                        $id = $item->getId();
+                        $currentQuantity = $item->getQuantity();
+                        $sum = $sum + $currentQuantity * $product->getPrice();
+                    ?>
+                        <div class="purchase-infor">
+                            <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $item->getProductId() ?>">
+                                <img src=<?php echo $product->getImageUrl(); ?> />
+                            </a>
+                            <div class="name-price">
+                                <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                                    <p style="margin-left: 0px;"><?php echo $product->getProductName() ?></p>
+                                    <p id="cart-price"><?php echo number_format(($currentQuantity * $product->getPrice()), 0, '', ',') . " VND" ?></p>                              
+                                </div>
+                                <div class="change-quantity">
+                                    <button onclick="" type="submit" name="decrease[]" value='<?php echo $id ?>' id="add">-</button>
+                                    <input type="number" name="quantity[]" value="<?php echo $currentQuantity; ?>" max="<?php echo $product->getQuantity() ?>" />
+                                    <input type="submit" name="quantity[]" hidden />
+                                    <button onclick="" type="submit" name="increase[]" value='<?php echo $id ?>' id="add">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
                     <?php
-
-        $sum  = 0;
-        $allCartItems = $cartItemService-> getAllCartItemsFormCart($userId);
-        foreach($allCartItems as $item){
-            $productId = $item -> getProductId();
-            $product = $productService->getProduct($productId);
-            $id = $item -> getId();
-            $currentQuantity = $item->getQuantity();
-            $sum = $sum + $currentQuantity * $product->getPrice();
-        ?>
-                    <tr>
-                        <td><img src=<?php echo $product->getImageUrl(); ?> /></td>
-                        <td><?php echo $product->getProductName() ?></td>
-                        <td>
-                            
-                            <button onclick="" type="submit" name="decrease[]" value='<?php echo $id?>'>-</button>
-                            <input type="number" name="quantity[]" value="<?php echo$currentQuantity; ?>" />
-                            <input type="submit" name="quantity[]" hidden/>
-                            <button onclick="" type="submit" name="increase[]" value='<?php echo $id?>' >+</button>
-                        </td>
-                        <td><?php echo ($currentQuantity * $product -> getPrice())?></td>
-                    </tr>
-                    <?php
-        }
-?>
-                </tbody>
-            </table>
-            TỔNG: <label name = "totalAmount"><?php echo $sum?></label>
-            <input type="submit" value = "Đặt hàng" name="buy"></input>
+                    } ?>
+                    <div class="sum-price">
+                        <p>Tổng số tiền: &emsp;<span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span></p>
+                        <div class="list-button">
+                            <button id="evaluate" type="submit" name="buy">
+                                Đặt hàng
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </form>
     </div>
 
