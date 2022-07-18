@@ -1,18 +1,15 @@
 <?php
-require_once ROOT . DS . 'services' . DS . 'CartItemService.php';
-require_once ROOT . DS . 'services' . DS . 'CartService.php';
+require_once ROOT . DS . 'services' . DS . 'OrderItemService.php';
+require_once ROOT . DS . 'services' . DS . 'UserService.php';
+require_once ROOT . DS . 'services' . DS . 'BillService.php';
 require_once ROOT . DS . 'services' . DS . 'ProductService.php';
+require_once ROOT . DS . 'services' . DS . 'CartItemService.php';
 
-$url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : "/";
-$url_components = parse_url($url);
-$userId = $_COOKIE['userId'];
-if (isset($url_components['query'])) {
-    parse_str($url_components['query'], $params);
-}
+    $userService = new UserService();
+    $userId = $_COOKIE['userId'];
+    $user = $userService->getUser($userId);
 
-?>
-
-<?php
+      
 $cartItemService = new CartItemService();
 $productService = new ProductService();
 $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
@@ -32,7 +29,9 @@ if (isset($_POST['quantity'])) {
     }
 }
 if (isset($_POST['buy'])) {
-    header("Location: confirm-order");
+    $cartService = new CartService();
+    $cartService->buy($_COOKIE['userId']);
+    header("Location: purchase");
 }
 ?>
 
@@ -43,35 +42,44 @@ if (isset($_POST['delete'])){
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="public/css/footer.css" type="text/css">
     <link rel="stylesheet" href="public/css/nav_bar.css" type="text/css">
     <link rel="stylesheet" href="public/css/purchase.css" type="text/css">
-    <title>Cart</title>
+    <title>CONFIRM ORDER</title>
 </head>
 
 <body>
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
-    <div class="bill-container" style="margin-top: 3%; min-height: 50vh">
+    <div class="container">
         <form method="post">
-            <?php
+            <div class="col">
+                <div class="row">
+                    Thông tin nhận hàng
+                    <a href="<?php echo  "/" . $path_project . "/" . "profile"?>">Chỉnh sửa</a>
+                </div>
+                <div><?php echo $user->getFullName()?></div>;
+                <div><?php echo $user->getPhoneNumber()?></div>
+                <div><?php echo $user->getAddress()?></div>
+                <div class="row">
+                    <?php
             if (empty($allCartItems)) {
                 echo "<div class='not-buy' style='text-align: center'>Không có sản phẩm để hiển thị</div>";
             } else { ?>
-                <div class="infor-bill" id="#username">
-                    <header>
-                        <h3>Giỏ hàng của bạn</h3>
-                        <p>Hiện đang có: <?php echo count($allCartItems) ?> sản phẩm</p>
-                        <div class="divider"></div>
-                    </header>
-                    <?php $sum  = 0;
+                    <div class="infor-bill" id="#username">
+                        <header>
+                            <h3>Giỏ hàng của bạn</h3>
+                            <p>Hiện đang có: <?php echo count($allCartItems) ?> sản phẩm</p>
+                            <div class="divider"></div>
+                        </header>
+                        <?php $sum  = 0;
                     $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
                     foreach ($allCartItems as $item) {
                         $productId = $item->getProductId();
@@ -87,31 +95,42 @@ if (isset($_POST['delete'])){
                             <div class="name-price">
                                 <div style="display: flex; flex-direction: row; justify-content: space-between;">
                                     <p style="margin-left: 0px;"><?php echo $product->getProductName() ?></p>
-                                    <p id="cart-price"><?php echo number_format(($currentQuantity * $product->getPrice()), 0, '', ',') . " VND" ?></p>                              
+                                    <p id="cart-price">
+                                        <?php echo number_format(($currentQuantity * $product->getPrice()), 0, '', ',') . " VND" ?>
+                                    </p>
                                 </div>
                                 <div class="change-quantity">
-                                    <button onclick="" type="submit" name="decrease[]" value='<?php echo $id ?>' id="add">-</button>
-                                    <input type="number" name="quantity[]" value="<?php echo $currentQuantity; ?>" max="<?php echo $product->getQuantity() ?>" />
+                                    <button onclick="" type="submit" name="decrease[]" value='<?php echo $id ?>'
+                                        id="add">-</button>
+                                    <input type="number" name="quantity[]" value="<?php echo $currentQuantity; ?>"
+                                        max="<?php echo $product->getQuantity() ?>" />
                                     <input type="submit" name="quantity[]" hidden />
-                                    <button onclick="" type="submit" name="increase[]" value='<?php echo $id ?>' id="add">+</button>
-                                    <button type="submit" name="delete[]" value="<?php echo $id ?>">Xóa sản phẩm</button>
+                                    <button onclick="" type="submit" name="increase[]" value='<?php echo $id ?>'
+                                        id="add">+</button>
+                                    <button type="submit" name="delete[]" value="<?php echo $id ?>">Xóa sản
+                                        phẩm</button>
                                 </div>
                             </div>
                         </div>
                         <div class="divider"></div>
-                    <?php
+                        <?php
                     } ?>
-                    <div class="sum-price">
-                        <p>Tổng số tiền: &emsp;<span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span></p>
+                    </div>
+                    <?php } ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+            <p>Tổng số tiền sản phẩm:
+                            &emsp;<span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span></p>
+                        <p>Phí giao hàng: 20000 VND</p>
+                        <p>Số tiền cần thanh toán: <?php echo number_format($sum+20000, 0, '', ',') . " VND" ?> </p>
                         <div class="list-button">
                             <button id="evaluate" type="submit" name="buy">
                                 Đặt hàng
                             </button>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
+                            <h4>Bằng cách đặt hàng, bạn đã đồng ý với <a href="">Chính sách</a> của chúng tôi</h4>
+            </div>
         </form>
     </div>
 </body>
-<script type="text/javascript" src="public/javascript/cart.js"></script>

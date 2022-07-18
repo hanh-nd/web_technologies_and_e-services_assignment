@@ -53,5 +53,14 @@ class BillService extends DatabaseConnect implements IMapper {
         parent::setQuery($query);
         parent::updateQuery($query);
     }
+
+    public function getLatestBill($userId){
+        $query = "SELECT * FROM bills WHERE user_id = '$userId' ORDER BY created_at DESC LIMIT 1";
+        parent::setQuery($query);
+        $res = parent::executeQuery();
+        $res = $this->fromObjectArray($res);
+        $bill = $res[0];
+        return $bill;
+    }
 }
 ?>
