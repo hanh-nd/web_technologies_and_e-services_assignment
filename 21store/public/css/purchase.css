@@ -93,7 +93,7 @@
 #cart-price {
     color: red; 
     font-weight: 550; 
-    padding-left: 40%;
+    margin-right: 0px;
 }
 
 .change-quantity {
