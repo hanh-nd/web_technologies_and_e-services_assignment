@@ -17,17 +17,19 @@ $cartItemService = new CartItemService();
 $productService = new ProductService();
 $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
 
+
+if (isset($_POST['decrease'])) {
+    $cartItemService->update($_POST['decrease'][0], false);
+} 
+if (isset($_POST['increase'])) {
+    $cartItemService->update($_POST['increase'][0], true);
+}
 if (isset($_POST['quantity'])) {
     foreach ($allCartItems as $index => $cartItem) {
         if ($cartItem->getQuantity() != $_POST['quantity'][$index]) {
             $cartItemService->updateQuantity($cartItem->getId(), $_POST['quantity'][$index]);
         }
     }
-}
-if (isset($_POST['decrease'])) {
-    $cartItemService->update($_POST['decrease'][0], false);
-} else if (isset($_POST['increase'])) {
-    $cartItemService->update($_POST['increase'][0], true);
 }
 if (isset($_POST['buy'])) {
     $cartService = new CartService();

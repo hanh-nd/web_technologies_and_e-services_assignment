@@ -102,6 +102,18 @@
     font-size: 24px;
 }
 
+.product-list__title {
+    margin: 16px 4px;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.product-list__title span {
+    font-weight: 500;
+    font-size: 16px;
+    color: #ea2624;
+}
+
 .product-list,
 .brand-list {
     display: grid;
@@ -148,6 +160,33 @@
     font-weight: 600;
     font-size: 0.95rem;
     color: red;
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.see-detail {
+    visibility: hidden;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    height: 40px;
+    color: white;
+    font-weight: 700;
+    line-height: 40px;
+    background: rgba(193, 83, 82, 0.529);
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+}
+
+.image-wrapper img:hover + .see-detail,
+.see-detail:hover {
+    visibility: visible;
+    opacity: 1;
 }
 
 @media only screen and (max-width: 880px) {

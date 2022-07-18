@@ -49,9 +49,43 @@
 					?>
 							<div class="product-item-row">
 								<a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $product->getId() ?>">
-									<img src="<?php echo $product->getImageUrl() ?>" width="100%">		
+									<div class="image-wrapper">
+										<img src="<?php echo $product->getImageUrl() ?>" width="100%">		
+										<div class="see-detail">Xem chi tiết</div>
+									</div>
 									<p><?php echo $product->getProductName() ?></p>
-									<p class="price-pr"><?php echo $product->getFormattedPrice() ?></p>					
+									<p class="price-pr"><?php echo $product->getFormattedPrice() ?></p>		
+												
+								</a>
+							</div>
+					<?php
+						}
+					?>	
+				</div>
+			</div>
+			<br><br>
+			<div class="product-list-container">
+				<div class="product-list__title">
+					Danh sách sản phẩm
+					<a href="<?php echo  "/" . $path_project . "/" . "products" ?>">
+						<span>Xem thêm</span>
+					</a>
+				</div>
+				<div class="product-list">
+					<?php
+						$service = new ProductService();
+						$products = $service->getPaginatedProducts(1, 8);
+						foreach($products as $product) {
+					?>
+							<div class="product-item-row">
+								<a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $product->getId() ?>">
+									<div class="image-wrapper">
+										<img src="<?php echo $product->getImageUrl() ?>" width="100%">		
+										<div class="see-detail">Xem chi tiết</div>
+									</div>
+									<p><?php echo $product->getProductName() ?></p>
+									<p class="price-pr"><?php echo $product->getFormattedPrice() ?></p>		
+												
 								</a>
 							</div>
 					<?php

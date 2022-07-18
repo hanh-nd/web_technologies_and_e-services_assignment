@@ -121,6 +121,10 @@ select:hover {
     padding: 8px 38px 10px 0;
 }
 
+.content-header span {
+    color: #ea2624;
+}
+
 .multi-select {
     margin: 0 24px 0 0;
 }
@@ -161,6 +165,33 @@ select:hover {
     border-radius: 8px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     z-index: 10;
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.see-detail {
+    visibility: hidden;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    height: 40px;
+    color: white;
+    font-weight: 700;
+    line-height: 40px;
+    background: rgba(193, 83, 82, 0.529);
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+}
+
+.image-wrapper img:hover + .see-detail,
+.see-detail:hover {
+    visibility: visible;
+    opacity: 1;
 }
 
 @media only screen and (max-width: 900px) {

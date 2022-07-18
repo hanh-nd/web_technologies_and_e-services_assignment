@@ -60,14 +60,14 @@
     <div class="product-list-container">
         <div class="product-list-content">
             <div class="content-header">
-                Danh sách sản phẩm: <?php 
+                Danh sách sản phẩm: Tổng <?php 
                     $service = new ProductService();
                     $filters = new stdClass();
                     $filters->searchQuery = $searchQuery;
                     $filters->brandFilters = $brandFilters;
                     $totalRows = $service->getTotalProducts($filters);
-                    $totalPages = ceil($totalRows / 4);
-                    echo $totalRows . ' sản phẩm';
+                    $totalPages = ceil($totalRows / 8);
+                    echo "<span>$totalRows</span> sản phẩm";
                 ?>
             </div>
             <div class="filters">
@@ -131,12 +131,15 @@
             </div>
             <div class="product-list">
                 <?php
-                    $products = $service->getPaginatedProducts($page, 4, $filters, $sortBy, $orderBy);
+                    $products = $service->getPaginatedProducts($page, 8, $filters, $sortBy, $orderBy);
                     foreach($products as $product) {
                 ?>
                     <div class="product-item-row">
                         <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $product->getId() ?>">
-                            <img src=<?php echo $product->getImageUrl() ?> width="100%">
+                            <div class="image-wrapper">
+                                <img src=<?php echo $product->getImageUrl() ?> width="100%">
+                                <div class="see-detail">Xem chi tiết</div>
+                            </div>
                             <p><?php echo $product->getProductName() ?></p>
                             <p class="price-pr"><?php echo $product->getFormattedPrice() ?></p>
                         </a>

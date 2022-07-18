@@ -10,7 +10,7 @@
     max-width: 1120px;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .detail-container img {
     max-width: 410px;
@@ -21,6 +21,11 @@
 .product-image-wrapper {
     margin: 0;
     padding: 32px 0;
+}
+
+.product-image-wrapper:hover {
+    transform: scale(1.05);
+    transition-duration: 0.3s;
 }
 
 .right-container {

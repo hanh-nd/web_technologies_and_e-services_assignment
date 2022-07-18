@@ -100,9 +100,15 @@ class ProductService extends DatabaseConnect implements IMapper {
         return $this->fromObjectArray($objArr);
     }
           
-    public function getPaginatedProducts($page, $pageSize, $filters, $sortBy = "created_at", $orderBy = "asc") {
-        $searchQuery = $filters->searchQuery;
-        $brandFilters = $filters->brandFilters;
+    public function getPaginatedProducts($page, $pageSize, $filters = null, $sortBy = "created_at", $orderBy = "asc") {
+        if (isset($filters)) {
+            $searchQuery = $filters->searchQuery;
+            $brandFilters = $filters->brandFilters;
+        } else {
+            $searchQuery = '';
+            $brandFilters = array();
+        }
+
 
         if ($page < 1) {
             $page = 1;
