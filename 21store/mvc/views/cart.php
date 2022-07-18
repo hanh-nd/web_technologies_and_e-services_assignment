@@ -97,7 +97,7 @@ if (isset($_POST['delete'])){
                                     <input type="number" name="quantity[]" value="<?php echo $currentQuantity; ?>" max="<?php echo $product->getQuantity() ?>" />
                                     <input type="submit" name="quantity[]" hidden />
                                     <button onclick="" type="submit" name="increase[]" value='<?php echo $id ?>' id="add">+</button>
-                                    <button type="submit" name="delete[]" value="<?php echo $id ?>">Xóa sản phẩm</button>
+                                    <button type="submit" name="delete[]" value="<?php echo $id ?>" id="add" style="font-size:0.8rem; padding: 2px 10px">Xóa sản phẩm</button>
                                 </div>
                             </div>
                         </div>
