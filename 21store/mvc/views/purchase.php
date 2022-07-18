@@ -81,9 +81,15 @@
                         <p>Tổng số tiền: &emsp;<span><?php echo $bill->getFormattedTotalAmount() ?></span></p>
                         <div class="list-button">
                             <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $items[0]->getProductId() . "#rateProduct" ?>" style="color: white;">
+                                <?php
+                                if ($bill->getStatus() == "Đã mua") {
+                                ?>
                                 <button id="evaluate" type="button">
                                     Đánh giá
                                 </button>
+                                <?php
+                                }
+                                ?>
                             </a>
                             <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" . $items[0]->getProductId() . "#buy" ?>">
                                 <button type="button">Mua lại</button>
