@@ -81,13 +81,13 @@
                         <p>Tổng số tiền: &emsp;<span><?php echo $bill->getFormattedTotalAmount() ?></span></p>
                         <div class="list-button">
                             <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $items[0]->getProductId() . "#rateProduct" ?>" style="color: white;">
-                                <button id="evaluate">
+                                <button id="evaluate" type="button">
                                     Đánh giá
                                 </button>
                             </a>
                             <!-- van dang fix cung -->
                             <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" . $items[0]->getProductId() . "#buy" ?>">
-                                <button>Mua lại</button>
+                                <button type="button">Mua lại</button>
                             </a>
                         </div>
                     </div>

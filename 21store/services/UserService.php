@@ -2,6 +2,10 @@
 require_once ROOT . DS . 'services' . DS . "IMapper.php";
 require_once ROOT . DS . 'services' . DS . "DatabaseConnect.php";
 require_once ROOT . DS . 'mvc' . DS . 'models' . DS . 'User.php';
+require_once ROOT . DS . 'mvc' . DS . 'models' . DS . 'Bill.php';
+require_once ROOT . DS . 'services' . DS . "BillService.php";
+require_once ROOT . DS . 'mvc' . DS . 'models' . DS . 'Cart.php';
+require_once ROOT . DS . 'services' . DS . "CartService.php";
 
 class UserService extends DatabaseConnect implements IMapper { 
     public function __construct() {
@@ -25,7 +29,23 @@ class UserService extends DatabaseConnect implements IMapper {
         foreach ($objectArray as $object) {
             array_push($result, new User($object));
         }
-        return $result;// co loi khi doi thong tin tai khoan
+        return $result;
+    }
+
+    public function fromBillObjectArray($objectArray) {
+        $result = array();
+        foreach ($objectArray as $object) {
+            array_push($result, new Bill($object));
+        }
+        return $result;
+    }
+
+    public function fromCartObjectArray($objectArray) {
+        $result = array();
+        foreach ($objectArray as $object) {
+            array_push($result, new Cart($object));
+        }
+        return $result;
     }
 
     public function getUser($id) {
@@ -68,6 +88,50 @@ class UserService extends DatabaseConnect implements IMapper {
 
     public function register($username, $password, $fullname = '', $phoneNumber = '', $address = '') {
         $query = "INSERT INTO users (username, password, fullname, phone_number, address) VALUES ('$username', '$password', '$fullname', '$phoneNumber', '$address')";
+        parent::setQuery($query);
+        parent::executeQuery();
+    }
+
+    public function delete($userId) {
+        // delete comments
+        $query = "DELETE FROM comments WHERE user_id = '$userId'";
+        parent::setQuery($query);
+        parent::executeQuery();
+
+        // delete cart
+        $query = "SELECT * from cart_sessions WHERE user_id = '$userId'";
+        parent::setQuery($query);
+        $carts = $this->fromCartObjectArray(parent::executeQuery());
+        
+        foreach ($carts as $cart) {
+            $cartId = $cart->getId();
+            $query = "DELETE FROM cart_items WHERE cart_session_id = '$cartId'";
+            parent::setQuery($query);
+            parent::executeQuery();
+        }
+
+        $query = "DELETE FROM cart_sessions WHERE user_id = '$userId'";
+        parent::setQuery($query);
+        parent::executeQuery();
+
+        // delete bill
+        $query = "SELECT * from bills WHERE user_id = '$userId'";
+        parent::setQuery($query);
+        $bills = $this->fromBillObjectArray(parent::executeQuery());
+        
+        foreach ($bills as $bill) {
+            $billId = $bill->getId();
+            $query = "DELETE FROM order_items WHERE bill_id = '$billId'";
+            parent::setQuery($query);
+            parent::executeQuery();
+        }
+
+        $query = "DELETE FROM bills WHERE user_id = '$userId'";
+        parent::setQuery($query);
+        parent::executeQuery();
+
+        // delete user
+        $query = "DELETE FROM users WHERE id = '$userId'";
         parent::setQuery($query);
         parent::executeQuery();
     }

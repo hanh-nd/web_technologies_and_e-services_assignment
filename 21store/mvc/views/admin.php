@@ -6,6 +6,10 @@
     if (!isset($_SESSION['admin_username']) || empty($_SESSION['admin_username'])) {
         header("Location: login-admin");
     }
+    // } else {
+    //     header("Location: account-management");
+
+    // }
 
 ?>
 

@@ -51,6 +51,10 @@
     margin: 24px 0;
 }
 
+.product {
+    cursor: pointer;
+}
+
 .product img {
     height: unset;
     max-width: 250px;

@@ -1,20 +1,27 @@
 <?php
+global $path_project;
 require_once ROOT . DS . 'services' . DS . 'UserService.php';
 require_once ROOT . DS . 'services' . DS . 'OrderItemService.php';
 require_once ROOT . DS . 'services' . DS . 'BillService.php';
 
 $userService = new UserService();
-$allUser = $userService->getAll();
-
 $billService = new BillService();
-$listTmpBill = $billService->getAllBill();
-
 $orderService = new OrderItemService();
 
+if (array_key_exists("productId", $_POST)) {
+    $userService->delete($_POST['productId'][0]);
+
+    if(isset($_COOKIE['userId']) && !empty($_COOKIE['userId'])) {
+        unset($_COOKIE['userId']);
+        setcookie('userId', "", time() - 3600, "/");
+    } 
+}
+
+$allUser = $userService->getAll();
+$listTmpBill = $billService->getAllBill();
 
 $phoneNumber = "";
 $fullname = "";
-
 
 if (array_key_exists("fullname", $_POST)) {
     $fullname = strtolower($_POST['fullname']);
@@ -42,6 +49,8 @@ foreach ($listTmpBill as $tmpBill) {
         array_push($listBill, $tmpBill);
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,24 +86,32 @@ foreach ($listTmpBill as $tmpBill) {
                         <input type="submit" value="Tìm kiếm">
                     </div>
                 </form>
-                <table class="table-user">
-                    <tr>
-                        <th>UserName</th>
-                        <th>Full Name</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                    </tr>
-                    <?php
-                    foreach ($users as $u) {
-                    ?>
+                <form method="post">
+                    <table class="table-user">
                         <tr>
-                            <td><?php echo $u->getUsername() ?></td>
-                            <td><?php echo $u->getFullname() ?></td>
-                            <td><?php echo $u->getPhoneNumber() ?></td>
-                            <td><?php echo $u->getAddress() ?></td>
+                            <th>UserName</th>
+                            <th>Full Name</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Action</th>
+
                         </tr>
-                    <?php } ?>
-            </table>
+                        <?php
+                        foreach ($users as $u) {
+                        ?>
+                            <tr>
+                                <td><?php echo $u->getUsername() ?></td>
+                                <td><?php echo $u->getFullname() ?></td>
+                                <td><?php echo $u->getPhoneNumber() ?></td>
+                                <td><?php echo $u->getAddress() ?></td>
+                                <td class="action">
+                                    <button type="submit" name="productId[]" value="<?php echo $u->getId() ?>">Xoá</button>
+                                </td>
+
+                            </tr>                        
+                        <?php } ?>
+                    </table>
+                </form>
                 <?php
                 $total_turnover = 0;
                 $total_bill = 0;

@@ -92,6 +92,9 @@
     color: white;
 }
 
+button {
+    cursor: pointer;
+}
 .not-buy {
     height: 400px;
     font-size: 2rem;
@@ -99,6 +102,10 @@
 
 label {
     width: fit-content;
+}
+
+.filter-bill label {
+    cursor: pointer;
 }
 @media (max-width: 1000px) {
     .purchase-container {
