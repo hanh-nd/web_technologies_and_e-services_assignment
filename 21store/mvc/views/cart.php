@@ -62,6 +62,8 @@ if (isset($_POST['delete'])){
     <div class="bill-container" style="margin-top: 3%; min-height: 50vh">
         <form method="post">
             <?php
+            $cartItemService = new CartItemService();
+            $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
             if (empty($allCartItems)) {
                 echo "<div class='not-buy' style='text-align: center'>Không có sản phẩm để hiển thị</div>";
             } else { ?>

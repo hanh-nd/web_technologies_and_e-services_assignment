@@ -58,6 +58,12 @@ if (isset($_POST['delete'])){
 
 <body>
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
+    <?php
+            $cartItemService = new CartItemService();
+            $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
+            if (empty($allCartItems)) {
+                echo "<div class='not-buy' style='text-align: center'>Không có sản phẩm để hiển thị</div>";
+            } else { ?>
     <div class="container">
         <form method="post">
             <div class="col">
@@ -69,10 +75,6 @@ if (isset($_POST['delete'])){
                 <div><?php echo $user->getPhoneNumber()?></div>
                 <div><?php echo $user->getAddress()?></div>
                 <div class="row">
-                    <?php
-            if (empty($allCartItems)) {
-                echo "<div class='not-buy' style='text-align: center'>Không có sản phẩm để hiển thị</div>";
-            } else { ?>
                     <div class="infor-bill" id="#username">
                         <header>
                             <h3>Giỏ hàng của bạn</h3>
@@ -114,23 +116,26 @@ if (isset($_POST['delete'])){
                         </div>
                         <div class="divider"></div>
                         <?php
-                    } ?>
-                    </div>
-                    <?php } ?>
+                    } 
+                    ?>
                     </div>
                 </div>
             </div>
-            <div class="col">
-            <p>Tổng số tiền sản phẩm:
-                            &emsp;<span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span></p>
-                        <p>Phí giao hàng: 20000 VND</p>
-                        <p>Số tiền cần thanh toán: <?php echo number_format($sum+20000, 0, '', ',') . " VND" ?> </p>
-                        <div class="list-button">
-                            <button id="evaluate" type="submit" name="buy">
-                                Đặt hàng
-                            </button>
-                            <h4>Bằng cách đặt hàng, bạn đã đồng ý với <a href="">Chính sách</a> của chúng tôi</h4>
-            </div>
+    </div>
+    <div class="col">
+        <p>Tổng số tiền sản phẩm:
+            &emsp;<span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span></p>
+        <p>Phí giao hàng: 20000 VND</p>
+        <p>Số tiền cần thanh toán: <?php echo number_format($sum+20000, 0, '', ',') . " VND" ?> </p>
+        <div class="list-button">
+            <button id="evaluate" type="submit" name="buy">
+                Đặt hàng
+            </button>
+            <h4>Bằng cách đặt hàng, bạn đã đồng ý với <a href="">Chính sách</a> của chúng tôi</h4>
+        </div>
         </form>
     </div>
+    <?php 
+    }
+ ?>
 </body>
