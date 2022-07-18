@@ -41,7 +41,8 @@ class CartItemService extends DatabaseConnect implements IMapper {
             $query = "UPDATE cart_items SET quantity = '$currentQuantity' WHERE id = '$cartItemId' ";
         }
         else {
-            $query = "DELETE FROM cart_items WHERE id = '$cartItemId'";
+            $currentQuantity = 1;
+            $query = "UPDATE cart_items SET quantity = '$currentQuantity' WHERE id = '$cartItemId' ";
         }
         parent::setQuery($query);
         parent::executeQuery();
