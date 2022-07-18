@@ -8,6 +8,7 @@
     $services = new ProductService();
     $filters = new stdClass();
     $filters->searchQuery = $productName;
+    $filters->brandFilters = array();
     $products = $services->getPaginatedProducts(1, 1000, $filters);
     foreach($products as $product){
         $productId = $product->getId();
