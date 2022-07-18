@@ -131,7 +131,9 @@ if (isset($_POST['delete'])){
             <button id="evaluate" type="submit" name="buy">
                 Đặt hàng
             </button>
-            <h4>Bằng cách đặt hàng, bạn đã đồng ý với <a href="">Chính sách</a> của chúng tôi</h4>
+            <h4>Bằng cách đặt hàng, bạn đã đồng ý với <a href="<?php echo "/" . $path_project . "/" . "policy" ?>">
+            Chính sách</a> của chúng tôi
+        </h4>
         </div>
         </form>
     </div>

@@ -13,6 +13,7 @@
 				<a href="<?php echo "/" . $path_project . "/" . "about" ?>">About</a>
 				<a href="#">Faq</a>		
 				<a href="#">Contact</a>
+				<a href="<?php echo "/" . $path_project . "/" . "policy" ?>">Policy</a>
 			</p>
 			<p class="footer-company-name">21Store © 2022</p>
 		</div>
