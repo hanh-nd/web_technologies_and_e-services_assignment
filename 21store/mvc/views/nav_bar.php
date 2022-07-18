@@ -66,7 +66,6 @@
                         </a>
                     </li>
                     <li>
-<<<<<<< HEAD
                         <a href="<?php 
                             if(isset($_COOKIE['userId']) && !empty($_COOKIE['userId'])){
                                 echo "/" . $path_project . "/" . "cart"; 
@@ -76,10 +75,6 @@
                          ?>">
                             <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-cart.png" ?>
                                 width="28" />
-=======
-                        <a href="<?php echo "/" . $path_project . "/" . "cart" ?>">
-                            <img src=<?php echo "/" . $path_project . "/" . "images/nav-bar/ic-cart.png" ?> width="28" />
->>>>>>> 6e67ce4d4daf2b23dcfc1fefeea51c2d78373a5e
                             <span>Giỏ hàng</span>
                         </a>
                     </li>

@@ -13,16 +13,21 @@ if (isset($url_components['query'])) {
 ?>
 
 <?php
-
 $cartItemService = new CartItemService();
+$productService = new ProductService();
+$allCartItems = $cartItemService-> getAllCartItemsFormCart($userId);
 
-if (isset ($_POST['decrease'])){
-    print_r($_POST['decrease'][0]);
+if (isset ($_POST['quantity'])) {
+    foreach ($allCartItems as $index=>$cartItem) {
+        if ($cartItem->getQuantity() != $_POST['quantity'][$index]) {
+            $cartItemService->updateQuantity($cartItem->getId(), $_POST['quantity'][$index]);
+        }
+    }
+} else if (isset ($_POST['decrease'])){
     $cartItemService->update($_POST['decrease'][0], false);
-}
-if (isset ($_POST['increase'])){
+} else if (isset ($_POST['increase'])){
     $cartItemService->update($_POST['increase'][0], true);
-}
+} 
 if (isset ($_POST['buy'])){
     $cartService = new CartService();
     $cartService->buy($_COOKIE['userId']);
@@ -52,9 +57,6 @@ if (isset ($_POST['buy'])){
 
         <h1>GIỎ HÀNG CỦA BẠN</h1>
         <?php 
-        $cartItemService = new CartItemService();
-        $productService = new ProductService();
-        $allCartItems = $cartItemService-> getAllCartItemsFormCart($userId);
         if (empty($allCartItems)){
         echo "<div class='not-buy'>Không có sản phẩm để hiển thị</div>";
     }
@@ -72,6 +74,7 @@ if (isset ($_POST['buy'])){
                     <?php
 
         $sum  = 0;
+        $allCartItems = $cartItemService-> getAllCartItemsFormCart($userId);
         foreach($allCartItems as $item){
             $productId = $item -> getProductId();
             $product = $productService->getProduct($productId);
@@ -85,7 +88,8 @@ if (isset ($_POST['buy'])){
                         <td>
                             
                             <button onclick="" type="submit" name="decrease[]" value='<?php echo $id?>'>-</button>
-                            <?php echo $currentQuantity; ?>
+                            <input type="number" name="quantity[]" value="<?php echo$currentQuantity; ?>" />
+                            <input type="submit" name="quantity[]" hidden/>
                             <button onclick="" type="submit" name="increase[]" value='<?php echo $id?>' >+</button>
                         </td>
                         <td><?php echo ($currentQuantity * $product -> getPrice())?></td>

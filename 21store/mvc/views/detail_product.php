@@ -18,6 +18,10 @@ if (isset($url_components['query'])) {
 } else {
     $id = 1;
 }
+
+$service = new ProductService();
+$product = $service->getProduct($id);
+$description = $product->getProductDescription();
 ?>
 
 <?php
@@ -38,6 +42,12 @@ if (isset($_COOKIE['userId']) && isset($_POST['quantity'])){
 if (isset($_COOKIE['userId']) && isset($_POST['buy-now'])){
     header("Location: cart");
 }
+
+if (isset($_COOKIE['userId']) && isset($_POST['add-to-cart'])) {
+    $productName = $product->getProductName();
+    $quantity = $_POST['quantity'];
+    echo "<script> alert('Thêm $quantity $productName vào giỏ hàng thành công.'); </script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -56,11 +66,6 @@ if (isset($_COOKIE['userId']) && isset($_POST['buy-now'])){
 <body>
     <?php require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'nav_bar.php'; ?>
     <div class="detail-container">
-        <?php
-        $service = new ProductService();
-        $product = $service->getProduct($id);
-        $description = $product->getProductDescription();
-        ?>
         <div class="product-image-wrapper">
             <img src="<?php echo $product->getImageUrl() ?>">
         </div>
@@ -95,8 +100,8 @@ if (isset($_COOKIE['userId']) && isset($_POST['buy-now'])){
                         <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></div></a>";
                     }
                     else {
-                        echo "<a href=" . "/" . $path_project . "/" . "cart" . " ><div class='buy-now'><input  type='submit'  />
-                        <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></div></a>";
+                        echo "<button type='submit' class='buy-now' name='buy-now'>
+                        <span>MUA NGAY</span><p>Giao hàng từ 3- 7 ngày (Trừ T7 CN)</p></button>";
                     }
                     
                     ?>
@@ -109,10 +114,10 @@ if (isset($_COOKIE['userId']) && isset($_POST['buy-now'])){
                             </div></a>";
                     }
                     else {
-                        echo "<a href=" . "/" . $path_project . "/" . "cart" . " ><div class='add-to-cart'><input type='submit' />
+                        echo "<button class='add-to-cart' type='submit' name='add-to-cart'>
                             <img src='https://gumac.vn/Content/Image/WebImage/addcart.png'' />
                             <span>THÊM VÀO GIỎ HÀNG</span>
-                            </div></a>";
+                            </button>";
                     }
 
             }

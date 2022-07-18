@@ -157,13 +157,12 @@
         gap: 32px 8px;
     }
     .product-item-row img {
-        max-height: 200px;
+        max-height: 250px;
     }
     .product-item-row {
         font-size: 0.8rem;
-        height: 270px;
     }
     .price-pr {
-        font-size: 0.8rem
+        font-size: 0.8rem;
     }
 }
