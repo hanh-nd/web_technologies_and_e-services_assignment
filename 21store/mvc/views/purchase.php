@@ -52,7 +52,7 @@
                 echo "<div class='not-buy'>Không có sản phẩm để hiển thị</div>";
             }
             else
-            foreach ($allBill as $bill) {
+            foreach (array_reverse($allBill) as $bill) {
             ?>
                 <div class="infor-bill" id="#username">
                     <header>
@@ -80,17 +80,13 @@
                     <div class="sum-price">
                         <p>Tổng số tiền: &emsp;<span><?php echo $bill->getFormattedTotalAmount() ?></span></p>
                         <div class="list-button">
-                            <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $items[0]->getProductId() . "#rateProduct" ?>" style="color: white;">
-                                <?php
-                                if ($bill->getStatus() == "Đã mua") {
-                                ?>
-                                <button id="evaluate" type="button">
-                                    Đánh giá
-                                </button>
-                                <?php
-                                }
-                                ?>
-                            </a>
+                            <?php if($bill->getStatus() == "Đã mua"){ ?>
+                                <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $items[0]->getProductId() . "#rateProduct" ?>" style="color: white;">
+                                    <button id="evaluate" type="button">
+                                        Đánh giá
+                                    </button>
+                                </a>
+                            <?php } ?>
                             <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" . $items[0]->getProductId() . "#buy" ?>">
                                 <button type="button">Mua lại</button>
                             </a>
