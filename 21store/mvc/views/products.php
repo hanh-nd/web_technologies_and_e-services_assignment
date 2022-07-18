@@ -9,6 +9,10 @@
     $searchQuery = '';
     $sortBy = 'created_at';
     $orderBy = 'desc';
+    $brandFilters = array();
+
+    $brandService = new BrandService();
+    $brands = $brandService->getAllBrands();
     
     if (isset($url_components['query'])) {
         parse_str($url_components['query'], $params);
@@ -26,10 +30,18 @@
             $orderBy = $sort[1];
         }
 
-        if (isset($params['brand_id'])) {
-            $brandId = $params['brand_id'];
+        if (isset($params['filter'])) {
+            $brandFilters = $params['filter'];
         }
+
+        if (isset($params['brand_id'])) {
+            array_push($brandFilters, $params['brand_id']);
+        }
+
+
     }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +64,7 @@
                     $service = new ProductService();
                     $filters = new stdClass();
                     $filters->searchQuery = $searchQuery;
-                    if (isset($brandId)) $filters->brandId = $brandId;
+                    $filters->brandFilters = $brandFilters;
                     $totalRows = $service->getTotalProducts($filters);
                     $totalPages = ceil($totalRows / 4);
                     echo $totalRows . ' sản phẩm';
@@ -63,9 +75,40 @@
                     <?php if (isset($searchQuery)) { ?>
                         <input type="hidden" name="q" value="<?= $searchQuery ?>" />
                     <?php } ?>
-                    <?php if (isset($brandId)) { ?>
-                        <input type="hidden" name="brand_id" value="<?= $brandId ?>" />
-                    <?php } ?>
+
+                    <div class="multi-select">
+                        <div class="select-box" onclick="showCheckboxes()">
+                            <select>
+                                <option>Lọc theo nhãn hàng</option>
+                            </select>
+                            <div class="over-select"></div>
+                        </div>
+                        <div class="checkbox-item-wrapper" id="checkboxes">
+                                <input 
+                                    type="checkbox" 
+                                    <?php if (empty($brandFilters)) echo 'checked' ?>
+                                    onclick="toggleCheckbox(this)"
+                                />
+                                Chọn/Bỏ chọn tất cả
+                            <?php
+                                foreach ($brands as $brand) {
+                            ?>
+                            <label for="<?php echo $brand->getId() ?>">
+                                <input 
+                                    type="checkbox"
+                                    class="brand-checkbox-item" 
+                                    name="filter[]" 
+                                    value="<?php echo $brand->getId() ?>" 
+                                    <?php if (empty($brandFilters) || in_array($brand->getId(), $brandFilters)) echo 'checked' ?>
+                                />
+                                <?php echo " " . $brand->getBrandName() ?>
+                            </label>
+                            <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    
                     <select class="" name="sort">
                         <option disabled <?php if ($sortBy . ":" . $orderBy == "created_at:desc") echo 'selected'?>>
                             Sắp xếp

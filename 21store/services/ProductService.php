@@ -102,7 +102,8 @@ class ProductService extends DatabaseConnect implements IMapper {
           
     public function getPaginatedProducts($page, $pageSize, $filters, $sortBy = "created_at", $orderBy = "asc") {
         $searchQuery = $filters->searchQuery;
-        
+        $brandFilters = $filters->brandFilters;
+
         if ($page < 1) {
             $page = 1;
         }
@@ -114,9 +115,15 @@ class ProductService extends DatabaseConnect implements IMapper {
         $offset = ($page - 1)  * $pageSize;
         $limit = $pageSize;
         $query = "SELECT * FROM products WHERE product_name LIKE '%{$searchQuery}%'";
-        if (isset($filters->brandId)) {
-            $query = $query . " AND brand_id = $filters->brandId";
+
+        if (!empty($brandFilters)) {
+            $query = $query . " AND brand_id IN (";
+            foreach ($brandFilters as $id) {
+                $query = $query . "'$id', ";
+            }
+            $query = substr($query, 0, -2) . ")";
         }
+
         $query = $query . " ORDER BY $sortBy $orderBy LIMIT $limit OFFSET $offset";
         parent::setQuery($query);
         $objArr = parent::executeQuery();
@@ -125,10 +132,17 @@ class ProductService extends DatabaseConnect implements IMapper {
 
     public function getTotalProducts($filters) {
         $searchQuery = $filters->searchQuery;
+        $brandFilters = $filters->brandFilters;
         $query = "SELECT COUNT(*) FROM `$this->table` WHERE product_name LIKE '%{$searchQuery}%'";
-        if (isset($filters->brandId)) {
-            $query = $query . " AND brand_id = $filters->brandId";
+
+        if (!empty($brandFilters)) {
+            $query = $query . " AND brand_id IN (";
+            foreach ($brandFilters as $id) {
+                $query = $query . "'$id', ";
+            }
+            $query = substr($query, 0, -2) . ")";
         }
+
         return parent::getTotalRows($query);
     }
 
@@ -138,7 +152,6 @@ class ProductService extends DatabaseConnect implements IMapper {
         $res = parent::executeQuery();
         $res = $this->fromObjectArray($res);
         $currentQuantity = $res[0]->getQuantity() - $quantity;
-        echo "hoho";
         echo $productId;
         echo $quantity;
         $query = "UPDATE products SET quantity = $currentQuantity WHERE id = $productId";
