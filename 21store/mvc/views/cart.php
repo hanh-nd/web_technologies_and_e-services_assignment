@@ -38,6 +38,13 @@ if (isset($_POST['buy'])) {
 }
 ?>
 
+<?php
+$cartItemService = new CartItemService();
+if (isset($_POST['delete'])){
+    $cartItemService->deleteItem($_POST['delete'][0]);
+}
+?>
+
 
 
 <!DOCTYPE html>
@@ -90,6 +97,7 @@ if (isset($_POST['buy'])) {
                                     <input type="number" name="quantity[]" value="<?php echo $currentQuantity; ?>" max="<?php echo $product->getQuantity() ?>" />
                                     <input type="submit" name="quantity[]" hidden />
                                     <button onclick="" type="submit" name="increase[]" value='<?php echo $id ?>' id="add">+</button>
+                                    <button type="submit" name="delete[]" value="<?php echo $id ?>">Xóa sản phẩm</button>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +117,5 @@ if (isset($_POST['buy'])) {
         </form>
     </div>
 
-
-</body>
 
 <script type="text/javascript" src="public/javascript/cart.js"></script>

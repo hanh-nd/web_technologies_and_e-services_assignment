@@ -83,6 +83,11 @@ class CartItemService extends DatabaseConnect implements IMapper {
         return $this->fromObjectArray($objArr);
     }
 
+    public function deleteItem($cartItemId){
+        $query = "DELETE FROM cart_items WHERE id = '$cartItemId'";
+        parent::setQuery($query);
+        parent::executeQuery();
+    }
 
 }
 ?>
