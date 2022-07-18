@@ -59,7 +59,7 @@ if (isset($_POST['buy'])) {
         <form method="post">
             <?php
             if (empty($allCartItems)) {
-                echo "<div class='not-buy'>Không có sản phẩm để hiển thị</div>";
+                echo "<div class='not-buy' style='text-align: center'>Không có sản phẩm để hiển thị</div>";
             } else { ?>
                 <div class="infor-bill" id="#username">
                     <header>
