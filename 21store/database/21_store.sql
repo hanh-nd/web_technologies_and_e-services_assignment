@@ -190,7 +190,7 @@ INSERT INTO users(username, password, fullname, phone_number, address) VALUES ("
 INSERT INTO users(username, password, fullname, phone_number, address) VALUES ("nguyenvanhung", "123123", "Nguyen Van Hung", "0911975138", "Hoang Hoa Thanh Hoa");
 INSERT INTO users(username, password, fullname, phone_number, address) VALUES ("ngodanghanh", "123123", "Ngo Dang Hanh", "0912975738", "Ha Noi");
 
-INSERT INTO comments(product_id, user_id, rate, content) VALUES ("1", "1", "1" ,"sp nhu biu");
+INSERT INTO comments(product_id, user_id, rate, content) VALUES ("1", "1", "1" ,"sp xau");
 
 INSERT INTO bills(user_id) VALUES (3);
 
