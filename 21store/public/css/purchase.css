@@ -85,6 +85,28 @@
     color: rgb(74, 72, 72);
     margin-left: 10px;
 }
+.order span {
+    color: red;
+    font-size: 1.1rem;
+    font-weight: 550;
+}
+.order p {
+    padding-left: 13px;
+    font-size: 0.95rem;
+}
+.order h5{
+    font-size: 0.95rem;
+}
+
+.order button {
+    padding: 10px 30px;
+    border-radius: 3px;
+    border: 0.1px solid rgb(221, 221, 221);
+    background-color: white;
+    color: rgb(74, 72, 72);
+    margin-left: 10px;
+}
+
 #add {
     padding: 0px 8px;
     font-size: 1rem;
@@ -136,6 +158,10 @@ label {
 
 .filter-bill label {
     cursor: pointer;
+}
+
+.delivery-infor{
+    margin-bottom: 3%;
 }
 @media (max-width: 1000px) {
     .purchase-container {

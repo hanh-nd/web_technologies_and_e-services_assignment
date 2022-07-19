@@ -10,6 +10,7 @@
     justify-content: center;
     max-width: 1120px;
     padding: 16px;
+    min-height: calc(100vh - 300px);
 }
 
 .product-list {
