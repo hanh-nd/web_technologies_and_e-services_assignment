@@ -5,9 +5,9 @@ require_once ROOT . DS . 'services' . DS . 'BillService.php';
 require_once ROOT . DS . 'services' . DS . 'ProductService.php';
 require_once ROOT . DS . 'services' . DS . 'CartItemService.php';
 
-    $userService = new UserService();
-    $userId = $_COOKIE['userId'];
-    $user = $userService->getUser($userId);
+$userService = new UserService();
+$userId = $_COOKIE['userId'];
+$user = $userService->getUser($userId);
 
       
 $cartItemService = new CartItemService();
@@ -15,19 +15,6 @@ $productService = new ProductService();
 $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
 
 
-if (isset($_POST['decrease'])) {
-    $cartItemService->update($_POST['decrease'][0], false);
-} 
-if (isset($_POST['increase'])) {
-    $cartItemService->update($_POST['increase'][0], true);
-}
-if (isset($_POST['quantity'])) {
-    foreach ($allCartItems as $index => $cartItem) {
-        if ($cartItem->getQuantity() != $_POST['quantity'][$index]) {
-            $cartItemService->updateQuantity($cartItem->getId(), $_POST['quantity'][$index]);
-        }
-    }
-}
 if (isset($_POST['buy'])) {
     $cartService = new CartService();
     $cartService->buy($_COOKIE['userId']);
@@ -35,12 +22,6 @@ if (isset($_POST['buy'])) {
 }
 ?>
 
-<?php
-$cartItemService = new CartItemService();
-if (isset($_POST['delete'])){
-    $cartItemService->deleteItem($_POST['delete'][0]);
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -101,9 +82,8 @@ if (isset($_POST['delete'])){
                                         <?php echo number_format(($currentQuantity * $product->getPrice()), 0, '', ',') . " VND" ?>
                                     </p>
                                 </div>
-                                <div class="change-quantity">
-                                    <input type="number" name="quantity[]" value="<?php echo $currentQuantity; ?>"
-                                        max="<?php echo $product->getQuantity() ?>" />
+                                <div class="quantity">
+                                    <p><?php echo $currentQuantity; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -116,10 +96,10 @@ if (isset($_POST['delete'])){
             </div>
     </div>
     <div class="col">
-        <p>Tổng số tiền sản phẩm:
-            &emsp;<span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span></p>
+        <p>Tổng số tiền sản phẩm:<span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span></p>
         <p>Phí giao hàng: 20000 VND</p>
-        <p>Số tiền cần thanh toán: <?php echo number_format($sum+20000, 0, '', ',') . " VND" ?> </p>
+        <p>Giảm giá : -20000 VND (phí giao hàng)</p>
+        <p>Số tiền cần thanh toán: <?php echo number_format($sum, 0, '', ',') . " VND" ?> </p>
         <div class="list-button">
             <button id="evaluate" type="submit" name="buy">
                 Đặt hàng
