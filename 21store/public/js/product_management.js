@@ -65,7 +65,7 @@ function update() {
         quantity +
         "&material=" +
         material +
-        "&brand_id=" +
+        "&brand=" +
         brandId +
         "&product_type=" +
         typeProduct +
@@ -178,7 +178,7 @@ function sc_ct(x) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             const s = this.responseText.split("&");
-            document.getElementById("edit_id").value = s[0];
+            document.getElementById("edit_id").value = id;
             document.getElementById("edit_name").value = s[1];
             document.getElementById("edit_img1").src = s[2];
             document.getElementById("edit_img1").value = s[2];
