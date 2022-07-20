@@ -162,7 +162,16 @@ label {
 
 .delivery-infor{
     margin-bottom: 3%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 15px 20px;
+    border-radius: 8px;
 }
+.delivery-infor span {
+    color: red;
+    font-size: 1.2rem;
+}
+
+
 @media (max-width: 1000px) {
     .purchase-container {
         display: block;

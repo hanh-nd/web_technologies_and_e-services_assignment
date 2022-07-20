@@ -1,1 +1,9 @@
-﻿
+﻿Customer,"Order Date","Order Detail","Total Amount",Status
+"Vo Tien Bac","2022-07-16 17:34:15","Đầm voan bèo vai: 2; Chân váy xòe đính nút: 4; ","1,554,000 VND","Đang giao"
+"Vo Tien Bac","2022-07-16 17:34:16","Quần suông ống rộng: 1; ","348,000 VND","Đã mua"
+"Vo Tien Bac","2022-07-18 13:18:23","Chân váy xòe xếp ly: 4; ","916,000 VND","Chờ xác nhận"
+"Vo Tien Bac","2022-07-18 13:19:00","ÁO SƠ MI BUỘC NƠ: 2; Chân váy xòe xếp ly: 1; ","869,000 VND","Chờ xác nhận"
+"Vo Tien Bac","2022-07-18 21:34:02","Quần suông ống rộng: 3; ÁO SƠ MI BUỘC NƠ: 1; ","1,364,000 VND","Đã mua"
+"Nguyen Duy Hoang Anh","2022-07-18 23:11:27","ÁO SƠ MI BUỘC NƠ: 1; Đầm voan bèo vai: 6; Chân váy xòe đính nút: 3; Chân váy xòe xếp ly: 1; ","2,970,000 VND","Chờ xác nhận"
+"Vo Tien Bac","2022-07-18 23:48:48","ÁO SƠ MI BUỘC NƠ: 1; ","320,000 VND","Đang giao"
+"Vo Tien Bac","2022-07-18 23:51:00","Quần suông ống rộng: 1; ","348,000 VND","Đã mua"

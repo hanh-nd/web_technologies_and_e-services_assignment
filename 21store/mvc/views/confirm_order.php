@@ -49,57 +49,64 @@ if (isset($_POST['buy'])) {
                 <div>
                     <div class="col">
                         <div class="delivery-infor">
-                            Thông tin nhận hàng: 
-                            <?php echo $user->getFullName() ?> - 
-                            <?php echo $user->getPhoneNumber() ?> - 
-                            <?php echo $user->getAddress() ?> - 
-                            <a href="<?php echo  "/" . $path_project . "/" . "profile" ?>">Chỉnh sửa</a>
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                                </svg>
+                                Địa chỉ nhận hàng:
+                            </span>
+                            <br><br>
+                            <p><b><?php echo $user->getFullName() ?>&emsp;
+                                    <?php echo $user->getPhoneNumber() ?>&emsp;</b>
+                                <?php echo $user->getAddress() ?>&emsp;
+                                <a href="<?php echo  "/" . $path_project . "/" . "profile" ?>">Chỉnh sửa</a>
+                            </p>
                         </div>
-                            <div class="infor-bill" id="#username">
-                                <header>
-                                    <h3>Giỏ hàng của bạn</h3>
-                                    <p>Hiện đang có: <?php echo count($allCartItems) ?> sản phẩm</p>
-                                    <div class="divider"></div>
-                                </header>
-                                <?php $sum  = 0;
-                                $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
-                                foreach ($allCartItems as $item) {
-                                    $productId = $item->getProductId();
-                                    $product = $productService->getProduct($productId);
-                                    $id = $item->getId();
-                                    $currentQuantity = $item->getQuantity();
-                                    $sum = $sum + $currentQuantity * $product->getPrice();
-                                ?>
-                                    <div class="purchase-infor">
-                                        <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $item->getProductId() ?>">
-                                            <img src=<?php echo $product->getImageUrl(); ?> />
-                                        </a>
-                                        <div class="name-price">
-                                            <p><?php echo $product->getProductName() ?></p>
-                                            <p class="quantity">X<?php echo $currentQuantity ?>
-                                                <span><?php echo number_format(($currentQuantity * $product->getPrice()), 0, '', ',') . " VND" ?></span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="divider"></div>
-                                <?php
-                                }
-                                ?>
-                                <div class="order">
-                                    <p>Tổng số tiền sản phẩm: <?php echo number_format($sum, 0, '', ',') . " VND" ?></p>
-                                    <p>Phí giao hàng: 20,000 VND</p>
-                                    <p>Giảm giá : -20,000 VND (phí giao hàng)</p>
-                                    <p>Số tiền cần thanh toán: <span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span> </p>
-                                    <h5>&emsp;Bằng cách đặt hàng, bạn đã đồng ý với <a href="<?php echo "/" . $path_project . "/" . "policy" ?>">
-                                            Chính sách</a> của chúng tôi
-                                    </h5>
-                                    <div class="list-button">
-                                        <button id="evaluate" type="submit" name="buy">
-                                            Đặt hàng
-                                        </button>
+                        <div class="infor-bill" id="#username">
+                            <header>
+                                <h3>Giỏ hàng của bạn</h3>
+                                <p>Hiện đang có: <?php echo count($allCartItems) ?> sản phẩm</p>
+                                <div class="divider"></div>
+                            </header>
+                            <?php $sum  = 0;
+                            $allCartItems = $cartItemService->getAllCartItemsFormCart($userId);
+                            foreach ($allCartItems as $item) {
+                                $productId = $item->getProductId();
+                                $product = $productService->getProduct($productId);
+                                $id = $item->getId();
+                                $currentQuantity = $item->getQuantity();
+                                $sum = $sum + $currentQuantity * $product->getPrice();
+                            ?>
+                                <div class="purchase-infor">
+                                    <a href="<?php echo  "/" . $path_project . "/" . "detail?id=" .  $item->getProductId() ?>">
+                                        <img src=<?php echo $product->getImageUrl(); ?> />
+                                    </a>
+                                    <div class="name-price">
+                                        <p><?php echo $product->getProductName() ?></p>
+                                        <p class="quantity">X<?php echo $currentQuantity ?>
+                                            <span><?php echo number_format(($currentQuantity * $product->getPrice()), 0, '', ',') . " VND" ?></span>
+                                        </p>
                                     </div>
                                 </div>
+                                <div class="divider"></div>
+                            <?php
+                            }
+                            ?>
+                            <div class="order">
+                                <p>Tổng số tiền sản phẩm: <?php echo number_format($sum, 0, '', ',') . " VND" ?></p>
+                                <p>Phí giao hàng: 20,000 VND</p>
+                                <p>Giảm giá : -20,000 VND (phí giao hàng)</p>
+                                <p>Số tiền cần thanh toán: <span><?php echo number_format($sum, 0, '', ',') . " VND" ?></span> </p>
+                                <h5>&emsp;Bằng cách đặt hàng, bạn đã đồng ý với <a href="<?php echo "/" . $path_project . "/" . "policy" ?>">
+                                        Chính sách</a> của chúng tôi
+                                </h5>
+                                <div class="list-button">
+                                    <button id="evaluate" type="submit" name="buy">
+                                        Đặt hàng
+                                    </button>
+                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             <?php
