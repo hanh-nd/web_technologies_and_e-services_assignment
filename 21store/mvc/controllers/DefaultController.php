@@ -1,10 +1,7 @@
 <?php
 class DefaultController {
-    public function __header() {
-
-    }
-    
-    public function __footer(){
+  
+    public function renderFooter(){
         include ROOT . DS . 'mvc' . DS . 'views' . DS . 'footer.php';
     }
 }

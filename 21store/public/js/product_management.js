@@ -65,7 +65,7 @@ function update() {
         quantity +
         "&material=" +
         material +
-        "&brand=" +
+        "&brand_id=" +
         brandId +
         "&product_type=" +
         typeProduct +

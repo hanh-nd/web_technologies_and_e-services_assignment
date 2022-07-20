@@ -1,5 +1,5 @@
 <?php
 
 interface Controller {
-    function __render();
+    function render();
 }

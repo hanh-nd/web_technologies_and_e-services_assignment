@@ -54,7 +54,7 @@ class ProductService extends DatabaseConnect implements IMapper {
      * @param Product $product
      */
     public function update($id,$name,$des, $price, $image_url,
-    $size, $color, $material, $brand, $product_type, $quantity) {
+    $size, $color, $material, $brandId, $product_type, $quantity) {
         $query = "UPDATE products
                     SET product_name =  '$name',
                     product_description = '$des',
@@ -63,7 +63,7 @@ class ProductService extends DatabaseConnect implements IMapper {
                     color = '$color',
                     size = '$size',
                     material = '$material',
-                    -- brand_id = '$brand',
+                    brand_id = '$brandId',
                     product_type ='$product_type',
                     quantity ='$quantity'
                     WHERE id = '$id'";

@@ -14,7 +14,7 @@
     $color=$_POST['color'];
     $size=$_POST['size'];
     $material=$_POST['material'];
-    $brand=$_POST['brand'];
+    $brandId=$_POST['brand_id'];
     $product_type=$_POST['product_type'];
     $quantity=$_POST['quantity'];
     $image_url= $_POST['image_url'];
@@ -23,7 +23,7 @@
 
     $service= new ProductService();
     $service->update($id,$name,$des, $price, $image_url,
-    $size, $color, $material, $brand, $product_type, $quantity);
+    $size, $color, $material, $brandId, $product_type, $quantity);
     echo "Update success!";
 
 

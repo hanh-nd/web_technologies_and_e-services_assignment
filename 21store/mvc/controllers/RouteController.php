@@ -2,34 +2,30 @@
 
 class RouteController
 {
-    private $_url;
-    private $_dispath;
-    private $_is_footer;
+    private $url;
+    private $route;
+    private $showFooter;
 
     function __construct($url)
     {
-        $this->_url = $url;
-        $this->_is_footer = 1;
-
-        self::parsingURL();
+        $this->url = $url;
+        $this->showFooter = 1;
+        self::analyseURL();
     }
 
-    function parsingURL()
+    function analyseURL()
     {
-        // call home page if path is '/'
-        if (strcmp($this->_url, "/") == 0) {
+        if (strcmp($this->url, "/") == 0) {
             require_once ROOT . DS . 'mvc' . DS . 'controllers' . DS . 'HomeController.php';
-            $this->_dispath = new HomeController();
+            $this->route = new HomeController();
             require_once ROOT . DS . 'mvc' . DS . 'views' . DS . 'home.php';
             return;
         }
 
-        $urlArray = explode("/", $this->_url);
+        $urlArray = explode("/", $this->url);
         $controller = $urlArray[0];
         array_shift($urlArray);
-        $id = -1;
 
-        // check if admin -> no footer
         if (
             strcmp($controller, "admin") == 0
             || strcmp($controller, "add-product") == 0
@@ -40,7 +36,7 @@ class RouteController
             || strcmp($controller, "register") === 0
 
         ) {
-            $this->_is_footer = 0;
+            $this->showFooter = 0;
         }
 
         $controller = str_replace('-', ' ', $controller);
@@ -50,16 +46,14 @@ class RouteController
 
 
         require_once ROOT . DS . 'mvc' . DS . 'controllers' . DS . $controller . '.php';
-        if ($id == -1) {
-            $this->_dispath = new $controller();
-        } else {
-            $this->_dispath = new $controller($id);
-        }
+        $this->route = new $controller();
     }
 
-    function show()
-    {
-        $this->_dispath->__render();
-        if ($this->_is_footer == 1) $this->_dispath->__footer();
+    function show() {
+        $this->route->render();
+
+        if ($this->showFooter == 1) {
+            $this->route->renderFooter();
+        }
     }
 }
