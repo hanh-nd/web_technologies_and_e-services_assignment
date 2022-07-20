@@ -50,7 +50,62 @@ foreach ($listTmpBill as $tmpBill) {
     }
 }
 
+if (array_key_exists("exportUser", $_POST)) {
+    $list = array(array("ID", "Full Name", "Phone Number", "Address"));
+    $fp = fopen("data.csv", 'w');
+    fputs($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
 
+    foreach($allUser as $user) {
+        $_id = $user->getId();
+        $_fullname = $user->getFullname();
+        $_phoneNumber = $user->getPhoneNumber();
+        $_address = $user->getAddress();
+
+        $userArray = array("$_id", "$_fullname", "$_phoneNumber", "$_address");
+        array_push($list, $userArray);
+    }
+
+    foreach($list as $fields) {
+        fputcsv($fp, $fields);
+    }
+
+    fclose($fp);
+    header("Location: data.csv");
+}
+
+if (array_key_exists("exportBill", $_POST)) {
+    $list = array(array("Customer", "Order Date", "Order Detail", "Total Amount", "Status"));
+    $fp = fopen("data.csv", 'w');
+    fputs($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+
+    foreach($listBill as $bill) {
+        $user = $userService->getUser($bill->getUserId());
+        $listOrderItem = $orderService->getAllOrderFormBill($bill->getId());
+
+        $_customer = $user->getFullname();
+        $_orderDate = $bill->getCreatedAt();
+        $_orderDetail = "";
+
+        foreach ($listOrderItem as $item) {
+            $_productName = $item->getProduct()->getProductName();
+            $_quantity = $item->getQuantity();
+            $_orderDetail = $_orderDetail . "$_productName" . ": $_quantity; ";
+        }
+        $_totalAmount = $bill->getFormattedTotalAmount();
+        $_status = $bill->getStatus();
+
+        $billArray = array("$_customer", "$_orderDate", "$_orderDetail", "$_totalAmount", "$_status");
+        array_push($list, $billArray);
+    }
+
+    foreach($list as $fields) {
+        fputcsv($fp, $fields);
+    }
+
+    fclose($fp);
+    header("Location: data.csv");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +141,10 @@ foreach ($listTmpBill as $tmpBill) {
                         <input type="submit" value="Tìm kiếm">
                     </div>
                 </form>
+                <form method="post">
+                    <button type="submit" name="exportUser">Export User</button>
+                </form>
+                <br><br>
                 <form method="post">
                     <table class="table-user">
                         <tr>
@@ -127,6 +186,9 @@ foreach ($listTmpBill as $tmpBill) {
                 <div class="divider"></div>
                 <h5>Tổng số tiền đã bán thành công : <span style="color: red;"><?php echo number_format($total_turnover, 0, '', ',') . " VND" ?></span></h5>
                 <h5>Tổng số đơn hàng đã bán thành công : <?php echo $total_bill ?></h5>
+                <form method="post">
+                    <button type="submit" name="exportBill">Export Bill Data</button>
+                </form>
                 <br><br>
                 <div class="products-container">
                     <table class="table-user">

@@ -1,6 +1,38 @@
 <?php
     global $path_project;
     require_once ROOT . DS . 'services' . DS . 'BrandService.php';
+	require_once ROOT . DS . 'services' . DS . 'ProductService.php';
+    $service = new ProductService();
+    $products = $service->getPaginatedProducts(1, 1000);
+
+    if (array_key_exists("exportProduct", $_POST)) {
+        $list = array(array("ID", "Product Name", "Price", "Size", "Color", "Quantity", "Type", "Brand", "Material", "Description"));
+        $fp = fopen("data.csv", 'w');
+        fputs($fp, chr(0xEF) . chr(0xBB) . chr(0xBF));
+    
+        foreach($products as $product) {
+            $_id = $product->getId();
+            $_productName = $product->getProductName();
+            $_price = $product->getFormattedPrice();
+            $_size = $product->getSize();
+            $_color = $product->getColor();
+            $_quantity = $product->getQuantity();
+            $_type = $product->getProductType();
+            $_brand = $product->getBrandName();
+            $_material = $product->getMaterial();
+            $_description = $product->getProductDescription();
+    
+            $productArray = array("$_id", "$_productName", "$_price", "$_size", "$_color", "$_quantity", "$_type", "$_brand", "$_material", "$_description");
+            array_push($list, $productArray);
+        }
+    
+        foreach($list as $fields) {
+            fputcsv($fp, $fields);
+        }
+    
+        fclose($fp);
+        header("Location: data.csv");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,10 +67,12 @@
                             <input class="form-left" type="text" id="name-search">
                             <button class="submit button" onclick="get_data_search()"  type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
+                        <form method="post">
+                            <button type="submit" class="button" name="exportProduct">Export Product</button>
+                        </form>
                     </div>
                     <div class="product-list" id="display_s"></div>
                 </div>
-                    
                     
                 <!--CHI TIẾT SẢN PHẨM -->
                 <div id='ct_sp' style="display: none;">
