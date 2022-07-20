@@ -22,9 +22,9 @@
                 </div>
                 <div class="images">
                     <div>
-                        <img src=<?php echo "/" . $path_project . "/" . "images/about/for-women.jpg" ?> width="1120">
-                        <img src=<?php echo "/" . $path_project . "/" . "images/about/for-men.jpg" ?> width="1120">
-                        <img src=<?php echo "/" . $path_project . "/" . "images/about/for-teen.jpg" ?> width="1120">
+                        <img src=<?php echo "/" . $path_project . "/" . "images/about/for-women.jpg" ?> width="100%">
+                        <img src=<?php echo "/" . $path_project . "/" . "images/about/for-men.jpg" ?> width="100%">
+                        <img src=<?php echo "/" . $path_project . "/" . "images/about/for-teen.jpg" ?> width="100%">
                         <br><br>
                     </div>
                 </div>
