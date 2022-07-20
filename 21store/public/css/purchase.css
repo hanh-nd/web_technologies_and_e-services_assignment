@@ -5,6 +5,7 @@
 }
 
 .purchase-container {
+    max-width: 1120px;
     display: flex;
     flex-direction: row;
     background-color: rgb(255, 255, 255);
@@ -94,7 +95,7 @@
     padding-left: 13px;
     font-size: 0.95rem;
 }
-.order h5{
+.order h5 {
     font-size: 0.95rem;
 }
 
@@ -160,7 +161,7 @@ label {
     cursor: pointer;
 }
 
-.delivery-infor{
+.delivery-infor {
     margin-bottom: 3%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 15px 20px;
@@ -170,7 +171,6 @@ label {
     color: red;
     font-size: 1.2rem;
 }
-
 
 @media (max-width: 1000px) {
     .purchase-container {
