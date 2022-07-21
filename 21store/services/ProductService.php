@@ -165,5 +165,12 @@ class ProductService extends DatabaseConnect implements IMapper {
         parent::executeQuery();
     }
 
+    public function deleteAll() {
+        $productList = $this->getPaginatedProducts(1, 1000);
+
+        foreach ($productList as $product) {
+            $this->delete($product->getId());
+        }
+    }
 }
 ?>

@@ -5,6 +5,40 @@ function check_img(s) {
     }
     return false;
 }
+
+function check_csv(s) {
+    extension = s.split(".").pop();
+    if (extension == "csv") {
+        return true;
+    }
+    return false;
+}
+
+function importProduct() {
+    const csv = document.getElementById("importProduct").value;
+
+    const csvs = csv.split("\\");
+    csvPath = "public/images/products/" + csvs[2];
+    if (check_csv(csvPath)) {
+        upload_img("importProduct");
+    } else {
+        alert("Wrong image format!");
+        return;
+    }
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            alert(this.responseText);
+            location.reload();
+        }
+    };
+
+    xhttp.open("POST", "library/admin/ImportProduct.php", false);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`path=${csvPath}`);
+}
+
 function update() {
     const type = document.getElementById("type-search").value;
     const id = document.getElementById("edit_id").value;
